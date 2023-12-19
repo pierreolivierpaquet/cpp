@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:32:54 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/18 10:26:07 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/19 14:52:14 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@
 #  define SPACE " "
 # endif /* SPACE */
 
+# ifndef TAB
+#  define TAB "\t"
+# endif /* TAB */
+
+# ifndef DOT
+#  define DOT "."
+# endif /* DOT */
+
 # ifndef EMPTY
 #  define EMPTY ""
 # endif /* EMPTY */
@@ -39,10 +47,11 @@
 /******************************************************************************/
 /********************************* MESSAGES ***********************************/
 
-# define MSG_WELCOME "WELCOME TO YOUR PHONEBOOK.\n"
-# define ADD_INSTRUCTIONS "ENTER \'ADD\' FOR A NEW CONTACT.\n"
-# define SEARCH_INSCTRUCTIONS "ENTER \'SEARCH\' TO LOOK FOR A CONTACT.\n"
-# define EXIT_INSTRUCTIONS "ENTER \'EXIT\' TO QUIT PHONEBOOK.\n"
+# define BANNER_FRAME "-----------------------------------------------------\n"
+# define MSG_WELCOME "\tWELCOME TO YOUR PHONEBOOK.\n"
+# define ADD_INSTRUCTIONS "\tENTER > \'ADD\' FOR A NEW CONTACT.\n"
+# define SEARCH_INSCTRUCTIONS "\tENTER > \'SEARCH\' TO LOOK FOR A CONTACT.\n"
+# define EXIT_INSTRUCTIONS "\tENTER > \'EXIT\' TO QUIT PHONEBOOK.\n"
 
 # ifndef INPUT_PROMPT
 #  define INPUT_PROMPT " > "

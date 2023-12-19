@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:34:20 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/15 21:34:03 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/19 14:41:43 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ bool	log_info(
 	Phonebook book){
 	std::string action;
 	action = EMPTY;
-	std::cout << MSG_WELCOME;
-	std::cout << ADD_INSTRUCTIONS << SEARCH_INSCTRUCTIONS << EXIT_INSTRUCTIONS;
+	
+	std::cout << BANNER_FRAME << MSG_WELCOME << std::endl;
+	std::cout   << ADD_INSTRUCTIONS \
+				<< SEARCH_INSCTRUCTIONS \
+				<< EXIT_INSTRUCTIONS << BANNER_FRAME;
 	while (WAIT_INPUT)
 	{
 		std::cout << INPUT_PROMPT;
