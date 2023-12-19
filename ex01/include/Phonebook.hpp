@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:20 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/18 11:25:31 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/19 14:59:20 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,22 @@
 # define PHONEBOOK_HPP
 
 # include <iostream>
+
+# ifndef TOP_FRAME
+#  define TOP_FRAME ".~~~~~~~~~~.~~~~~~~~~~.~~~~~~~~~~.~~~~~~~~~~.\n"
+# endif /* TOP_FRAME */
+
+# ifndef MIDDLE_FRAME
+#  define MIDDLE_FRAME "|~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~|\n"
+# endif /* MIDDLE_FRAME */
+
+# ifndef BOTTOM_FRAME
+#  define BOTTOM_FRAME "'~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~'\n"
+# endif /* BOTTOME_FRAME */
+
+# ifndef NO_REGIST
+#  define NO_REGIST "\t*** NO REGISTERED CONTACT AT THIS INDEX. ***\n"
+# endif /* NO_REGIST */
 
 /// @brief Listing of all contacts.
 class Phonebook {

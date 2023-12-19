@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:35:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/18 13:05:15 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/19 15:01:29 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,25 @@
 
 #include "Contact.hpp"
 #include "Phonebook.hpp"
-#include <sstream> // string to int
+#include <sstream>
 
-/// @brief Constructor function
-Phonebook::Phonebook(void) : contactIndex(0) {};
+Phonebook::Phonebook(void) : contactIndex(0){};
 
 void	Phonebook::incrementIndex(void){
 	this->contactIndex++;
 	this->contactIndex %= CONTACT_MAX;
 };
 
-/// @brief Checks that the string is under a valid phone number format.
 bool	is_phoneNumber(
 	std::string phone_number){
-	std::size_t	i = -1;
+	std::size_t	i = 0;
 	std::size_t l = phone_number.length();
-	while (++i < l)
+	while (i < l)
 	{
-		if (!isdigit(phone_number[i]) && phone_number[i] != '-')
-		{
+		if (!isdigit(phone_number[i]) && phone_number[i] != '-'){
 			return(false);
 		}
+		i++;
 	}
 	return (true);
 }
@@ -42,21 +40,20 @@ bool	is_phoneNumber(
 bool	is_searchable(
 	std::string index,
 	int *i_index){
-	std::size_t	i = -1;
+	std::size_t	i = 0;
 	std::size_t	l = index.length();
 	if (l > 1)
 		return (false);
-	while (++i < l)
+	while (i < l)
 	{
-		if (!isdigit(index[i]))
-		{
+		if (!isdigit(index[i])){
 			return (false);
 		}
+		i++;
 	}
 	std::istringstream result(index);
 	result >> *i_index;
-	if (*i_index < 0 || *i_index > 7)
-	{
+	if (*i_index < 0 || *i_index > 7){
 		return (false);
 	}
 	return (true);
@@ -89,15 +86,15 @@ std::string	userInput(
 void	Phonebook::setContact(
 	size_t index){
 	this->directory[index].setFirstName(
-							userInput(TEXT_TYPE, "\t1. FIRST NAME", NULL));
+							userInput(TEXT_TYPE, "\tFIRST NAME", NULL));
 	this->directory[index].setLastName(
-							userInput(TEXT_TYPE, "\t2. LAST NAME", NULL));
+							userInput(TEXT_TYPE, "\tLAST NAME", NULL));
 	this->directory[index].setNickName(
-							userInput(TEXT_TYPE, "\t3. NICK NAME", NULL));
+							userInput(TEXT_TYPE, "\tNICK NAME", NULL));
 	this->directory[index].setSecret(
-							userInput(TEXT_TYPE, "\t4. DARKEST SECRET", NULL));
+							userInput(TEXT_TYPE, "\tDARKEST SECRET", NULL));
 	this->directory[index].setPhoneNumber(
-							userInput(PHONE_TYPE, "\t5. PHONE NUMBER", NULL));
+							userInput(PHONE_TYPE, "\tPHONE NUMBER", NULL));
 	this->directory[index].setRegistered();
 	return ;
 };
@@ -115,7 +112,7 @@ void	printSpace(std::size_t i){
 };
 
 void	printSubString(std::string sub_name){
-	std::cout << sub_name.substr(0, 9) << ".";
+	std::cout << sub_name.substr(0, 9) << DOT;
 };
 
 void	printInfo(std::string sub_name){
@@ -142,37 +139,37 @@ void	displayInfo(Contact info){
 
 void	Phonebook::_displayDirectory(void) const{
 	std::size_t	i = 0;
-	std::cout << ".~~~~~~~~~~.~~~~~~~~~~.~~~~~~~~~~.~~~~~~~~~~." << std::endl;
-	std::cout << SEPARATOR << " INDEX    " << SEPARATOR \
-		<< " FRST NM. " << SEPARATOR \
-		<< " LST NM.  " << SEPARATOR \
-		<< " NCKNM.   " << SEPARATOR << std::endl;
-	std::cout << "|~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~|" << std::endl;
+	std::cout << TAB << TOP_FRAME;
+	std::cout << TAB << SEPARATOR << " INDEX    " << SEPARATOR \
+									<< " FRST NM. " << SEPARATOR \
+									<< " LST NM.  " << SEPARATOR \
+									<< " NCKNM.   " << SEPARATOR << std::endl;
+	std::cout << TAB << MIDDLE_FRAME;
 	while (i < CONTACT_MAX){
-		std::cout << SEPARATOR << "        " << i << "." << SEPARATOR;
+		std::cout << TAB << SEPARATOR << "        " \
+							<< i << DOT << SEPARATOR;
 		displayInfo(this->directory[i]);
 		i++;
 	}
-	std::cout << "'~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~'~~~~~~~~~~'" << std::endl;
+	std::cout << TAB << BOTTOM_FRAME;
 	return ;
 };
 
 void	Phonebook::_searchContact(void) const{
 	int	index;
-	this->_displayDirectory(); // test
+	this->_displayDirectory();
 	std::string contact_index = userInput(
 								SEARCH_TYPE, "ENTER CONTACT'S INDEX",
 								&index);
 	Contact temp = this->directory[index];
-	if (!temp._getRegistration())
-	{
-		std::cout << "SORRY; NO REGISTERED CONTACT AT THIS INDEX." << std::endl;
+	if (!temp._getRegistration()){
+		std::cout << NO_REGIST;
 		return ;
 	}
-	std::cout << temp._getFirstName() << SPACE;
+	std::cout << "\tFULL NAME: " << temp._getFirstName() << SPACE;
 	std::cout << temp._getLastName() << std::endl;
-	std::cout << temp._getNickName() << std::endl;
-	std::cout << temp._getSecret() << std::endl;
-	std::cout << temp._getPhoneNumber() << std::endl;
+	std::cout << "\tNICKNAME: " << temp._getNickName() << std::endl;
+	std::cout << "\tDARKEST SECRET: " << temp._getSecret() << std::endl;
+	std::cout << "\tPHONE NUMBER: " << temp._getPhoneNumber() << std::endl;
 	return ;
 };
