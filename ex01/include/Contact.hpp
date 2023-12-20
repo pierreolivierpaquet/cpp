@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:48:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/20 12:45:37 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 13:18:07 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ class	Contact {
 
 	public:
 
-		Contact(void) ;
-		~Contact(void) {};
+		Contact(void);
+		~Contact(void);
 		
 		void		setRegistered(void);
 		void		setFirstName(std::string first_name);

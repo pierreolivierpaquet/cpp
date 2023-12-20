@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:35:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/20 12:54:48 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 13:14:45 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <sstream>
 
 Phonebook::Phonebook(void) : contactIndex(0){};
+
+Phonebook::~Phonebook(void){};
 
 void	Phonebook::incrementIndex(void){
 	this->contactIndex++;

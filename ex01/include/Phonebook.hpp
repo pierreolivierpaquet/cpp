@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:29:20 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/20 12:49:14 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 13:14:05 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ class Phonebook {
 
 	public:
 		Phonebook(void);
-		~Phonebook(void) {};
+		~Phonebook(void);
 
 		void	addContact(void);
 

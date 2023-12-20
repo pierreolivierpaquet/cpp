@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:48:28 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/20 11:57:42 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 13:15:56 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ Contact::Contact( void ) :  registered(false), \
 							nick_name(EMPTY), \
 							secret(EMPTY), \
 							phone_number(EMPTY) {};
+
+Contact::~Contact(void){};
 
 /* *************************************************************** FIRST NAME */
 
