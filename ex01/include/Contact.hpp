@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:48:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/15 19:42:53 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 12:45:37 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #  define CONTACT_MAX 8
 # endif /* CONTACT_MAX */
 
-/// @brief Telephone contact information.
 class	Contact {
 	private:
 		bool		registered;
@@ -30,19 +29,16 @@ class	Contact {
 		std::string	phone_number;
 
 	public:
-		// Constructor & Destructor
 
 		Contact(void) ;
 		~Contact(void) {};
 		
-		// Getter & Setter
-		
-		void	setRegistered(void);
-		void	setFirstName(std::string first_name);
-		void	setLastName(std::string last_name);
-		void 	setNickName(std::string nick_name);
-		void	setSecret(std::string secret);
-		void	setPhoneNumber(std::string phone_number);
+		void		setRegistered(void);
+		void		setFirstName(std::string first_name);
+		void		setLastName(std::string last_name);
+		void		setNickName(std::string nick_name);
+		void		setSecret(std::string secret);
+		void		setPhoneNumber(std::string phone_number);
 		
 		bool		_getRegistration(void) const;
 		std::string _getFirstName(void) const;

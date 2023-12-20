@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:13:18 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/20 11:59:08 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 12:44:31 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ int	main(
 	int argc,
 	char **argv)
 {
-	if (argc == 1){
+	if (argc == 1)
 		return (std::cout << MEGAPHONE << std::endl, EXIT_SUCCESS);
-	}
 	int	i = 0;
 	while (++i < argc){
 		std::string louder = argv[i];
