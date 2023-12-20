@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:35:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/20 11:58:49 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 12:54:48 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ bool	is_phoneNumber(
 	std::size_t l = phone_number.length();
 	while (i < l)
 	{
-		if (!isdigit(phone_number[i]) && phone_number[i] != '-'){
+		if (!isdigit(phone_number[i]) && phone_number[i] != '-')
 			return(false);
-		}
 		i++;
 	}
 	return (true);
@@ -48,16 +47,14 @@ bool	is_searchable(
 		return (false);
 	while (i < l)
 	{
-		if (!isdigit(index[i])){
+		if (!isdigit(index[i]))
 			return (false);
-		}
 		i++;
 	}
 	std::istringstream result(index);
 	result >> *i_index;
-	if (*i_index < 0 || *i_index > 7){
+	if (*i_index < 0 || *i_index > 7)
 		return (false);
-	}
 	return (true);
 };
 
@@ -79,9 +76,8 @@ std::string	userInput(
 			valid = is_searchable(input, index);
 		if (std::cin.good() && !input.empty() && valid)
 			return (input);
-		if (std::cin.eof()){
+		if (std::cin.eof())
 			return (input);
-		}
 		std::cin.clear();
 		input.clear();
 		input = SPACE;
@@ -186,9 +182,8 @@ void	Phonebook::_searchContact(void) const{
 	std::string contact_index = userInput(
 								SEARCH_TYPE, "\tENTER CONTACT'S INDEX",
 								&index);
-	if(index < 0){
+	if(index < 0)
 		return ;
-	}
 	Contact temp = this->directory[index];
 	if (!temp._getRegistration()){
 		std::cout << NO_REGIST;
@@ -196,7 +191,7 @@ void	Phonebook::_searchContact(void) const{
 	}
 	std::cout << std::endl;
 	std::cout << "\tFULL NAME:      " << temp._getFirstName() << SPACE;
-	std::cout << temp._getLastName() << std::endl;
+	std::cout << temp._getLastName()  << std::endl;
 	std::cout << "\tNICKNAME:       " << temp._getNickName() << std::endl;
 	std::cout << "\tDARKEST SECRET: " << temp._getSecret() << std::endl;
 	std::cout << "\tPHONE NUMBER:   " << temp._getPhoneNumber() << std::endl;
