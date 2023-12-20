@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ex00.cpp                                           :+:      :+:    :+:   */
+/*   megaphone.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:13:18 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/15 14:35:45 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 11:59:08 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,22 @@
 #endif /* SPACE */
 
 void	str_toupper(
-	std::string& str){
-	std::size_t	i = -1;
+	std::string& str)
+{
+	std::size_t	i = 0;
 	std::size_t l = str.length();
-	while (++i < l)
+	while (i < l){
 		str[i] = toupper(str[i]);
+		i++;
+	}
 	i = 0;
 	return ;
 }
 
 int	main(
 	int argc,
-	char **argv){
+	char **argv)
+{
 	if (argc == 1){
 		return (std::cout << MEGAPHONE << std::endl, EXIT_SUCCESS);
 	}
