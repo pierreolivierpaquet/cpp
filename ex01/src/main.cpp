@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 15:34:20 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/19 14:41:43 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 11:56:32 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 
 /// @brief Takes input from user, and stores it into Phonebook.
 bool	log_info(
-	Phonebook book){
+	Phonebook book)
+{
 	std::string action;
 	action = EMPTY;
 	
-	std::cout << BANNER_FRAME << MSG_WELCOME << std::endl;
+	std::cout   << BANNER_FRAME << MSG_WELCOME << std::endl;
 	std::cout   << ADD_INSTRUCTIONS \
 				<< SEARCH_INSCTRUCTIONS \
 				<< EXIT_INSTRUCTIONS << BANNER_FRAME;
@@ -28,15 +29,14 @@ bool	log_info(
 	{
 		std::cout << INPUT_PROMPT;
 		std::getline(std::cin, action);
-		if (!action.compare(EXIT)){
+		if (!action.compare(EXIT))
 			return (true);
-		}
-		else if (!action.compare(ADD)){
+		else if (!action.compare(ADD))
 			book.addContact();
-		}
-		else if (!action.compare(SEARCH)){
+		else if (!action.compare(SEARCH))
 			book._searchContact();
-		}
+		if (std::cin.eof())
+			return (true);
 		std::cin.clear();
 		action.clear();
 		action = EMPTY;
@@ -46,7 +46,8 @@ bool	log_info(
 
 int	main(
 	int argc,
-	char **argv){
+	char **argv)
+{
 	(void)argc;
 	(void)argv;
 	Phonebook book;

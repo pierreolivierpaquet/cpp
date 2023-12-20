@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 09:48:28 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/19 14:07:06 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 11:57:42 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ std::string Contact::_getFirstName(void) const{
 };
 
 void	Contact::setFirstName(
-	std::string first_name){
+	std::string first_name)
+{
 	this->first_name = first_name;
 	return;
 };
@@ -52,7 +53,8 @@ std::string Contact::_getLastName(void) const{
 };
 
 void	Contact::setLastName(
-	std::string last_name){
+	std::string last_name)
+{
 	this->last_name = last_name;
 	return;
 };
@@ -64,7 +66,8 @@ std::string Contact::_getNickName(void) const{
 };
 
 void	Contact::setNickName(
-	std::string nick_name){
+	std::string nick_name)
+{
 	this->nick_name = nick_name;
 	return;
 };
@@ -76,7 +79,8 @@ std::string	Contact::_getSecret(void) const{
 };
 
 void	Contact::setSecret(
-	std::string secret){
+	std::string secret)
+{
 	this->secret = secret;
 	return ;
 };
@@ -88,7 +92,8 @@ std::string Contact::_getPhoneNumber(void) const{
 };
 
 void	Contact::setPhoneNumber(
-	std::string phone_number){
+	std::string phone_number)
+{
 	this->phone_number = phone_number;
 	return ;
 };
