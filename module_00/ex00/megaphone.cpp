@@ -6,12 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:13:18 by ppaquet           #+#    #+#             */
-/*   Updated: 2023/12/20 12:44:31 by ppaquet          ###   ########.fr       */
+/*   Updated: 2023/12/20 16:01:51 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <cstdlib>
 
 #ifndef MEGAPHONE
 # define MEGAPHONE "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
@@ -47,8 +46,6 @@ int	main(
 			return (louder.clear(), EXIT_SUCCESS);
 		str_toupper(louder);
 		std::cout << louder;
-		if (i + 1 != argc)
-			std::cout << SPACE;
 		louder.clear();
 	}
 	return (std::cout << std::endl, EXIT_SUCCESS);
