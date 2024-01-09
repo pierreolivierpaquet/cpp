@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:22:26 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/08 15:47:03 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/09 09:58:23 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,14 @@
 # define SEPARATOR "-----------------------------------------------------------"
 #endif /* SEPARATOR */
 
+#ifndef SUCCESS
+# define SUCCESS 0
+#endif /* SUCCESS */
+
 std::string	userInput( void ){
 	std::string input = EMPTY;
 	
-	std::cout << "NEW ZOMBIE NAME > " << std::endl;
+	std::cout << "NEW ZOMBIE NAME > ";
 	getline(std::cin, input);
 	if (std::cin.eof()){
 		std::cout << std::endl;
@@ -34,17 +38,18 @@ std::string	userInput( void ){
 int	main(int argc, char **argv){
 	(void)argc;
 	(void)argv;
-	Zombie *smurf;
-	std::cout << "*** BASIC CONSTRUCTOR ***" << std::endl;
+	Zombie *pointer;
+	
+	std::cout << "\t\t*** BASIC CONSTRUCTOR ***" << std::endl;
 	Zombie basic("ZOMBOY");
-	basic.annonce();
+	basic.announce();
 	std::cout << SEPARATOR << std::endl;
-	std::cout << "*** RANDOMCHUMP FUNCTION ***" << std::endl;
+	std::cout << "\t\t*** RANDOMCHUMP FUNCTION ***" << std::endl;
 	randomChump(userInput());
 	std::cout << SEPARATOR << std::endl;
-	std::cout << "*** NEWZOMBIE FUNCTION ***" << std::endl;
-	smurf = newZombie(userInput());
-	smurf->annonce();
-	delete smurf;
-	return (0);
+	std::cout << "\t\t*** NEWZOMBIE FUNCTION ***" << std::endl;
+	pointer = newZombie(userInput());
+	pointer->announce();
+	delete pointer;
+	return (SUCCESS);
 };

@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 10:22:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 09:10:06 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/09 09:17:45 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/09 12:06:27 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void	randomChump(std::string zombie_name){
-	Zombie generate(DEFAULT_ZOMBIE_NAME);
-
-	if (zombie_name.length() == 0 && std::cin.eof()){
-		std::cout << "EOF: Default name used." << std::endl;
+Zombie *zombieHorde(int N, std::string name){
+	Zombie *new_horde = NULL;
+	int		i = -1;
+	
+	if (N < 0){
+		return (NULL);
 	}
-	else
-		generate.setName(zombie_name);
-	generate.announce();
+	new_horde = new Zombie[ N ];
+	while (++i < N){
+		new_horde[i].setName(name);
+		std::cout << "Zombie #" << (i + 1) << std::endl << "\t";
+		new_horde[i].announce();
+	}
+	return (new_horde);
 };
