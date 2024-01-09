@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/09 12:31:54 by ppaquet           #+#    #+#              #
-#    Updated: 2024/01/09 17:53:11 by ppaquet          ###   ########.fr        #
+#    Created: 2024/01/09 13:47:44 by ppaquet           #+#    #+#              #
+#    Updated: 2024/01/09 17:52:47 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	:= Brain
+NAME	:= Weapon
 
 # ****************************** MISCELLANEOUS ******************************* #
 
@@ -25,13 +25,22 @@ FLAGS	:= -Wall -Werror -Wextra -std=c++98
 # ********************************* SOURCES ********************************** #
 
 SRC_PATH	:=  src/
-SRC_FILES	:= main.cpp
+SRC_FILES	:= \
+				HumanA.cpp \
+				HumanB.cpp \
+				main.cpp \
+				Weapon.cpp \
 
 # ********************************* OBJECTS ********************************** #
 
 OBJ_PATH	:= obj/
 OBJ_FILES	:= $(SRC_FILES:.cpp=.o)
 OBJ			:= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
+
+# ********************************* INCLUDE ********************************** #
+
+INCL_PATH	:= include/
+INCL 		:= -I $(INCL_PATH)
 
 # **************************************************************************** #
 # ********************************** RULES *********************************** #
@@ -41,14 +50,14 @@ all: $(NAME)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "\tCompiling"
-	@$(COMPILE) $(FLAGS) $(OBJ) -o $@
+	@$(COMPILE) $(FLAGS) $(INCL) $(OBJ) -o $@
 
 $(OBJ_PATH):
 	@$(FOLDER) $(OBJ_PATH)
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.cpp
 	@echo "\t$@ created."
-	@$(COMPILE) $(FLAGS) -o $@ -c $<
+	@$(COMPILE) $(FLAGS) $(INCL) -o $@ -c $<
 	@printf "\033[1A\033[K"
 
 clean:
