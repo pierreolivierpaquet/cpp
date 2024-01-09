@@ -5,20 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 12:23:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 17:38:33 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/09 13:47:42 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/09 17:56:56 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
 #ifndef SUCCESS
 # define SUCCESS 0
 #endif /* SUCCESS */
-
-#ifndef GREET
-# define GREET "HI THIS IS BRAIN"
-# endif /* GREET */
 
 #ifndef SEPARATOR
 # define SEPARATOR "-----------------------------------------------------------"
@@ -35,20 +32,26 @@
 /******************************************************************************/
 
 int	main(int argc, char **argv){
-	std::string	brain = GREET;
-	std::string *stringPTR = &brain;
-	std::string &stringREF = brain;
-	
 	( void )argc;
 	( void )argv;
-	std::cout << BOLD << "ADDRESSES" << RESET << std::endl;
-	std::cout << "\t\tbrain     : " << &brain << std::endl;
-	std::cout << "\t\tstringPTR : " << stringPTR << std::endl;
-	std::cout << "\t\tstringREF : " << &stringREF << std::endl;
+	
+	{
+		std::cout << BOLD << "BOB" << RESET << std::endl;
+		Weapon club("crude spiked club");
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
+	}
 	std::cout << SEPARATOR << std::endl;
-	std::cout << BOLD << "VALUES" << RESET << std::endl;
-	std::cout << "\t\tbrain     : " << brain << std::endl;
-	std::cout << "\t\tstringPTR : " << *stringPTR << std::endl;
-	std::cout << "\t\tstringREF : " << stringREF << std::endl;
+	{
+		std::cout << BOLD << "JIM" << RESET << std::endl;
+		Weapon club("crude spiked club");
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("other type of club");
+		jim.attack();
+	}
 	return (SUCCESS);
 }

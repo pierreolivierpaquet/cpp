@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 09:17:27 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 15:13:15 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/09 13:46:46 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/09 17:54:54 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HUMANA_HPP
+# define HUMANA_HPP
 
-Zombie::Zombie( void ){};
+# include "Weapon.hpp"
 
-Zombie::~Zombie( void ){
-	std::cout << this->_getName() << " destroyed." << std::endl;
+class HumanA {
+	private:
+		std::string _name;
+		Weapon &_Weapon;
+
+	public:
+		HumanA(const std::string name, Weapon &weaponRef);
+		~HumanA( void );
+	
+		void		attack( void );
+		std::string _getName( void ) const;
+		std::string _getWeaponType( void ) const;
 };
 
-std::string Zombie::_getName( void ) const {
-	return (this->name);
-};
-
-void	Zombie::setName(std::string const zombie_name){
-	this->name = zombie_name;
-	return ;
-};
-
-void Zombie::announce( void ) {
-	std::cout << this->_getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
-};
+#endif /* HUMANA_HPP */
