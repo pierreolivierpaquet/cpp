@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 10:22:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 09:10:06 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/09 09:17:27 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/09 12:03:17 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void	randomChump(std::string zombie_name){
-	Zombie generate(DEFAULT_ZOMBIE_NAME);
+Zombie::Zombie( void ){};
 
-	if (zombie_name.length() == 0 && std::cin.eof()){
-		std::cout << "EOF: Default name used." << std::endl;
-	}
-	else
-		generate.setName(zombie_name);
-	generate.announce();
+Zombie::~Zombie( void ){
+	std::cout << this->_getName() << " destroyed." << std::endl;
+};
+
+std::string Zombie::_getName( void ) const {
+	return (this->name);
+};
+
+void	Zombie::setName(std::string const zombie_name){
+	this->name = zombie_name;
+	return ;
+};
+
+void Zombie::announce( void ) {
+	std::cout << this->_getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
 };

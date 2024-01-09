@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/01/08 10:13:29 by ppaquet           #+#    #+#              #
-#    Updated: 2024/01/09 12:12:06 by ppaquet          ###   ########.fr        #
+#    Created: 2024/01/09 09:16:08 by ppaquet           #+#    #+#              #
+#    Updated: 2024/01/09 12:12:27 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	:= Zombie
+NAME	:= ZombieHorde
 
 # ****************************** MISCELLANEOUS ******************************* #
 
@@ -27,9 +27,8 @@ FLAGS	:= -Wall -Werror -Wextra -std=c++98
 SRC_PATH	:=	src/
 SRC_FILES	:= \
 				main.cpp \
-				newZombie.cpp \
-				randomChump.cpp \
 				Zombie.cpp \
+				zombieHorde.cpp \
 
 # ********************************* OBJECTS ********************************** #
 
@@ -52,13 +51,13 @@ $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "\tCompiling..."
 	@$(COMPILE) $(FLAGS) $(INCL) $(OBJ) -o $@
 
-$(OBJ_PATH):
-	@$(FOLDER) $(OBJ_PATH)
-
 $(OBJ_PATH)%.o:$(SRC_PATH)%.cpp
 	@echo "\t$@ created."
 	@$(COMPILE) $(FLAGS) $(INCL) -o $@ -c $<
 	@printf "\033[1A\033[K"
+
+$(OBJ_PATH):
+	@$(FOLDER) $(OBJ_PATH)
 
 clean:
 	@$(REMOVE) $(OBJ_PATH)
@@ -70,4 +69,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all re clean fclean

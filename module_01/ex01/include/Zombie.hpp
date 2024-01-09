@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 10:22:21 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 09:57:15 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/09 09:22:24 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/09 12:03:31 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,22 @@
 # include <iostream>
 
 # ifndef DEFAULT_ZOMBIE_NAME
-#  define DEFAULT_ZOMBIE_NAME "Normie"
+#  define DEFAULT_ZOMBIE_NAME "ZOMBOY"
 # endif /* DEFAULT_ZOMBIE_NAME */
 
 class Zombie {
 	private:
-		std::string	name;
+		std::string name;
 		
 	public:
-		Zombie(std::string zombie_name);
+		Zombie( void ); // Default constructor
 		~Zombie( void );
 
+		void 		setName(std::string zombie_name);
 		std::string _getName( void ) const;
-		void		setName(std::string const zombie_name);
 		void		announce( void );
 };
 
-void	randomChump(std::string zombie_name);
-
-Zombie *newZombie(std::string zombie_name);
+Zombie *zombieHorde(int N, std::string name);
 
 #endif /* ZOMBIE_HPP */

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:22:36 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/08 15:11:31 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/09 09:09:27 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ std::string Zombie::_getName( void ) const {
 };
 
 
-void Zombie::annonce( void ) {
+void Zombie::announce( void ) {
 	std::cout << this->_getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
 };
 
@@ -33,4 +33,6 @@ Zombie::Zombie (std::string zombie_name){
 };
 
 /// @brief Destructor 
-Zombie::~Zombie( void ){};
+Zombie::~Zombie( void ){
+	std::cout << this->_getName() << " destroyed." << std::endl;
+};

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 10:22:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 09:10:06 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/09 09:17:00 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/09 12:07:31 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void	randomChump(std::string zombie_name){
-	Zombie generate(DEFAULT_ZOMBIE_NAME);
+#ifndef SUCCESS
+# define SUCCESS 0
+#endif /*SUCCESS */
 
-	if (zombie_name.length() == 0 && std::cin.eof()){
-		std::cout << "EOF: Default name used." << std::endl;
-	}
-	else
-		generate.setName(zombie_name);
-	generate.announce();
+int	main(int argc, char **argv){
+	( void )argc;
+	( void )argv;
+	Zombie	*group = zombieHorde(1500, DEFAULT_ZOMBIE_NAME);
+	delete[] group;
+	return (SUCCESS);	
 };
