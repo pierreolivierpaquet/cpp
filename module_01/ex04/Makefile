@@ -1,0 +1,71 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/10 08:36:44 by ppaquet           #+#    #+#              #
+#    Updated: 2024/01/10 19:47:46 by ppaquet          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	:=	Replace
+
+# ****************************** MISCELLANEOUS ******************************* #
+
+FOLDER	:=	mkdir
+REMOVE	:=	rm -rf
+
+# ******************************* COMPILATION ******************************** #
+
+COMPILE	:=	g++
+FLAGS	:=	-std=c++98 -Wall -Werror -Wextra
+
+# ********************************* SOURCES ********************************** #
+
+SRC_PATH	:=	src/
+SRC_FILES	:=	\
+				main.cpp \
+				Replace.cpp \
+
+# ********************************* OBJECTS ********************************** #
+
+OBJ_PATH	:=	obj/
+OBJ_FILES	:=	$(SRC_FILES:.cpp=.o)
+OBJ			:=	$(addprefix $(OBJ_PATH), $(OBJ_FILES))
+
+# ********************************* INCLUDE ********************************** #
+
+INCL_PATH	:=	include/
+INCL		:=	-I $(INCL_PATH)
+
+# **************************************************************************** #
+# ********************************** RULES *********************************** #
+
+all: $(NAME)
+	@echo "\t./$< ready."
+
+$(NAME): $(OBJ_PATH) $(OBJ)
+	@echo "\tCompiling"
+	$(COMPILE) $(FLAGS) $(INCL) -o $@ $(OBJ)
+
+$(OBJ_PATH):
+	@$(FOLDER) $(OBJ_PATH)
+
+$(OBJ_PATH)%.o:$(SRC_PATH)%.cpp
+	@echo "\t$@ created."
+	$(COMPILE) $(FLAGS) $(INCL) -o $@ -c $<
+	@printf "\033[1A\033[K"
+
+clean:
+	@$(REMOVE) $(OBJ_PATH)
+	@echo "\tObjects removed."
+
+fclean: clean
+	@$(REMOVE) $(NAME)
+	@echo "\t$(NAME) executable removed."
+
+re: fclean all
+
+.PHONY: all re clean fclean
