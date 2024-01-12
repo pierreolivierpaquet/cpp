@@ -6,29 +6,29 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 10:22:06 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/10 21:02:17 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:27:57 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_HPP
-# define MAIN_HPP
+#ifndef		MAIN_HPP_
+# define	MAIN_HPP_
 
-#include "Replace.hpp"
+# include	"Replace.hpp"
 
-# ifndef OK
-#  define OK 1
-# endif /* OK */
+# ifndef	OK
+#  define	OK 1
+# endif	/*	OK	*/
 
-# ifndef KO
-#  define KO 0
-# endif /* KO */
+# ifndef	KO
+#  define	KO 0
+# endif	/*	KO	*/
 
-# ifndef FAILURE
-#  define FAILURE 1
-# endif /* FAILURE */
+# ifndef	FAILURE
+#  define	FAILURE 1
+# endif	/*	FAILURE	*/
 
-# ifndef SUCCESS
-#  define SUCCESS 0
-# endif /* SUCCESS */
+# ifndef	SUCCESS
+#  define	SUCCESS 0
+# endif	/*	SUCCESS	*/
 
-#endif /* MAIN_HPP */
+#endif 	/*	MAIN_HPP_	*/

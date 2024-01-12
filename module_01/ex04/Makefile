@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 08:36:44 by ppaquet           #+#    #+#              #
-#    Updated: 2024/01/10 19:47:46 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/01/11 21:32:23 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,18 +44,18 @@ INCL		:=	-I $(INCL_PATH)
 # ********************************** RULES *********************************** #
 
 all: $(NAME)
-	@echo "\t./$< ready."
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "\tCompiling"
-	$(COMPILE) $(FLAGS) $(INCL) -o $@ $(OBJ)
+	@$(COMPILE) $(FLAGS) $(INCL) -o $@ $(OBJ)
+	@echo "\t./$@ ready."
 
 $(OBJ_PATH):
 	@$(FOLDER) $(OBJ_PATH)
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.cpp
 	@echo "\t$@ created."
-	$(COMPILE) $(FLAGS) $(INCL) -o $@ -c $<
+	@$(COMPILE) $(FLAGS) $(INCL) -o $@ -c $<
 	@printf "\033[1A\033[K"
 
 clean:

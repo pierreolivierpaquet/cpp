@@ -6,11 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:15:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/10 21:02:52 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:49:31 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Replace.hpp"
+#include	"Replace.hpp"
 
 /// ---
 /// @brief 
@@ -19,7 +19,7 @@ bool	Replace::setInfile( const std::string filename ){
 	if (filename.empty() == true || this->_infile.is_open() == true){
 		return ( false );
 	} else {
-		this->_infile.open(filename.c_str());
+		this->_infile.open( filename.c_str() );
 		if (this->_infile.is_open() == false){
 			return ( false );
 		}
@@ -34,7 +34,7 @@ bool	Replace::setOutfile( const std::string filename ){
 	if (filename.empty() == true || this->_outfile.is_open() == true){
 		return ( false );
 	} else {
-		this->_outfile.open(filename.c_str());
+		this->_outfile.open( filename.c_str() );
 		if (this->_outfile.is_open() == false){
 			return ( false );
 		}
@@ -67,15 +67,18 @@ void	Replace::substitute( void ){
 	std::string	line = EMPTY;
 
 	while (true){
-		getline(this->_infile, line);
+		getline( this->_infile, line );
 		i = 0;
 		n = 0;
 		while ( i < line.length() ){
-			n = line.find(this->_needle, i);
+			n = line.find( this->_needle, i );
+			/*	If needle was NOT found, n will be equivalent to the maximum
+				value of size_t (std::string::npos), which is a static member
+				of std::string.	*/
 			if (n != std::string::npos){
-				line.erase(n, this->_needle.length());
-				line.insert(n, this->_substitute.c_str(), this->_substitute.length());
-				i += (n + this->_substitute.length());
+				line.erase( n, this->_needle.length() );
+				line.insert( n, this->_substitute.c_str(), this->_substitute.length() );
+				i += ( n + this->_substitute.length() );
 			} else {
 				i = line.length();
 			}

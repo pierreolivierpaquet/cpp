@@ -6,13 +6,13 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:17:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 12:06:27 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:05:51 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include	"Zombie.hpp"
 
-Zombie *zombieHorde(int N, std::string name){
+Zombie *zombieHorde( int N, std::string name ){
 	Zombie *new_horde = NULL;
 	int		i = -1;
 	

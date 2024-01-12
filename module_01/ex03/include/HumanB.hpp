@@ -6,32 +6,32 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:46:49 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 17:55:05 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:09:11 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#ifndef		HUMANB_HPP_
+# define	HUMANB_HPP_
 
-# include "Weapon.hpp"
+# include	"Weapon.hpp"
 
-# ifndef DEFAULT_WEAPON
-#  define DEFAULT_WEAPON "bare hands"
-# endif /* DEFAULT_WEAPON */
+# ifndef	DEFAULT_WEAPON
+#  define	DEFAULT_WEAPON "bare hands"
+# endif	/*	DEFAULT_WEAPON	*/
 
 class HumanB {
 	private:
-		std::string _name;
-		Weapon *_Weapon;
+		std::string	_name;
+		Weapon		*_Weapon;
 
 	public:
-		HumanB(const std::string name);
+		HumanB( const std::string name );
 		~HumanB( void );
 
-		void		setWeapon(Weapon &new_weapon);
-		std::string	_getWeaponType( void ) const;
-		std::string	_getName( void ) const;
+		void		setWeapon( Weapon &new_weapon );
+		std::string	getWeaponType( void ) const;
+		std::string	getName( void ) const;
 		void		attack( void );
 };
 
-#endif /* HUMANB_HPP */
+#endif	/*	HUMANB_HPP_	*/
