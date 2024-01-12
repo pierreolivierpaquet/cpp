@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:46:52 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 21:14:42 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:30:51 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class Weapon {
 		Weapon( const std::string weapon_type );
 		~Weapon( void );
 
-		const std::string	&getType( void ) const;
+		const std::string	&getType_( void ) const;
 		void				setType( const std::string weapon_type );
 };
 

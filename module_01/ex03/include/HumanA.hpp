@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:46:46 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 21:08:34 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:33:40 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ class HumanA {
 		Weapon		&_Weapon;
 
 	public:
-		HumanA(const std::string name, Weapon &weaponRef);
+		HumanA( const std::string name, Weapon &weaponRef );
 		~HumanA( void );
 	
-		std::string getName( void ) const;
-		std::string getWeaponType( void ) const;
+		std::string 		getName( void ) const;
+		const std::string	getWeaponType_( void ) const;
 		
 		void		attack( void );
 };

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 14:05:24 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 21:25:40 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:31:06 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	Weapon::setType( const std::string weapon_type ) {
 }
 
 /// @brief Weapon type getter. 
-const std::string	&Weapon::getType( void ) const {
+const std::string	&Weapon::getType_( void ) const {
 	const std::string &weaponReference = this->_type;
 	return ( weaponReference );
 }

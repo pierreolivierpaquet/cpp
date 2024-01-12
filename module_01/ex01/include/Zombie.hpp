@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:22:24 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 20:47:35 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:13:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Zombie {
 		~Zombie( void );
 
 		void 		setName( std::string zombie_name );
-		std::string getName( void ) const;
+		std::string getName_( void ) const;
 		
 		void		announce( void );
 };

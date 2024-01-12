@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:47:39 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 21:25:45 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 12:31:39 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ std::string HumanA::getName( void ) const {
 	return ( this->_name );
 }
 
-std::string HumanA::getWeaponType() const {
-	return ( this->_Weapon.getType() );
+const std::string HumanA::getWeaponType_() const {
+	return ( this->_Weapon.getType_() );
 }
 
 void	HumanA::attack( void ) {
 	std::cout	<< this->getName()
-				<< ATTACK_ACTION << this->getWeaponType() << std::endl;
+				<< ATTACK_ACTION << this->getWeaponType_() << std::endl;
 	return ;
 }
 

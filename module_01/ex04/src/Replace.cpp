@@ -6,15 +6,12 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:15:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 21:49:31 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 13:04:31 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"Replace.hpp"
 
-/// ---
-/// @brief 
-/// 
 bool	Replace::setInfile( const std::string filename ){
 	if (filename.empty() == true || this->_infile.is_open() == true){
 		return ( false );
@@ -27,9 +24,6 @@ bool	Replace::setInfile( const std::string filename ){
 	return ( true );
 }
 
-/// ---
-/// @brief 
-/// 
 bool	Replace::setOutfile( const std::string filename ){
 	if (filename.empty() == true || this->_outfile.is_open() == true){
 		return ( false );
@@ -42,25 +36,16 @@ bool	Replace::setOutfile( const std::string filename ){
 	return ( true );
 }
 
-/// ---
-/// @brief 
-/// 
 void	Replace::setNeedle( const std::string needle ){
 	this->_needle = needle;
 	return ;
 }
 
-/// ---
-/// @brief 
-///
 void	Replace::setSubstitute( const std::string substitute ){
 	this->_substitute = substitute;
 	return ;
 }
 
-/// ---
-/// @brief 
-/// 
 void	Replace::substitute( void ){
 	size_t	i;
 	size_t	n;

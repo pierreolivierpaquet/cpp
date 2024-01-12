@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 08:36:34 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 21:40:56 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 13:13:04 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ bool	arguments_check( int argc , char **argv, Replace &data ){
 			return ( error( "Too many arguments." ) );
 		}
 	}
-	/* Parse each arguments of the array and validates their lenght */
-	for (int i = 1; i < argc; i++){
+	/*	Parse each arguments of the array and validates their lenght.
+		Except for the last argument: Needle will be replaced by empty string.
+		Comment ' -1 ' for disabling this option.	*/
+	for (int i = 1; i < (argc - 1); i++){
 		checker = argv[i];
 		if (checker.length() == 0){
 			return ( error( "Invalid argument: Make sure it's not empty." ) );
@@ -78,7 +80,10 @@ bool	files_handler( char *filename, Replace &data ){
 }
 
 /// ---
-/// @brief 
+/// User provides the following:
+/// - argv[1] Filename (Haystack).
+/// - argv[2] Needle.
+/// - argv[3] Substitute to needle.
 ///
 int	main( int argc, char **argv ){
 	Replace data;
