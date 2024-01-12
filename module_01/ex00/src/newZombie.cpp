@@ -6,19 +6,19 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:22:31 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 21:04:56 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 11:58:32 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"Zombie.hpp"
 
-Zombie *newZombie(std::string zombie_name){
-	Zombie *create = new Zombie(DEFAULT_ZOMBIE_NAME);
+Zombie *newZombie( std::string zombie_name ){
+	Zombie *create = new Zombie( DEFAULT_ZOMBIE_NAME );
 	
 	if (zombie_name.length() == 0 && std::cin.eof()){
 		std::cout << "EOF: Default name used." << std::endl;
 	}
 	else
-		create->setName(zombie_name);
+		create->setName( zombie_name );
 	return (create);
 };

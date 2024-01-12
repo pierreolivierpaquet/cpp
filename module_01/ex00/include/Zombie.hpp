@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:22:21 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/11 20:42:14 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/12 11:49:05 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@
 # ifndef 	DEFAULT_ZOMBIE_NAME
 #  define 	DEFAULT_ZOMBIE_NAME "Normie"
 # endif 	/* DEFAULT_ZOMBIE_NAME */
+
+# ifndef	ANNOUNCE_MESSAGE
+#  define	ANNOUNCE_MESSAGE ": BraiiiiiiinnnzzzZ..."
+# endif	/*	ANNOUNCE_MESSAGE	*/
 
 class Zombie {
 	private:
