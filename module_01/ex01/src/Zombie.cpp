@@ -6,27 +6,27 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 09:17:27 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 15:13:15 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:05:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include	"Zombie.hpp"
 
-Zombie::Zombie( void ){};
-
-Zombie::~Zombie( void ){
-	std::cout << this->_getName() << " destroyed." << std::endl;
+std::string Zombie::getName( void ) const {
+	return (this->_name);
 };
 
-std::string Zombie::_getName( void ) const {
-	return (this->name);
-};
-
-void	Zombie::setName(std::string const zombie_name){
-	this->name = zombie_name;
+void	Zombie::setName( std::string const zombie_name ){
+	this->_name = zombie_name;
 	return ;
 };
 
 void Zombie::announce( void ) {
-	std::cout << this->_getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout << this->getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
+};
+
+Zombie::Zombie( void ){};
+
+Zombie::~Zombie( void ){
+	std::cout << this->getName() << " destroyed." << std::endl;
 };

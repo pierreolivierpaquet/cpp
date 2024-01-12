@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 09:16:08 by ppaquet           #+#    #+#              #
-#    Updated: 2024/01/09 12:12:27 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/01/11 20:54:19 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,11 +45,11 @@ INCL		:= -I $(INCL_PATH)
 # ********************************** RULES *********************************** #
 
 all: $(NAME)
-	@echo "\t./$< ready."
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "\tCompiling..."
 	@$(COMPILE) $(FLAGS) $(INCL) $(OBJ) -o $@
+	@echo "\t./$@ ready."
 
 $(OBJ_PATH)%.o:$(SRC_PATH)%.cpp
 	@echo "\t$@ created."

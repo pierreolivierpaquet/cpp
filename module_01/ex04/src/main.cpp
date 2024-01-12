@@ -6,11 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 08:36:34 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/10 20:00:17 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:40:56 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.hpp"
+#include	"main.hpp"
 
 /// ---
 /// @param err_message Message to be displayed on the std::cerr stream.
@@ -26,30 +26,34 @@ bool	error( const std::string err_message ){
 ///	Displays messages in case of error.
 /// @param N Number of arguments.
 ///
-bool	arguments_check( int argc , char **argv, Replace &data){
+bool	arguments_check( int argc , char **argv, Replace &data ){
 	std::string checker = EMPTY;
 	
 	/* Validates the amount of argument(s) */
 	if (argc != 4){
 		if (argc == 1){
-			return (error( "Please provide: <filename> <search> <replace>." ));
+			return ( error( "Please provide: <filename> <search> <replace>" ) );
 		} else if (argc < 4){
-			return (error( "Too few arguments." ));
+			return ( error( "Too few arguments." ) );
 		} else if (argc > 4){
-			return (error( "Too many arguments." ));
+			return ( error( "Too many arguments." ) );
 		}
 	}
 	/* Parse each arguments of the array and validates their lenght */
 	for (int i = 1; i < argc; i++){
 		checker = argv[i];
 		if (checker.length() == 0){
-			return (error( "Invalid argument: Make sure it's not empty." ));
+			return ( error( "Invalid argument: Make sure it's not empty." ) );
 		} else {
 			checker.clear();
 		}
 	}
+
+	/*	No error was found at this point: The needle and substitute are then
+		stored into the data instance.	*/
 	data.setNeedle( argv[2] );
 	data.setSubstitute( argv[3] );
+	
 	return ( true );
 }
 
@@ -59,16 +63,16 @@ bool	arguments_check( int argc , char **argv, Replace &data){
 /// @param filename Name of the file which needs to be opened and replaced.
 /// @return Wether the process was SUCCESSFUL, or not.
 ///
-bool	files_handler( char *filename, Replace &data){
-	std::string name(filename);
+bool	files_handler( char *filename, Replace &data ){
+	std::string name( filename );
 
 	if (data.setInfile( name ) != true){
-		return ( error("error: Opening infile.") );
+		return ( error( "error: Opening infile." ) );
 	}
 	/* Adds the extension to the name for the modified version. */
-	name.append(REPLACE_EXT);
+	name.append( REPLACE_EXT );
 	if (data.setOutfile( name ) != true){
-		return ( error("error: Creating outfile.") );
+		return ( error( "error: Creating outfile." ) );
 	}
 	return ( true );
 }

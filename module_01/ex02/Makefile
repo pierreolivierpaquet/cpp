@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 12:31:54 by ppaquet           #+#    #+#              #
-#    Updated: 2024/01/09 17:53:11 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/01/11 20:58:45 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,11 @@ OBJ			:= $(addprefix $(OBJ_PATH), $(OBJ_FILES))
 # ********************************** RULES *********************************** #
 
 all: $(NAME)
-	@echo "\t./$< ready."
 
 $(NAME): $(OBJ_PATH) $(OBJ)
 	@echo "\tCompiling"
 	@$(COMPILE) $(FLAGS) $(OBJ) -o $@
+	@echo "\t./$@ ready."
 
 $(OBJ_PATH):
 	@$(FOLDER) $(OBJ_PATH)

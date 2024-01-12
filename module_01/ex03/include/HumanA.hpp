@@ -6,27 +6,28 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 13:46:46 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/09 17:54:54 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:08:34 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANA_HPP
-# define HUMANA_HPP
+#ifndef		HUMANA_HPP_
+# define	HUMANA_HPP_
 
-# include "Weapon.hpp"
+# include	"Weapon.hpp"
 
 class HumanA {
 	private:
-		std::string _name;
-		Weapon &_Weapon;
+		std::string	_name;
+		Weapon		&_Weapon;
 
 	public:
 		HumanA(const std::string name, Weapon &weaponRef);
 		~HumanA( void );
 	
+		std::string getName( void ) const;
+		std::string getWeaponType( void ) const;
+		
 		void		attack( void );
-		std::string _getName( void ) const;
-		std::string _getWeaponType( void ) const;
 };
 
-#endif /* HUMANA_HPP */
+#endif	/*	HUMANA_HPP_	*/

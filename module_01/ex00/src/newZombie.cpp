@@ -6,11 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 10:22:31 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/08 15:20:53 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:04:56 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include	"Zombie.hpp"
 
 Zombie *newZombie(std::string zombie_name){
 	Zombie *create = new Zombie(DEFAULT_ZOMBIE_NAME);

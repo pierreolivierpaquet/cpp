@@ -6,23 +6,23 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 13:13:56 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/10 21:02:55 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/11 21:28:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REPLACE_HPP
-# define REPLACE_HPP
+#ifndef		REPLACE_HPP_
+# define	REPLACE_HPP_
 
-# include <iostream>
-# include <fstream>
+# include	<iostream>
+# include	<fstream>
 
-# ifndef REPLACE_EXT
-#  define REPLACE_EXT ".replace"
-#  endif /* REPLACE_EXT */
+# ifndef	REPLACE_EXT
+#  define	REPLACE_EXT ".replace"
+# endif	/*	REPLACE_EXT	*/
 
-# ifndef EMPTY
-#  define EMPTY ""
-# endif /* EMPTY */
+# ifndef	EMPTY
+#  define	EMPTY ""
+# endif	/*	EMPTY	*/
 
 /******************************************************************************/
 
@@ -47,4 +47,4 @@ class Replace {
 		void	substitute( void );
 };
 
-#endif /* REPLACE_HPP */
+#endif	/*	REPLACE_HPP_	*/
