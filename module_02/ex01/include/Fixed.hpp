@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 10:03:36 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/15 14:08:36 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/15 14:35:15 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/15 16:14:04 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 # define	FIXED_HPP_
 
 # include <iostream>
+# include <cmath>
 
 class Fixed {
 	private:
 		int					_fixed_value;
-		static const int	_nbits;
+		static const int	_nbits;			
 
 	public:
 	/* Constructors */
 		Fixed( void );	// Default.
 		Fixed( Fixed const &src );	// Copy.
-		//Fixed( /* Insert parameter here. */ );	// Parametric.
+		Fixed( const int integer_number );	// Parametric 1.
+		Fixed( const float float_number );	// Parametric 2.
 
 	/* Destructor */
 		~Fixed( void );	// Default.
@@ -33,7 +35,13 @@ class Fixed {
 		Fixed &operator=( Fixed const &rhs );	// Assignation.
 
 		int		getRawBits_( void ) const;
-		void	setRawBits( int const raw );
+		void	setRawBits( const int raw);
+
+		float	toFloat_( void ) const;
+		int		toInt_( void ) const;
+
 };	/* Fixed */
+
+std::ostream &operator<<( std::ostream &o, const Fixed &rhs);
 
 #endif	/*	FIXED_HPP_	*/
