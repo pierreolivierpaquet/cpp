@@ -6,20 +6,23 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:17 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/15 16:21:40 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/16 10:23:23 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
+/// Fractionnal part bit initialization.
 const int Fixed::_nbits = 8;
 
 void	Fixed::setRawBits( const int raw){
+	// std::cout << "setRawBits member function called" << std::endl;
 	this->_fixed_value = raw;
 	return ;
 }
 
 int	Fixed::getRawBits_( void ) const {
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (this->_fixed_value);
 }
 
@@ -36,36 +39,40 @@ int Fixed::toInt_( void ) const {
 
 /******************************************************************************/
 
-/// @brief Copy constructor by reference. 
+/// @brief Constructor by reference copy. 
 Fixed::Fixed( const Fixed &src ){
 	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 	return ;
 }
 
+/// @brief Assignation overload.
 Fixed &Fixed::operator=( Fixed const &rhs ){
 	this->_fixed_value = rhs.getRawBits_();
 	std::cout << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 
+/******************************************************************************/
+
+/// @brief Parametric constructor (from constant integer value).
 Fixed::Fixed( const int integer_number) {
+	std::cout << "Int constructor called" << std::endl;
 	this->_fixed_value = integer_number << this->_nbits;
 	return ;
 }
 
+/// @brief Parametric constructor (from constant float value).
 Fixed::Fixed( const float float_number ) {
 	float	result;
 	
+	std::cout << "Float constructor called" << std::endl;
 	result = roundf(float_number * (1 << this->_nbits));
 	this->_fixed_value = (int)result;
 	return ;
 }
 
-std::ostream &operator<<( std::ostream &output, const Fixed &rhs){
-	output << rhs.toFloat_();
-	return (output);
-}
+/******************************************************************************/
 
 /// @brief Default constructor. 
 Fixed::Fixed( void ) : _fixed_value( 0 ) {
@@ -77,3 +84,8 @@ Fixed::~Fixed ( void ) {
 	std::cout << "Destructor called" << std::endl;
 }
 
+/// @brief Output stream overload.
+std::ostream &operator<<( std::ostream &output, const Fixed &rhs){
+	output << rhs.toFloat_();
+	return (output);
+}
