@@ -6,19 +6,19 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:15 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/17 12:05:40 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 14:03:35 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		FIXED_HPP_
 # define	FIXED_HPP_
 
-# include <iostream>
-# include <cmath>
+# include	<iostream>
+# include	<cmath>
 
 class Fixed {
 	private:
-		int					_fixed_value;
+		int					_fixed_point;
 		static const int	_nbits;			
 
 	public:
@@ -32,7 +32,7 @@ class Fixed {
 		~Fixed( void );	// Default.
 
 	/* Overload operands. */
-		Fixed &operator=( Fixed const &rhs );	// Assignation.
+		Fixed	&operator=( Fixed const &rhs );	// Assignation.
 
 		int		getRawBits_( void ) const;
 		void	setRawBits( const int raw);
@@ -49,10 +49,10 @@ class Fixed {
 		bool	operator!=( const Fixed &rhs ) const;
 
 		/* Incrementation & Decrementation */
-		Fixed	&operator++( void );
-		Fixed	&operator--( void );
-		Fixed	operator++( int );
-		Fixed	operator--( int );
+		Fixed	&operator++( void );	// Pre.
+		Fixed	&operator--( void );	// Pre.
+		Fixed	operator++( int );		// Post.
+		Fixed	operator--( int );		// Post.
 
 		static const Fixed &min_( const Fixed &first, const Fixed &second );
 		static const Fixed &max_( const Fixed &first, const Fixed &second );

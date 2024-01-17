@@ -6,11 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:19 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/17 12:41:45 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 14:08:32 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Fixed.hpp"
+#include "Fixed.hpp"
 
 int	main( int argc, char **argv ){
 	( void )argc;
@@ -29,15 +29,15 @@ int	main( int argc, char **argv ){
 	std::cout << b << std::endl;
 
 	std::cout << Fixed::max_( a, b ) << std::endl;
-	std::cout << Fixed::min_( a, b ) << std::endl;
+	// std::cout << Fixed::min_( a, b ) << std::endl;
 
-	std::cout << "[ TEST ]\n" << std::endl;
-	Fixed one( 4 );
+	// std::cout << "[ TEST ]\n" << std::endl;
+	// Fixed one( 4 );
 
-	one = one / 2;
-	std::cout << one << std::endl;
-	one = one - 0.5f;
-	std::cout << one << std::endl;
+	// one = one / 2;
+	// std::cout << one << std::endl;
+	// one = one - 0.5f;
+	// std::cout << one << std::endl;
 
 	return ( 0 );
 }

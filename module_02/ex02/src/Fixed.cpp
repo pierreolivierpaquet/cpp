@@ -6,11 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:17 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/17 12:47:08 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 14:05:21 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Fixed.hpp"
+#include "Fixed.hpp"
 
 /// Fractionnal part bit initialization.
 const int Fixed::_nbits = 8;
@@ -25,28 +25,27 @@ std::ostream &operator<<( std::ostream &output, const Fixed &rhs){
 
 void	Fixed::setRawBits( const int raw){
 	// std::cout << "setRawBits member function called" << std::endl;
-	this->_fixed_value = raw;
+	this->_fixed_point = raw;
 	return ;
 }
 
 int	Fixed::getRawBits_( void ) const {
 	// std::cout << "getRawBits member function called" << std::endl;
-	return (this->_fixed_value);
+	return (this->_fixed_point);
 }
 
 float Fixed::toFloat_( void ) const {
 	float	result;
 
-	result = (float)this->_fixed_value / ( 1 << this->_nbits);
+	result = (float)this->_fixed_point / ( 1 << this->_nbits);
 	return (result);
 }
 
 int Fixed::toInt_( void ) const {
-	return (this->_fixed_value >> this->_nbits);
+	return (this->_fixed_point >> this->_nbits);
 }
 
 /************************** CANONICAL FORM REQUISITE **************************/
-
 
 /// @brief Constructor by reference copy. 
 Fixed::Fixed( const Fixed &src ){
@@ -57,7 +56,7 @@ Fixed::Fixed( const Fixed &src ){
 
 /// @brief Assignation overload.
 Fixed &Fixed::operator=( Fixed const &rhs ){
-	this->_fixed_value = rhs.getRawBits_();
+	this->_fixed_point = rhs.getRawBits_();
 	// std::cout << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
@@ -67,7 +66,7 @@ Fixed &Fixed::operator=( Fixed const &rhs ){
 /// @brief Parametric constructor (from constant integer value).
 Fixed::Fixed( const int integer_number) {
 	// std::cout << "Int constructor called" << std::endl;
-	this->_fixed_value = integer_number << this->_nbits;
+	this->_fixed_point = integer_number << this->_nbits;
 	return ;
 }
 
@@ -77,14 +76,14 @@ Fixed::Fixed( const float float_number ) {
 	
 	// std::cout << "Float constructor called" << std::endl;
 	result = roundf(float_number * (1 << this->_nbits));
-	this->_fixed_value = (int)result;
+	this->_fixed_point = (int)result;
 	return ;
 }
 
 /*********************** DEFAULT CONSTRUCTOR/DESTRUCTOR ***********************/
 
 /// @brief Default constructor. 
-Fixed::Fixed( void ) : _fixed_value( 0 ) {
+Fixed::Fixed( void ) : _fixed_point( 0 ) {
 	// std::cout << "Default constructor called" << std::endl;
 }
 
@@ -96,27 +95,27 @@ Fixed::~Fixed ( void ) {
 /********************************* COMPARISON *********************************/
 
 bool	Fixed::operator>( const Fixed &rhs ) const {
-	return ( this->_fixed_value > rhs.getRawBits_() );
+	return ( this->_fixed_point > rhs.getRawBits_() );
 }
 
 bool	Fixed::operator>=( const Fixed &rhs ) const {
-	return (this->_fixed_value >= rhs.getRawBits_());
+	return (this->_fixed_point >= rhs.getRawBits_());
 }
 
 bool	Fixed::operator<( const Fixed &rhs ) const {
-	return ( this->_fixed_value < rhs.getRawBits_() );
+	return ( this->_fixed_point < rhs.getRawBits_() );
 }
 
 bool	Fixed::operator<=( const Fixed &rhs ) const {
-	return ( this->_fixed_value <= rhs.getRawBits_() );
+	return ( this->_fixed_point <= rhs.getRawBits_() );
 }
 
 bool	Fixed::operator==( const Fixed &rhs ) const {
-	return ( this->_fixed_value == rhs.getRawBits_() );
+	return ( this->_fixed_point == rhs.getRawBits_() );
 }
 
 bool	Fixed::operator!=( const Fixed &rhs ) const {
-	return ( this->_fixed_value != rhs.getRawBits_() );
+	return ( this->_fixed_point != rhs.getRawBits_() );
 }
 
 /*********************** INCREMENTATION+DECREMENTATION ************************/
@@ -125,13 +124,13 @@ bool	Fixed::operator!=( const Fixed &rhs ) const {
 ///			expressions. Example: <class> <Name> = ++b;
 /// Pre-incrementation.
 Fixed	&Fixed::operator++( void ) {
-	this->_fixed_value++;
+	this->_fixed_point++;
 	return ( *this );
 }
 
 /// Pre-decrementation.
 Fixed	&Fixed::operator--( void ) {
-	this->_fixed_value--;
+	this->_fixed_point--;
 	return ( *this );
 }
 
@@ -139,7 +138,7 @@ Fixed	&Fixed::operator--( void ) {
 Fixed	Fixed::operator++( int ) {
 	Fixed	pre_incrementation_state = *this;	
 
-	this->_fixed_value++;
+	this->_fixed_point++;
 	return ( pre_incrementation_state );
 }
 
@@ -147,7 +146,7 @@ Fixed	Fixed::operator++( int ) {
 Fixed	Fixed::operator--( int ) {
 	Fixed	pre_decrementation_state = *this;	
 
-	this->_fixed_value--;
+	this->_fixed_point--;
 	return ( pre_decrementation_state );
 }
 
@@ -179,7 +178,7 @@ Fixed Fixed::operator*( const Fixed &rhs ) const {
 	Fixed	result;
 	int		multiplied;
 
-	multiplied = (this->_fixed_value * rhs.getRawBits_()) >> this->_nbits;
+	multiplied = (this->_fixed_point * rhs.getRawBits_()) >> this->_nbits;
 	result.setRawBits( multiplied );
 	return ( result );
 }
@@ -188,7 +187,7 @@ Fixed Fixed::operator/( const Fixed &rhs ) const {
 	Fixed	result;
 	int		divided;
 
-	divided = (this->_fixed_value)/ (rhs.getRawBits_()) << Fixed::_nbits;
+	divided = (this->_fixed_point)/ (rhs.getRawBits_()) << Fixed::_nbits;
 	result.setRawBits( divided );
 	return ( result );
 }
@@ -197,7 +196,7 @@ Fixed Fixed::operator+( const Fixed &rhs ) const {
 	Fixed	result;
 	int		added;
 
-	added = this->_fixed_value + rhs.getRawBits_();
+	added = this->_fixed_point + rhs.getRawBits_();
 	result.setRawBits( added );
 	return ( result );
 }
@@ -206,7 +205,7 @@ Fixed Fixed::operator-( const Fixed &rhs ) const {
 	Fixed	result;
 	int		subtracted;
 
-	subtracted = this->_fixed_value - rhs.getRawBits_();
+	subtracted = this->_fixed_point - rhs.getRawBits_();
 	result.setRawBits( subtracted );
 	return ( result );
 }
