@@ -6,14 +6,14 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:03:36 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/15 14:08:36 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 10:12:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		FIXED_HPP_
 # define	FIXED_HPP_
 
-# include <iostream>
+# include	<iostream>
 
 class Fixed {
 	private:
@@ -22,15 +22,15 @@ class Fixed {
 
 	public:
 	/* Constructors */
-		Fixed( void );	// Default.
-		Fixed( Fixed const &src );	// Copy.
+		Fixed( void );	// *Canonical* Default.
+		Fixed( Fixed const &src );	// *Canonical* Copy.
 		//Fixed( /* Insert parameter here. */ );	// Parametric.
 
 	/* Destructor */
-		~Fixed( void );	// Default.
+		~Fixed( void );	// *Canonical* Default.
 
 	/* Overload operands. */
-		Fixed &operator=( Fixed const &rhs );	// Assignation.
+		Fixed	&operator=( Fixed const &rhs );	// *Canonical* Assignation.
 
 		int		getRawBits_( void ) const;
 		void	setRawBits( int const raw );

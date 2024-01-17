@@ -6,11 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:17 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/16 10:23:23 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 11:45:30 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "../include/Fixed.hpp"
 
 /// Fractionnal part bit initialization.
 const int Fixed::_nbits = 8;

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 09:40:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/15 14:26:06 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 10:26:37 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ int	main( int argc, char **argv ){
 	Fixed c;
 
 	c = b;
+	
+	// a.setRawBits(123);
+	// b.setRawBits(456);
+	// c.setRawBits(789);
 	
 	std::cout << a.getRawBits_() << std::endl;
 	std::cout << b.getRawBits_() << std::endl;

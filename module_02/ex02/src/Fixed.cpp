@@ -6,14 +6,22 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:17 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/16 15:12:18 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 12:47:08 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
+#include "../include/Fixed.hpp"
 
 /// Fractionnal part bit initialization.
 const int Fixed::_nbits = 8;
+
+/// @brief Output stream overload.
+std::ostream &operator<<( std::ostream &output, const Fixed &rhs){
+	output << rhs.toFloat_();
+	return (output);
+}
+
+/******************************* SETTER+GETTER ********************************/
 
 void	Fixed::setRawBits( const int raw){
 	// std::cout << "setRawBits member function called" << std::endl;
@@ -37,7 +45,8 @@ int Fixed::toInt_( void ) const {
 	return (this->_fixed_value >> this->_nbits);
 }
 
-/******************************************************************************/
+/************************** CANONICAL FORM REQUISITE **************************/
+
 
 /// @brief Constructor by reference copy. 
 Fixed::Fixed( const Fixed &src ){
@@ -53,7 +62,7 @@ Fixed &Fixed::operator=( Fixed const &rhs ){
 	return (*this);
 }
 
-/******************************************************************************/
+/*************************** PARAMETRIC CONSTRUCTOR ***************************/
 
 /// @brief Parametric constructor (from constant integer value).
 Fixed::Fixed( const int integer_number) {
@@ -72,7 +81,7 @@ Fixed::Fixed( const float float_number ) {
 	return ;
 }
 
-/******************************************************************************/
+/*********************** DEFAULT CONSTRUCTOR/DESTRUCTOR ***********************/
 
 /// @brief Default constructor. 
 Fixed::Fixed( void ) : _fixed_value( 0 ) {
@@ -84,13 +93,7 @@ Fixed::~Fixed ( void ) {
 	// std::cout << "Destructor called" << std::endl;
 }
 
-/// @brief Output stream overload.
-std::ostream &operator<<( std::ostream &output, const Fixed &rhs){
-	output << rhs.toFloat_();
-	return (output);
-}
-
-/******************************************************************************/
+/********************************* COMPARISON *********************************/
 
 bool	Fixed::operator>( const Fixed &rhs ) const {
 	return ( this->_fixed_value > rhs.getRawBits_() );
@@ -116,18 +119,20 @@ bool	Fixed::operator!=( const Fixed &rhs ) const {
 	return ( this->_fixed_value != rhs.getRawBits_() );
 }
 
-/******************************************************************************/
+/*********************** INCREMENTATION+DECREMENTATION ************************/
 
 /// @return Reference to the currect modified instance, used in more complex
 ///			expressions. Example: <class> <Name> = ++b;
+/// Pre-incrementation.
 Fixed	&Fixed::operator++( void ) {
 	this->_fixed_value++;
-	return (*this);
+	return ( *this );
 }
 
+/// Pre-decrementation.
 Fixed	&Fixed::operator--( void ) {
 	this->_fixed_value--;
-	return (*this);
+	return ( *this );
 }
 
 /// @brief Post-incrementation.
@@ -135,7 +140,7 @@ Fixed	Fixed::operator++( int ) {
 	Fixed	pre_incrementation_state = *this;	
 
 	this->_fixed_value++;
-	return (pre_incrementation_state);
+	return ( pre_incrementation_state );
 }
 
 /// @brief Post-decrementation.
@@ -143,10 +148,10 @@ Fixed	Fixed::operator--( int ) {
 	Fixed	pre_decrementation_state = *this;	
 
 	this->_fixed_value--;
-	return (pre_decrementation_state);
+	return ( pre_decrementation_state );
 }
 
-/******************************************************************************/
+/********************************** MIN/MAX ***********************************/
 
 const Fixed	&Fixed::min_( const Fixed &first, const Fixed &second ) {
 	const Fixed &result = ( first < second ) ? first : second;
@@ -168,7 +173,7 @@ Fixed	&Fixed::max_( Fixed &first, Fixed &second ) {
 	return ( result );
 }
 
-/******************************************************************************/
+/********************************* ARITHMETIC *********************************/
 
 Fixed Fixed::operator*( const Fixed &rhs ) const {
 	Fixed	result;
@@ -183,7 +188,7 @@ Fixed Fixed::operator/( const Fixed &rhs ) const {
 	Fixed	result;
 	int		divided;
 
-	divided = (this->_fixed_value << this->_nbits)/ rhs.getRawBits_();
+	divided = (this->_fixed_value)/ (rhs.getRawBits_()) << Fixed::_nbits;
 	result.setRawBits( divided );
 	return ( result );
 }
