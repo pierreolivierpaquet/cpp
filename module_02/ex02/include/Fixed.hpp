@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:15 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/16 15:04:36 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 12:05:40 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class Fixed {
 		float	toFloat_( void ) const;
 		int		toInt_( void ) const;
 
-		/* Overload comparaison operands */
+		/* Overload comparison operands */
 		bool	operator>( const Fixed &rhs ) const;
 		bool	operator>=( const Fixed &rhs ) const;
 		bool	operator<( const Fixed &rhs ) const;
