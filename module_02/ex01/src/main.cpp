@@ -6,15 +6,12 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:19 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/15 16:16:15 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 13:49:42 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-/// ---
-/// @brief
-/// 
 int	main( int argc, char **argv ){
 	( void )argc;
 	( void )argv;

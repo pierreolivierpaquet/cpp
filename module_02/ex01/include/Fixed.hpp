@@ -6,19 +6,19 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:35:15 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/16 09:56:44 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 13:49:32 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		FIXED_HPP_
 # define	FIXED_HPP_
 
-# include <iostream>
-# include <cmath>
+# include	<iostream>
+# include	<cmath>
 
 class Fixed {
 	private:
-		int					_fixed_value;
+		int					_fixed_point;
 		static const int	_nbits;			
 
 	public:

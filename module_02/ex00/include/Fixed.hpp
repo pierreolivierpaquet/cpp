@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 10:03:36 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/17 10:12:46 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/17 13:45:38 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class Fixed {
 	private:
-		int					_fixed_value;
+		int					_fixed_point;
 		static const int	_nbits;
 
 	public:
