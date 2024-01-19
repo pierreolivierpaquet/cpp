@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:30:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/18 17:23:47 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/19 12:10:18 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # ifndef	EMPTY_STR
 #  define	EMPTY_STR	""
 # endif	/*	EMPTY_STR	*/
+
+# ifndef	EXIT_SUCCESS
+#  define	EXIT_SUCCESS 0
+# endif	/*	EXIT_SUCCESS	*/
 
 /********************************** MESSAGES **********************************/
 
@@ -57,15 +61,23 @@
 #  define	DEFAULT_ATTACK	0
 # endif	/*	DEFAULT_ATTACK	*/
 
+# ifndef	COST_ATTACK
+#  define	COST_ATTACK	1
+# endif	/*	COST_ATTACK	*/
+
+# ifndef	COST_REPAIR
+#  define	COST_REPAIR	1
+# endif	/*	COST_REPAIR	*/
+
 /******************************************************************************/
 /******************************************************************************/
 
 class ClapTrap {
 	private:
 		std::string	_name;
-		int			_hit_point;
-		int			_energy_point;
-		int			_attack_damage;
+		int			_hit_point; // Decreases from enemy attack damage.
+		int			_energy_point; // Decreases by one from attacking or repairing.
+		int			_attack_damage; // Affects enemy's hit points when attacking.
 	
 	public:
 		ClapTrap	&operator=( const ClapTrap &rhs ); // Assignation overload.
@@ -85,6 +97,13 @@ class ClapTrap {
 		int			getHitPoint		( void ) const;
 		int			getEnergyPoint	( void ) const;
 		int			getAttackDamage	( void ) const;
+
+		void	setName( const std::string name );
+		void	setHitPoint( const int points );
+		void	subEnergyPoint( const int points );
+		void	subHitPoint( const int points );
+		void	addHitPoints( const int points );
+		
 }	/*	ClapTrap	*/;
 
 #endif	/*	CLAPTRAP_HPP_	*/
