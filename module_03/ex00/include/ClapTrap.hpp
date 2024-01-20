@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:30:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/19 12:10:18 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/19 21:20:56 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@
 class ClapTrap {
 	private:
 		std::string	_name;
-		int			_hit_point; // Decreases from enemy attack damage.
-		int			_energy_point; // Decreases by one from attacking or repairing.
-		int			_attack_damage; // Affects enemy's hit points when attacking.
+		/// @note Decreases when enemy attack, or increases from repairing.
+		int			_hit_point;
+		/// @note Decreases by <COST> when attacking, or repairing.
+		int			_energy_point;
+		/// @note Affects enemy's hit points when attacking.
+		int			_attack_damage;
 	
 	public:
 		ClapTrap	&operator=( const ClapTrap &rhs ); // Assignation overload.
