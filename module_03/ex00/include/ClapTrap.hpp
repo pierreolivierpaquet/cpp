@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:30:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/19 21:20:56 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/20 21:04:14 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@
 # ifndef	MSG_DAMAGE
 #  define	MSG_DAMAGE		" points of damage!"
 # endif	/*	MSG_DAMAGE	*/
+
+# ifndef	MSG_CONSTRUCTOR
+#  define	MSG_CONSTRUCTOR " Constructor called."
+# endif	/*	MSG_CONSTRUCTOR	*/
+
+# ifndef	MSG_DESTRUCTOR
+#  define	MSG_DESTRUCTOR " Destructor called."
+# endif	/*	MSG_DESTRUCTOR	*/
 
 /*********************************** POINTS ***********************************/
 
@@ -103,6 +111,8 @@ class ClapTrap {
 
 		void	setName( const std::string name );
 		void	setHitPoint( const int points );
+		void	setEnergyPoint( const int points );
+		void	setAttackDamage( const int points );
 		void	subEnergyPoint( const int points );
 		void	subHitPoint( const int points );
 		void	addHitPoints( const int points );

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:28:26 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/19 21:09:34 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/20 22:00:58 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ void	ClapTrap::setHitPoint( const int points ) {
 	return ;
 }
 
+void	ClapTrap::setEnergyPoint( const int points ) {
+	this->_energy_point = points;
+	return ;
+}
+
+void	ClapTrap::setAttackDamage( const int points ) {
+	this->_attack_damage = points;
+}
+
 /// @brief Substracts the <amount of points> to the instance's energy. 
 void	ClapTrap::subEnergyPoint( const int points ) {
 	this->_energy_point -= points;
@@ -67,9 +76,10 @@ ClapTrap::ClapTrap( const std::string name ) :
 	_hit_point		( DEFAULT_HIT ),
 	_energy_point	( DEFAULT_ENERGY ),
 	_attack_damage	( DEFAULT_ATTACK ) {
-		std::cout	<< MSG_CLAPTRAP << this->getName()
-					<< " Constructor called." << std::endl;
-	}
+	std::cout	<< MSG_CLAPTRAP << this->getName()
+				<< MSG_CONSTRUCTOR << " [parametric]" << std::endl;
+	return ;
+}
 
 /******************************************************************************/
 /**************************** CANONICAL REQUISITE *****************************/
@@ -87,7 +97,7 @@ ClapTrap	&ClapTrap::operator=( const ClapTrap &rhs ) {
 ClapTrap::ClapTrap( const ClapTrap &source ) {
 	*this = source;
 	std::cout	<< MSG_CLAPTRAP << this->_name
-				<< " Constructor called." << std::endl;
+				<< MSG_CONSTRUCTOR << " [reference]" << std::endl;
 	return ;
 }
 
@@ -99,12 +109,13 @@ ClapTrap::ClapTrap( void ) :
 	_hit_point		( DEFAULT_HIT ),
 	_energy_point	( DEFAULT_ENERGY ),
 	_attack_damage	( DEFAULT_ATTACK ) {
-		std::cout << "Default constructor called." << std::endl;
-	}
+	std::cout << "ClapTrap" << MSG_CONSTRUCTOR << " [default]" << std::endl;
+	return ;
+}
 
 ClapTrap::~ClapTrap( void ) {
 	std::cout	<< MSG_CLAPTRAP << this->getName()
-				<< " Destructor called." << std::endl;
+				<< MSG_DESTRUCTOR << std::endl;
 }
 
 /******************************************************************************/
@@ -134,7 +145,7 @@ void	ClapTrap::takeDamage( unsigned int amount ) {
 			this->setHitPoint( 0 );
 		}
 		std::cout	<< MSG_CLAPTRAP << this->getName()
-					<< " took " << amount << " of hit damage: It now has "
+					<< " took -" << amount << " of hit damage: It now has "
 					<< this->getHitPoint() << " hit points." << std::endl;
 	}
 	return ;
@@ -153,7 +164,7 @@ void	ClapTrap::beRepaired( unsigned int amount ) {
 		this->addHitPoints( amount );
 		this->subEnergyPoint( COST_REPAIR );
 		std::cout	<< MSG_CLAPTRAP << this->getName()
-					<< " successfully repaired: It now has " 
+					<< " +" << amount << " repaired: It now has " 
 					<< this->getHitPoint() << " hit points " << "and "
 					<< this->getEnergyPoint() << " energy points." << std::endl;
 	}
