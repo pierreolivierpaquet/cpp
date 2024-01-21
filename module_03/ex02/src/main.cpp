@@ -5,26 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 12:20:39 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/21 13:29:16 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/21 13:36:09 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/21 14:17:39 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int	main( int argc, char **argv ){
 	( void )argc;
 	( void )argv;
-	
-	ScavTrap Destroid("Pendulum");
-	Destroid.attack( "KickDrum" );
-	Destroid.takeDamage( 50 );
-	Destroid.beRepaired( 25 );
-	Destroid.guardGate();
-	
-	ClapTrap Soundwave( "PicoHertz" );
-	Soundwave.attack( "SubWoofer" );
-	Soundwave.takeDamage( 5 );
 
+	FragTrap	Hero( "Eleven" );
+	Hero.attack( "Vecna" );
+	Hero.highFivesGuys();
+	Hero.takeDamage( 99 );
+
+	// FragTrap	Demon( Hero );
+	// Demon.beRepaired( 99 );
+	
 	return ( 0 );
 }
