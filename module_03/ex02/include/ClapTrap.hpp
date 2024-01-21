@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:30:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/21 12:41:01 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/21 13:58:52 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ class ClapTrap {
 	private:
 		std::string	_name;
 		/// @note Decreases when enemy attack, or increases from repairing.
+		
+	protected:
 		int			_hit_point;
 		/// @note Decreases by <COST> when attacking, or repairing.
 		int			_energy_point;
