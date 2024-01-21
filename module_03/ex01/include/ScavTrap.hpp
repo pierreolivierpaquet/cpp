@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 20:12:09 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/20 22:14:26 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/21 12:42:04 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ class ScavTrap : public ClapTrap {
 	/* Constructors */
 		ScavTrap( void );	// Default.
 		ScavTrap( ScavTrap const &src );	// Copy.
-		ScavTrap( std::string name );	// Parametric.
+		ScavTrap( std::string name );	// Parameterized.
 
 	/* Destructor */
 		~ScavTrap( void );	// Default.

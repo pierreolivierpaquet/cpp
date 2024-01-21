@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:28:26 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/20 22:00:51 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/21 12:44:13 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 /******************************* SETTER+GETTER ********************************/
 
 std::string	ClapTrap::getName( void ) const {
+	if (this->_name.empty() == true){
+		return ("*Without a name*");
+	}
 	return ( this->_name );
 }
 
@@ -69,15 +72,15 @@ void	ClapTrap::addHitPoints( const int points ) {
 }
 
 /******************************************************************************/
-/*************************** PARAMETRIC CONSTRUCTOR ***************************/
+/************************* PARAMETERIZED CONSTRUCTOR **************************/
 
 ClapTrap::ClapTrap( const std::string name ) :
 	_name			( name ),
-	_hit_point		( DEFAULT_HIT ),
-	_energy_point	( DEFAULT_ENERGY ),
-	_attack_damage	( DEFAULT_ATTACK ) {
+	_hit_point		( CT_DEFAULT_HIT ),
+	_energy_point	( CT_DEFAULT_ENERGY ),
+	_attack_damage	( CT_DEFAULT_ATTACK ) {
 	std::cout	<< MSG_CLAPTRAP << this->getName()
-				<< MSG_CONSTRUCTOR << " [parametric]" << std::endl;
+				<< MSG_CONSTRUCTOR << " [parameterized]" << std::endl;
 	return ;
 }
 
@@ -106,9 +109,9 @@ ClapTrap::ClapTrap( const ClapTrap &source ) {
 
 ClapTrap::ClapTrap( void ) :
 	_name			( EMPTY_STR ),
-	_hit_point		( DEFAULT_HIT ),
-	_energy_point	( DEFAULT_ENERGY ),
-	_attack_damage	( DEFAULT_ATTACK ) {
+	_hit_point		( CT_DEFAULT_HIT ),
+	_energy_point	( CT_DEFAULT_ENERGY ),
+	_attack_damage	( CT_DEFAULT_ATTACK ) {
 	std::cout << "ClapTrap" << MSG_CONSTRUCTOR << " [default]" << std::endl;
 	return ;
 }
@@ -138,12 +141,20 @@ void	ClapTrap::attack( const std::string &target ) {
 }
 
 void	ClapTrap::takeDamage( unsigned int amount ) {
-	if (amount == 0) {
+	if (amount == 0 && this->getHitPoint() > 0) {
+		std::cout	<< MSG_CLAPTRAP << this->getName()
+					<< " took no hit damage: " << "Still has "
+					<< this->getHitPoint() << " hit points." << std::endl;
 		return ;
+	} else if (this->getHitPoint() == 0) {
+		std::cout	<< MSG_CLAPTRAP << this->getName()
+					<< " is aldready dead: No damage inflicted."
+					<< std::endl;
 	} else {
+		/*	ClapTrap takes the damage. */
 		this->subHitPoint( amount );
 		if (this->getHitPoint() < 0){
-			this->setHitPoint( 0 );
+			this->setHitPoint( CT_DEAD );
 		}
 		std::cout	<< MSG_CLAPTRAP << this->getName()
 					<< " took -" << amount << " of hit damage: It now has "

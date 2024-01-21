@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 20:36:27 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/20 22:14:46 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/21 12:49:13 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ void	ScavTrap::attack( const std::string& target ) {
 }
 
 /******************************************************************************/
-/*************************** PARAMETRIC CONSTRUCTOR ***************************/
+/************************* PARAMETERIZED CONSTRUCTOR **************************/
 
 ScavTrap::ScavTrap( std::string name ) : ClapTrap( name ) {
 	this->setHitPoint( ST_DEFAULT_HIT );
 	this->setEnergyPoint( ST_DEFAULT_ENERGY );
 	this->setAttackDamage( ST_DEFAULT_ATTACK );
 	std::cout	<< MSG_SCAVTRAP << this->getName()
-				<< MSG_CONSTRUCTOR << " [parametric]" << std::endl;
+				<< MSG_CONSTRUCTOR << " [parameterized]" << std::endl;
 	return ;
 }
 

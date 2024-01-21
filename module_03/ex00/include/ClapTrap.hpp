@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:30:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/20 21:04:14 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/21 12:41:01 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,25 @@
 # endif	/*	MSG_CONSTRUCTOR	*/
 
 # ifndef	MSG_DESTRUCTOR
-#  define	MSG_DESTRUCTOR " Destructor called."
+#  define	MSG_DESTRUCTOR	" Destructor called."
 # endif	/*	MSG_DESTRUCTOR	*/
 
 /*********************************** POINTS ***********************************/
 
-/* Amount of points recovered during life regeneration. */
-# ifndef	DEFAULT_HIT
-#  define	DEFAULT_HIT	10
-# endif	/*	DEFAULT_HIT	*/
+/* Default amount of Hit Points (life). */
+# ifndef	CT_DEFAULT_HIT
+#  define	CT_DEFAULT_HIT		10
+# endif	/*	CT_DEFAULT_HIT	*/
 
-/* Energy level. */
-# ifndef	DEFAULT_ENERGY
-#  define	DEFAULT_ENERGY	10
-# endif	/*	DEFAULT_ENERGY	*/
+/* Default amount of Energy. */
+# ifndef	CT_DEFAULT_ENERGY
+#  define	CT_DEFAULT_ENERGY	10
+# endif	/*	CT_DEFAULT_ENERGY	*/
 
-/* Number of damage point(s) suffered by the enemy. */
-# ifndef	DEFAULT_ATTACK
-#  define	DEFAULT_ATTACK	0
-# endif	/*	DEFAULT_ATTACK	*/
+/* Default amount of damage point(s) inflicted on the enemy. */
+# ifndef	CT_DEFAULT_ATTACK
+#  define	CT_DEFAULT_ATTACK	0
+# endif	/*	CT_DEFAULT_ATTACK	*/
 
 # ifndef	COST_ATTACK
 #  define	COST_ATTACK	1
@@ -76,6 +76,10 @@
 # ifndef	COST_REPAIR
 #  define	COST_REPAIR	1
 # endif	/*	COST_REPAIR	*/
+
+# ifndef	CT_DEAD
+#  define	CT_DEAD		0
+# endif	/*	CT_DEAD	*/
 
 /******************************************************************************/
 /******************************************************************************/
@@ -96,7 +100,7 @@ class ClapTrap {
 		ClapTrap	( void ); // Default constructor.
 		~ClapTrap	( void ); // Default destructor.
 
-		ClapTrap	( const std::string name ); // Parametric constructor.
+		ClapTrap	( const std::string name ); // Parameterized constructor.
 
 		/* ACTION FUNCTION */
 		void	attack		( const std::string &target );
@@ -109,23 +113,14 @@ class ClapTrap {
 		int			getEnergyPoint	( void ) const;
 		int			getAttackDamage	( void ) const;
 
-		void	setName( const std::string name );
-		void	setHitPoint( const int points );
-		void	setEnergyPoint( const int points );
-		void	setAttackDamage( const int points );
-		void	subEnergyPoint( const int points );
-		void	subHitPoint( const int points );
-		void	addHitPoints( const int points );
+		void	setName			( const std::string name );
+		void	setHitPoint		( const int points );
+		void	setEnergyPoint	( const int points );
+		void	setAttackDamage	( const int points );
+		void	subEnergyPoint	( const int points );
+		void	subHitPoint		( const int points );
+		void	addHitPoints	( const int points );
 		
 }	/*	ClapTrap	*/;
 
 #endif	/*	CLAPTRAP_HPP_	*/
-
-/*
-
-Quand ClapTrap attaque, sa cible perd <attack damage> hit points.
-Quand ClapTrap se répare, il regagne <amount> hit points.
-Les actions attaquer et réparer coûtent chacune 1 point d’énergie.
-Bien entendu, ClapTrap ne peut exécuter aucune action s’il n’a plus de vie ou d’énergie
-
-*/
