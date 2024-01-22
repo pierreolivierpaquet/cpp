@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:28:26 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/21 12:44:31 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/22 10:17:53 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ ClapTrap	&ClapTrap::operator=( const ClapTrap &rhs ) {
 ClapTrap::ClapTrap( const ClapTrap &source ) {
 	*this = source;
 	std::cout	<< MSG_CLAPTRAP << this->_name
-				<< MSG_CONSTRUCTOR << " [reference]" << std::endl;
+				<< MSG_CONSTRUCTOR << " [reference copy]" << std::endl;
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 13:37:03 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/21 14:17:17 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/22 10:19:20 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ FragTrap	&FragTrap::operator=( const FragTrap &rhs ) {
 FragTrap::FragTrap( const FragTrap &src ) : ClapTrap() {
 	*this = src;
 	std::cout	<< MSG_FRAGTRAP << this->getName()
-				<< MSG_CONSTRUCTOR << " [reference]" << std::endl;
+				<< MSG_CONSTRUCTOR << " [reference copy]" << std::endl;
 	return ;
 }
 

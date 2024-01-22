@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 20:36:27 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/21 13:27:56 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/22 10:19:27 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ ScavTrap &ScavTrap::operator=( const ScavTrap &rhs ) {
 ScavTrap::ScavTrap( const ScavTrap &src ) : ClapTrap() {
 	*this = src;
 	std::cout	<< MSG_SCAVTRAP << this->getName()
-				<< MSG_CONSTRUCTOR << " [reference]" << std::endl;
+				<< MSG_CONSTRUCTOR << " [reference copy]" << std::endl;
 	return ;
 }
 
