@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:40:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/23 16:45:28 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 13:45:24 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ class Animal {
 		Animal &operator=( const Animal &src ); // Assignation overload.
 		
 	/* Destructor */
-		~Animal( void );
+		/// @note	Virtual keywords used to make sure that the proper
+		///			destructor member is called (through a pointer).
+		virtual ~Animal( void );
 
-	/* SETTER+GETTER */
+	/* Setter + Getter */
 		std::string	getType( void ) const;
 
 	/* Functions */

@@ -6,11 +6,15 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:47:29 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/23 18:17:47 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 13:50:10 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Dog.hpp"
+
+std::string	Dog::getType( void ) const {
+	return ( this->_type );
+}
 
 void	Dog::makeSound( void ) const {
 	std::cout << "Wouf wouf." << std::endl;

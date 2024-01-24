@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 15:08:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 13:48:55 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/24 11:19:54 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/24 13:45:55 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		DOG_HPP_
-# define	DOG_HPP_
+#ifndef		WRONGCAT_HPP_
+# define	WRONGCAT_HPP_
 
-# include "Animal.hpp"
+# include "WrongAnimal.hpp"
+# include <iostream>
 
-class	Dog : public Animal {
-	private:
-
+class	WrongCat : public WrongAnimal {
 	public:
 	/* Constructors */
-		Dog( void ); // Default.
-		// Dog(  ); // Parameterized.
-		Dog( const Dog &rhs ); // Reference copy.
-
+		WrongCat( void ); // Default.
+		// WrongCat(  ); // Parameterized.
+		WrongCat( const WrongCat &rhs ); // Reference copy.
+		
 	/* Overload operands */
-		Dog &operator=( const Dog &src ); // Assignation overload.
+		WrongCat &operator=( const WrongCat &src ); // Assignation overload.
 		
 	/* Destructor */
-		~Dog( void );
+		~WrongCat( void );
 
 	/* Setter + Getter */
 		std::string	getType( void ) const;
 
 	/* Functions */
-		void	makeSound( void ) const;
-};	/*	Dog	*/
+		void makeSound( void ) const;
 
-#endif	/*	DOG_HPP_	*/
+};	/*	WrongCat	*/
+
+#endif	/*	WRONGCAT_HPP_	*/
