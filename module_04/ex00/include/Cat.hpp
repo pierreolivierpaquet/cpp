@@ -6,13 +6,16 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:08:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/23 17:29:44 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 13:47:07 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Animal.hpp"
+#ifndef		CAT_HPP_
+# define	CAT_HPP_
 
-class Cat : public Animal {
+# include "Animal.hpp"
+
+class	Cat : public Animal {
 	private:
 
 	public:
@@ -27,7 +30,12 @@ class Cat : public Animal {
 	/* Destructor */
 		~Cat( void );
 
+	/* Setter + Getter */
+		std::string	getType( void ) const;
+
 	/* Functions */
 		void	makeSound( void ) const ;
 		
-}; /* Cat */
+};	/*	Cat	*/
+
+#endif	/*	CAT_HPP_	*/

@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 11:21:12 by ppaquet           #+#    #+#              #
-#    Updated: 2024/01/23 18:18:41 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/01/24 11:18:15 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ SRC_FILES	:=	\
 				Animal.cpp \
 				Cat.cpp \
 				Dog.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp \
 
 
 #********************************** OBJECTS ***********************************#
@@ -80,7 +82,7 @@ clean:
 		echo "\t$(RED)$(OBJ_PATH) directory does not exist.$(RESET)";\
 	fi;
 
-fclean:
+fclean: clean
 	@if [ -f $(NAME) ]; then\
 		$(REMOVE) $(NAME);\
 		echo "\t$(GREEN)$(NAME) executable deleted.$(RESET)";\
