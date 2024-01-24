@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:47:34 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 13:50:26 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 16:36:24 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	Cat::makeSound( void ) const {
 
 Cat::Cat( const Cat &src ) : Animal() {
 	*this = src;
-	this->_type = "Cat";
+	// this->_type = "Cat";
 	std::cout	<< this->_type << " Constructor called. [reference copy]"
 				<< std::endl;
 	return ;
@@ -48,4 +48,5 @@ Cat::Cat( void ) : Animal() {
 
 Cat::~Cat( void ) {
 	std::cout << this->_type << " Destructor called." << std::endl;
+	return ;
 }
