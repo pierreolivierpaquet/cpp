@@ -1,48 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 14:15:24 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 20:04:38 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/23 15:08:43 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/24 21:18:16 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		BRAIN_HPP_
-# define	BRAIN_HPP_
+#ifndef		CAT_HPP_
+# define	CAT_HPP_
 
-#include <iostream>
+# include "AAnimal.hpp"
+# include "../include/Brain.hpp"
 
-# ifndef	N_IDEAS
-#  define	N_IDEAS	100
-# endif	/*	N_IDEAS	*/
-
-class	Brain {
+class	Cat : public Animal {
 	private:
-		std::string	_ideas[ N_IDEAS ];
-		size_t		_iBrain; // Index of ideas array.
-		
-	protected:
-	
+		Brain *_brain;
+
 	public:
 	/* Constructors */
-		Brain( void ); // Default
-		Brain( const Brain &src ); // Reference copy.
+		Cat( void ); // Default.
+		// Cat(  ); // Parameterized.
+		Cat( const Cat &src ); // Reference copy.
 
 	/* Overload operands */
-		Brain &operator=( const Brain &rhs ); // Assignation overload.
+		Cat &operator=( const Cat &rhs ); // Assignation overload.
 		
 	/* Destructor */
-		~Brain( void ); // Default.
-		
-	/* Setter + Getter */
-		const std::string	getIdeas( const size_t index ) const;
-		void	setIdeas( const std::string idea );
-		void	setIdeas( const std::string idea, const size_t index );
-		size_t	getiBrain( void ) const;
-		
-};	/*	Brain	*/
+		~Cat( void ); // Default.
 
-#endif	/*	BRAIN_HPP_	*/
+	/* Setter + Getter */
+		std::string	getType( void ) const;
+		void	setIdeas( const std::string idea );
+		void	setIdeas( const std::string idea, const size_t index);
+		const std::string getIdeas( const size_t index ) const;
+		size_t	getiBrain( void ) const;
+
+	/* Functions */
+		void	makeSound( void ) const ;
+		
+};	/*	Cat	*/
+
+#endif	/*	CAT_HPP_	*/

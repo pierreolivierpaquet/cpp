@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:08:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 16:14:36 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 20:20:03 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ class	Cat : public Animal {
 		Cat &operator=( const Cat &rhs ); // Assignation overload.
 		
 	/* Destructor */
-		~Cat( void );
+		~Cat( void ); // Default.
 
 	/* Setter + Getter */
 		std::string	getType( void ) const;
 		void	setIdeas( const std::string idea );
 		void	setIdeas( const std::string idea, const size_t index);
-		const std::string getIdeas( const size_t index ) const;	
+		const std::string getIdeas( const size_t index ) const;
+		size_t	getiBrain( void ) const;
 
 	/* Functions */
 		void	makeSound( void ) const ;

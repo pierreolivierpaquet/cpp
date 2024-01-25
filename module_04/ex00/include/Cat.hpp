@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:08:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 13:47:07 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 20:20:48 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class	Cat : public Animal {
 		Cat &operator=( const Cat &rhs ); // Assignation overload.
 		
 	/* Destructor */
-		~Cat( void );
+		~Cat( void ); // Default.
 
 	/* Setter + Getter */
 		std::string	getType( void ) const;

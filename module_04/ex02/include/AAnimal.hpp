@@ -1,40 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   AAnimal.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 15:08:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 20:20:58 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/23 14:40:45 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/24 21:31:17 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		DOG_HPP_
-# define	DOG_HPP_
+#ifndef		AANIMAL_HPP_
+# define	AANIMAL_HPP_
 
-# include "Animal.hpp"
+#include <iostream>
 
-class	Dog : public Animal {
-	private:
+class	Animal {
+	protected:
+		std::string	_type;
+		Animal( void ); // Default.
+		Animal( std::string type ); // Parameterized.
 
 	public:
 	/* Constructors */
-		Dog( void ); // Default.
-		// Dog(  ); // Parameterized.
-		Dog( const Dog &rhs ); // Reference copy.
+		Animal( const Animal &rhs ); // Reference copy.
 
 	/* Overload operands */
-		Dog &operator=( const Dog &src ); // Assignation overload.
+		Animal &operator=( const Animal &src ); // Assignation overload.
 		
 	/* Destructor */
-		~Dog( void ); // Default.
+		/// @note	Virtual keywords used to make sure that the proper
+		///			destructor member is called (through a pointer).
+		virtual ~Animal( void );
 
 	/* Setter + Getter */
 		std::string	getType( void ) const;
 
 	/* Functions */
-		void	makeSound( void ) const;
-};	/*	Dog	*/
+		virtual void	makeSound( void ) const = 0;
+};	/*	Animal	*/
 
-#endif	/*	DOG_HPP_	*/
+#endif	/*	AANIMAL_HPP_	*/

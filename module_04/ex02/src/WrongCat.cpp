@@ -1,52 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 16:47:34 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 19:52:28 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/24 11:19:03 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/24 14:03:50 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "WrongCat.hpp"
 
-std::string	Cat::getType( void ) const {
+std::string	WrongCat::getType( void ) const {
 	return ( this->_type );
 }
 
-void	Cat::makeSound( void ) const {
-	std::cout << "Meow meow." << std::endl;
-	return ;
+void	WrongCat::makeSound( void ) const {
+	std::cout << "*Some WrongCat sound*" << std::endl;
 }
 
 /******************************************************************************/
 /************************* CANONICAL FORM REQUISITES **************************/
 
-Cat::Cat( const Cat &src ) : Animal() {
-	*this = src;
-	// this->_type = "Cat";
-	std::cout	<< this->_type << " Constructor called. [reference copy]"
-				<< std::endl;
+WrongCat::WrongCat( const WrongCat &rhs ) : WrongAnimal() {
+	*this = rhs;
+	this->_type = "WrongCat";
+	std::cout	<< "WrongCat (" << this->getType()
+				<< ") Constructor called. [reference copy]" << std::endl;
 	return ;
 }
 
-Cat	&Cat::operator=( const Cat &rhs ) {
-	this->_type = rhs._type;
+WrongCat	&WrongCat::operator=( const WrongCat &src ) {
+	this->_type = src._type;
 	return ( *this );
 }
 
 /******************************************************************************/
 /*********************** DEFAULT CONSTRUCTOR/DESTRUCTOR ***********************/
 
-Cat::Cat( void ) : Animal() {
-	this->_type = "Cat";
-	std::cout	<< this->_type << " Constructor called. [default]" << std::endl;
+WrongCat::WrongCat() : WrongAnimal() {
+	this->_type = "WrongCat";
+	std::cout	<< this->_type
+				<< " Constructor called [default]" << std::endl;
 	return ;
 }
 
-Cat::~Cat( void ) {
-	std::cout << this->_type << " Destructor called." << std::endl;
+WrongCat::~WrongCat() {
+	std::cout	<< "WrongCat (" << this->getType() << ") Destructor called."
+				<< std::endl;
 	return ;
 }
