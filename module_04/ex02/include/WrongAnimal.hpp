@@ -1,40 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.hpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 15:08:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 20:20:58 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/01/24 11:19:52 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/01/24 14:04:33 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		DOG_HPP_
-# define	DOG_HPP_
+#ifndef		WRONGANIMAL_HPP_
+# define	WRONGANIMAL_HPP_
 
-# include "Animal.hpp"
+# include	<iostream>
 
-class	Dog : public Animal {
-	private:
-
+class	WrongAnimal {
+	protected:
+		std::string	_type;
+		
 	public:
 	/* Constructors */
-		Dog( void ); // Default.
-		// Dog(  ); // Parameterized.
-		Dog( const Dog &rhs ); // Reference copy.
-
+		WrongAnimal( void ); // Default.
+		WrongAnimal( std::string type ); // Parameterized.
+		WrongAnimal( const WrongAnimal &rhs ); // Reference copy.
+		
 	/* Overload operands */
-		Dog &operator=( const Dog &src ); // Assignation overload.
+		WrongAnimal &operator=( const WrongAnimal &src ); // Assignation overload.
 		
 	/* Destructor */
-		~Dog( void ); // Default.
+		~WrongAnimal( void );
 
 	/* Setter + Getter */
 		std::string	getType( void ) const;
 
 	/* Functions */
-		void	makeSound( void ) const;
-};	/*	Dog	*/
+		void makeSound( void ) const;
 
-#endif	/*	DOG_HPP_	*/
+};	/*	WrongAnimal	*/
+
+#endif	/*	WRONGANIMAL_HPP_	*/

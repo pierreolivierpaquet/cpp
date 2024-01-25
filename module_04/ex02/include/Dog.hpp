@@ -6,17 +6,19 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:08:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 20:20:58 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 21:18:21 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		DOG_HPP_
 # define	DOG_HPP_
 
-# include "Animal.hpp"
+# include "AAnimal.hpp"
+# include "../include/Brain.hpp"
 
 class	Dog : public Animal {
 	private:
+		Brain	*_brain;
 
 	public:
 	/* Constructors */
@@ -32,9 +34,13 @@ class	Dog : public Animal {
 
 	/* Setter + Getter */
 		std::string	getType( void ) const;
+		void	setIdeas( const std::string idea );
+		void	setIdeas( const std::string idea, const size_t index);
+		const std::string getIdeas( const size_t index ) const;	
 
 	/* Functions */
 		void	makeSound( void ) const;
+
 };	/*	Dog	*/
 
 #endif	/*	DOG_HPP_	*/

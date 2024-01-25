@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:08:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 16:13:03 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 20:20:16 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class	Dog : public Animal {
 		Dog &operator=( const Dog &src ); // Assignation overload.
 		
 	/* Destructor */
-		~Dog( void );
+		~Dog( void ); // Default.
 
 	/* Setter + Getter */
 		std::string	getType( void ) const;

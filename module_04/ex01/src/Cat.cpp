@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 16:47:34 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 18:24:14 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/24 20:04:48 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	Cat::setIdeas( const std::string idea, const size_t index ) {
 
 const std::string Cat::getIdeas( const size_t index ) const {
 	return ( this->_brain->getIdeas( index ) );
+}
+
+size_t	Cat::getiBrain( void ) const {
+	return ( this->_brain->getiBrain() );
 }
 
 /******************************************************************************/
