@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:08:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 20:20:03 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/25 11:41:18 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 class	Cat : public Animal {
 	private:
-		Brain *_brain;
+		Brain	*_brain;
 
 	public:
 	/* Constructors */

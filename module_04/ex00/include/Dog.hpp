@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 15:08:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 20:20:58 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/25 11:40:40 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "Animal.hpp"
 
 class	Dog : public Animal {
-	private:
-
 	public:
 	/* Constructors */
 		Dog( void ); // Default.

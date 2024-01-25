@@ -6,14 +6,14 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 14:40:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 19:48:53 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/25 11:42:21 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		ANIMAL_HPP_
 # define	ANIMAL_HPP_
 
-#include <iostream>
+# include <iostream>
 
 class	Animal {
 	protected:
