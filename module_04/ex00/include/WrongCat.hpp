@@ -6,14 +6,14 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 11:19:54 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/01/24 13:45:55 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/01/29 13:43:16 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		WRONGCAT_HPP_
 # define	WRONGCAT_HPP_
 
-# include "WrongAnimal.hpp"
+# include	"WrongAnimal.hpp"
 # include <iostream>
 
 class	WrongCat : public WrongAnimal {

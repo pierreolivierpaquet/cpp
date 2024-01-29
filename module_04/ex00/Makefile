@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/23 11:21:12 by ppaquet           #+#    #+#              #
-#    Updated: 2024/01/26 12:37:44 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/01/29 13:43:31 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ REMOVE	:=	rm -rf
 #******************************** COMPILATION *********************************#
 
 COMPILER	:=	c++
-FLAGS	:=	-Wall -Werror -Wextra -std=c++98
+FLAGS	:=	-Wall -Werror -Wextra -std=c++98 -pedantic
 
 OUTPUT_NAME		:=	-o
 BUILD_OBJECT	:=	-c
