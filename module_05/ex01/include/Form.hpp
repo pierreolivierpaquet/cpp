@@ -6,28 +6,27 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/01 14:50:38 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 08:58:55 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		FORM_HPP_
 # define	FORM_HPP_
 
+# pragma once
+# include "Bureaucrat.hpp"
+// class Bureaucrat; // Forward declaration (other option) to prevent double inclusions.
+
 # include <iostream>
 
-# include "Bureaucrat.hpp"
+typedef enum form_signature_state {
+	FORM_NOT_SIGNED,
+	FORM_SIGNED
+} f_state;
 
 # ifndef	DEFAULT_FORM_NAME
 #  define	DEFAULT_FORM_NAME	"/* Nameless Form */"
 # endif	/*	DEFAULT_NAME	*/
-
-# ifndef	FORM_SIGNED
-#  define	FORM_SIGNED		1
-# endif	/*	FORM_SIGNED	*/
-
-# ifndef	FORM_NOT_SIGNED
-#  define	FORM_NOT_SIGNED	0
-# endif	/*	FORM_NOT_SIGNED	*/
 
 class	Form {
 	private:
@@ -39,15 +38,21 @@ class	Form {
 	protected:
 	
 	public:
-//	NESTED CLASS
+//	NESTED CLASS ---------------------------------------------------------------
 	class GradeTooHighException : public std::exception {
-		virtual const char *what( void ) const throw();
+		public:
+			virtual const char *what( void ) const throw();
 	};
 	class GradeTooLowException : public std::exception {
-		virtual const char *what( void ) const throw();
+		public:
+			virtual const char *what( void ) const throw();
+	};
+	class AlreadySigned : public std::exception {
+		public:
+			virtual const char *what( void ) const throw();
 	};
 
-//	CONSTRUCTOR.S
+//	CONSTRUCTOR.S --------------------------------------------------------------
 	Form(	void );
 	Form(	const Form &src ); // Reference copy.
 	Form(	const std::string form_name ); // Parameterized.
@@ -57,18 +62,18 @@ class	Form {
 			const grade_t to_execute,
 			const grade_t to_sign ); // Full parameterized.
 
-//	DESTRUCTOR.S
+//	DESTRUCTOR.S ---------------------------------------------------------------
 	~Form( void );
 
-//	OVERLOAD OPERAND.S
+//	OVERLOAD OPERAND.S ---------------------------------------------------------
 	Form &operator=( const Form &rhs ); // Assignation overload.
 
-//	FUNCTION.S
+//	FUNCTION.S -----------------------------------------------------------------
 
-//	SETTER.S
+//	SETTER.S -------------------------------------------------------------------
 	void	beSigned( const Bureaucrat &person );
 
-//	GETTER.S
+//	GETTER.S -------------------------------------------------------------------
 	const std::string	getName( void ) const;
 	bool				isSigned( void ) const;
 	const grade_t		getGradeToExecute( void ) const;

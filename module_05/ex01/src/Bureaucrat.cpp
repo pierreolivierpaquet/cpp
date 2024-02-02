@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:13:01 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/01 10:06:23 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 09:03:59 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ void	Bureaucrat::decrementGrade( void ) {
 
 void	Bureaucrat::decrementGrade( grade_t amount ) {
 	this->setGrade( this->getGrade() + amount );
+	return ;
+}
+
+void	Bureaucrat::signForm( Form &to_sign ) {
+	try {
+		to_sign.beSigned( *this );
+		std::cout	<< this->_name << " signed "
+					<< to_sign.getName() << std::endl;
+	}
+	catch ( std::exception &e ) {
+		std::cout	<< this->_name << " can't sign " << to_sign.getName()
+					<< " because " << e.what() << std::endl;	
+	}
 	return ;
 }
 
