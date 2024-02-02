@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:39 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 11:44:12 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 11:33:44 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Form.hpp"
+#include "../include/AForm.hpp"
 
 /******************************************************************************/
 /********************************* FUNCTIONS **********************************/
 
-void	Form::beSigned( const Bureaucrat &person ) {
+void	AForm::beSigned( const Bureaucrat &person ) {
 	if (this->_signed){
-		throw( Form::AlreadySigned() );
+		throw( AForm::AlreadySigned() );
 	} else if (person.getGrade() <= this->_gradeToSign ){
 		this->_signed = FORM_SIGNED;
 	} else {
-		throw( Form::GradeTooLowException() );
+		throw( AForm::GradeTooLowException() );
 	}
 	return ;
 }
 
-const std::string	Form::getName( void ) const {
+const std::string	AForm::getName( void ) const {
 	return ( this->_name );
 }
 
-bool	Form::isSigned( void ) const {
+bool	AForm::isSigned( void ) const {
 	return ( this->_signed );
 }
 
-grade_t	Form::getGradeToExecute( void ) const {
+grade_t	AForm::getGradeToExecute( void ) const {
 	return ( this->_gradeToExecute );
 }
 
-grade_t	Form::getGradeToSign( void ) const {
+grade_t	AForm::getGradeToSign( void ) const {
 	return ( this->_gradeToSign );
 }
 
-grade_t	Form::checkGrade( const grade_t to_check ) const {
+grade_t	AForm::checkGrade( const grade_t to_check ) const {
 	if (to_check < 1){
-		throw( Form::GradeTooHighException() );
+		throw( AForm::GradeTooHighException() );
 	} else if (to_check > 150) {
-		throw( Form::GradeTooLowException() );
+		throw( AForm::GradeTooLowException() );
 	}
 	return ( to_check );
 }
@@ -54,7 +54,7 @@ grade_t	Form::checkGrade( const grade_t to_check ) const {
 /******************************************************************************/
 /************************* PARAMETERIZED CONSTRUCTOR **************************/
 
-Form::Form( const std::string form_name ) :
+AForm::AForm( const std::string form_name ) :
 	_name( form_name ),
 	_signed( FORM_NOT_SIGNED ),
 	_gradeToExecute( DEFAULT_GRADE ),
@@ -64,7 +64,7 @@ Form::Form( const std::string form_name ) :
 	return ;
 }
 
-Form::Form(	const grade_t to_execute,
+AForm::AForm(	const grade_t to_execute,
 			const grade_t to_sign ) :
 	_name( DEFAULT_FORM_NAME ),
 	_signed( FORM_NOT_SIGNED ),
@@ -75,7 +75,7 @@ Form::Form(	const grade_t to_execute,
 	return ;
 }
 
-Form::Form( const std::string form_name,
+AForm::AForm( const std::string form_name,
 			const grade_t to_execute,
 			const grade_t to_sign ) :
 	_name( form_name ),
@@ -90,7 +90,7 @@ Form::Form( const std::string form_name,
 /******************************************************************************/
 /************************** CANONICAL FORM REQUISITE **************************/
 
-Form::Form( const Form &src ) :
+AForm::AForm( const AForm &src ) :
 	_name( src._name ),
 	_gradeToExecute( src._gradeToExecute ),
 	_gradeToSign( src._gradeToSign ) {
@@ -100,7 +100,7 @@ Form::Form( const Form &src ) :
 	return ;
 }
 
-Form	&Form::operator=( const Form &rhs ) {
+AForm	&AForm::operator=( const AForm &rhs ) {
 	this->_signed = rhs._signed;
 	return ( *this );
 }
@@ -108,7 +108,7 @@ Form	&Form::operator=( const Form &rhs ) {
 /******************************************************************************/
 /*********************** DEFAULT CONSTRUCTOR/DESTRUCTOR ***********************/
 
-Form::Form( void ) :
+AForm::AForm( void ) :
 	_name( DEFAULT_FORM_NAME ),
 	_signed( FORM_NOT_SIGNED ),
 	_gradeToExecute( DEFAULT_GRADE ),
@@ -118,7 +118,7 @@ Form::Form( void ) :
 	return ;
 }
 
-Form::~Form( void ) {
+AForm::~AForm( void ) {
 	std::cout	<< this->_name
 				<< " Form Destructor called. [default]"<< std::endl;
 	return ;
@@ -127,22 +127,22 @@ Form::~Form( void ) {
 /******************************************************************************/
 /******************************* NESTED CLASSES *******************************/
 
-const char *Form::GradeTooHighException::what( void ) const throw() {
+const char *AForm::GradeTooHighException::what( void ) const throw() {
 	return ( "\033[91m\033[1mForm: Grade is too high.\033[0m" );
 }
 
-const char *Form::GradeTooLowException::what( void ) const throw() {
+const char *AForm::GradeTooLowException::what( void ) const throw() {
 	return ( "\033[91m\033[1mForm: Grade is too low.\033[0m" );
 }
 
-const char *Form::AlreadySigned::what( void ) const throw() {
+const char *AForm::AlreadySigned::what( void ) const throw() {
 	return ( "\033[91m\033[1mForm: Already signed.\033[0m" );
 }
 
 /******************************************************************************/
 /********************************** OPERANDS **********************************/
 
-std::ostream &operator<<( std::ostream &output, const Form &data ) {
+std::ostream &operator<<( std::ostream &output, const AForm &data ) {
 	output	<< "\tFORM NAME: " << data.getName() << std::endl;
 	output	<< "\tFORM SIGNED: ";
 	if (data.isSigned()){
