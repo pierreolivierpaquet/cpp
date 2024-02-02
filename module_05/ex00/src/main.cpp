@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:13:03 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/01 10:29:11 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 09:47:13 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	test1( void ) {
 	catch ( Bureaucrat::GradeTooLowException &exception ) {
 		std::cout << exception.what() << std::endl;
 	}
-	std::cout << "Does it?" << std::endl;
 	return ;
 }
 

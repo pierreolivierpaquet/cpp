@@ -6,16 +6,15 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:12:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 08:54:06 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 09:41:52 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		BUREAUCRAT_HPP_
 # define	BUREAUCRAT_HPP_
 
-# pragma once
 # include "Form.hpp"
-// class Form; // Forward declaration (other option) to prevent double inclusions.
+class Form;
 
 # include	<iostream>
 
