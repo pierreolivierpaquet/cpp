@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 12:18:23 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 12:18:52 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		FORM_HPP_
-# define	FORM_HPP_
+#ifndef		AFORM_HPP_
+# define	AFORM_HPP_
 
 # include "Bureaucrat.hpp"
 class Bureaucrat;
@@ -29,7 +29,7 @@ typedef short	grade_t;
 #  define	DEFAULT_FORM_NAME	"/* Nameless Form */"
 # endif	/*	DEFAULT_NAME	*/
 
-class	Form {
+class	AForm {
 	private:
 		const	std::string	_name;
 		bool				_signed;
@@ -54,26 +54,27 @@ class	Form {
 	};
 
 //	CONSTRUCTOR.S --------------------------------------------------------------
-		Form(	void );
-		Form(	const Form &src ); // Reference copy.
-		Form(	const std::string form_name ); // Parameterized.
-		Form(	const grade_t to_execute,
-			const grade_t to_sign ); // Parameterized.
-		Form(	const std::string form_name,
-			const grade_t to_execute,
-			const grade_t to_sign ); // Full parameterized.
+		AForm(	void );
+		AForm(	const Form &src ); // Reference copy.
+		AForm(	const std::string form_name ); // Parameterized.
+		AForm(	const grade_t to_execute,
+				const grade_t to_sign ); // Parameterized.
+		AForm(	const std::string form_name,
+				const grade_t to_execute,
+				const grade_t to_sign ); // Full parameterized.
 
 //	DESTRUCTOR.S ---------------------------------------------------------------
-		~Form( void );
+		virtual ~AForm( void );
 
 //	OVERLOAD OPERAND.S ---------------------------------------------------------
-		Form &operator=( const Form &rhs ); // Assignation overload.
+		AForm &operator=( const AForm &rhs ); // Assignation overload.
 
 //	FUNCTION.S -----------------------------------------------------------------
-		grade_t	checkGrade( const grade_t to_check ) const;
+		virtual grade_t	checkGrade( const grade_t to_check ) const;
+		virtual void	execute( const Bureaucrat &executor ) const = 0; // Abstract function.
 
 //	SETTER.S -------------------------------------------------------------------
-		void	beSigned( const Bureaucrat &person );
+		virtual void	beSigned( const Bureaucrat &person );
 
 //	GETTER.S -------------------------------------------------------------------
 		const std::string	getName( void ) const;
@@ -81,8 +82,8 @@ class	Form {
 		grade_t		getGradeToExecute( void ) const;
 		grade_t		getGradeToSign( void ) const;
 	
-};	//	Form
+};	//	AForm
 
-std::ostream &operator<<( std::ostream &output, const Form &data );
+std::ostream &operator<<( std::ostream &output, const AForm &data );
 
-#endif	/*	FORM_HPP_	*/
+#endif	/*	AFORM_HPP_	*/
