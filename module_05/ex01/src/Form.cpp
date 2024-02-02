@@ -6,14 +6,19 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:39 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/01 15:05:02 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 08:59:09 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 
+/******************************************************************************/
+/********************************* FUNCTIONS **********************************/
+
 void	Form::beSigned( const Bureaucrat &person ) {
-	if (person.getGrade() <= this->_gradeToSign ){
+	if (this->_signed){
+		throw( Form::AlreadySigned() );
+	} else if (person.getGrade() <= this->_gradeToSign ){
 		this->_signed = FORM_SIGNED;
 	} else {
 		throw( Form::GradeTooLowException() );
@@ -114,11 +119,15 @@ Form::~Form( void ) {
 /******************************* NESTED CLASSES *******************************/
 
 const char *Form::GradeTooHighException::what( void ) const throw() {
-		return ( "\t\033[91m\033[1mForm: Grade is too high.\033[0m" );
+	return ( "\t\033[91m\033[1mForm: Grade is too high.\033[0m" );
 }
 
 const char *Form::GradeTooLowException::what( void ) const throw() {
-		return ( "\t\033[91m\033[1mForm: Grade is too low.\033[0m" );
+	return ( "\t\033[91m\033[1mForm: Grade is too low.\033[0m" );
+}
+
+const char *Form::AlreadySigned::what( void ) const throw() {
+	return ( "\t\033[91m\033[1mForm: Already signed.\033[0m" );
 }
 
 /******************************************************************************/
