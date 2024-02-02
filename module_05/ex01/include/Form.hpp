@@ -6,16 +6,15 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 08:58:55 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 10:10:13 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		FORM_HPP_
 # define	FORM_HPP_
 
-# pragma once
 # include "Bureaucrat.hpp"
-// class Bureaucrat; // Forward declaration (other option) to prevent double inclusions.
+class Bureaucrat;
 
 # include <iostream>
 
@@ -23,6 +22,8 @@ typedef enum form_signature_state {
 	FORM_NOT_SIGNED,
 	FORM_SIGNED
 } f_state;
+
+typedef short	grade_t;
 
 # ifndef	DEFAULT_FORM_NAME
 #  define	DEFAULT_FORM_NAME	"/* Nameless Form */"
@@ -69,6 +70,7 @@ class	Form {
 	Form &operator=( const Form &rhs ); // Assignation overload.
 
 //	FUNCTION.S -----------------------------------------------------------------
+	grade_t	checkGrade( const grade_t to_check ) const; // test construction.
 
 //	SETTER.S -------------------------------------------------------------------
 	void	beSigned( const Bureaucrat &person );
@@ -76,8 +78,8 @@ class	Form {
 //	GETTER.S -------------------------------------------------------------------
 	const std::string	getName( void ) const;
 	bool				isSigned( void ) const;
-	const grade_t		getGradeToExecute( void ) const;
-	const grade_t		getGradeToSign( void ) const;
+	grade_t		getGradeToExecute( void ) const;
+	grade_t		getGradeToSign( void ) const;
 	
 };	//	Form
 

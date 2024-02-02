@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 10:13:05 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/01 09:11:04 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/02/02 09:22:41 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_PATH	:=	src/
 SRC_FILES	:=	\
 				main.cpp	\
 				Bureaucrat.cpp	\
+				Form.cpp \
 
 #********************************** OBJECTS ***********************************#
 

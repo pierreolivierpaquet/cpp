@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:13:01 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 09:03:59 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/02 10:35:37 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	Bureaucrat::signForm( Form &to_sign ) {
 	try {
 		to_sign.beSigned( *this );
 		std::cout	<< this->_name << " signed "
-					<< to_sign.getName() << std::endl;
+					<< to_sign.getName() << "." << std::endl;
 	}
 	catch ( std::exception &e ) {
 		std::cout	<< this->_name << " can't sign " << to_sign.getName()
@@ -129,11 +129,11 @@ Bureaucrat::~Bureaucrat( void ) {
 /******************************* NESTED CLASSES *******************************/
 
 const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
-	return ( "\t\033[91m\033[1mGrade is too high.\033[0m" );
+	return ( "\033[91m\033[1mBureaucrat: Grade is too high.\033[0m" );
 }
 
 const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
-	return ( "\t\033[91m\033[1mGrade is too low.\033[0m" );
+	return ( "\033[91m\033[1mBureaucrat: Grade is too low.\033[0m" );
 }
 
 /******************************************************************************/
