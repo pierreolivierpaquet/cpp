@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:22 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 12:48:38 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:47:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,60 @@
 
 # include "../include/AForm.hpp"
 
+# ifndef	SHRUBBERY_NAME
+#  define	SHRUBBERY_NAME		"Shrubbery Creation Form"
+# endif	/*	SHRUBBERY_NAME	*/
+
+# ifndef	SHRUBBERY_EXT
+#  define	SHRUBBERY_EXT		"_shrubbery"
+# endif	/*	SHRUBBERY_EXT	*/
+
+# ifndef	SHRUBBERY_SIGN
+#  define	SHRUBBERY_SIGN		145
+# endif	/*	SHRUBBERY_SIGN	*/
+
+# ifndef	SHRUBBERY_EXECUTE
+#  define	SHRUBBERY_EXECUTE	137
+# endif	/*	SHRUBBERY_EXECUTE	*/
+
+# ifndef	TREE_AMOUNT
+#  define	TREE_AMOUNT	3
+# endif	/*	TREE_AMOUNT	*/
+
 class ShrubberyCreationForm : public AForm {
 	private:
 		ShrubberyCreationForm( void ); // Default.
-		const std::string	target;
+		const std::string	_target;
 
 	protected:
 
 	public:
-//	CONSTRUCTOR.S
+//	CONSTRUCTOR.S --------------------------------------------------------------
 		ShrubberyCreationForm(	const ShrubberyCreationForm &src ); // Reference copy.
 		ShrubberyCreationForm(	const std::string target ); // Parameterized.								const grade_t to_sign); // Fully parameterized.
 
-//	DESTRUCTOR
+//	DESTRUCTOR -----------------------------------------------------------------
 		~ShrubberyCreationForm( void );
 
-//	NESTED CLASS
+//	OVERLOAD OPERAND.S ---------------------------------------------------------
+		ShrubberyCreationForm &operator=( const ShrubberyCreationForm &rhs );
 
-//	FUNCTION.S
+//	NESTED CLASS ---------------------------------------------------------------
+		class FailedExecution : public std::exception {
+			public:
+				const char *what( void ) const throw();
+		};
 
-//	SETTER.S
+//	FUNCTION.S -----------------------------------------------------------------
+		void	execute( const Bureaucrat &executor ) const;
 
-//	GETTER.S
+//	SETTER.S -------------------------------------------------------------------
 
-}
+//	GETTER.S -------------------------------------------------------------------
+		std::string	getTarget( void ) const;
+
+};	/*	ShrubberyCreationForm	*/
+
+std::ostream &operator<<( std::ostream &output, const ShrubberyCreationForm& data );
 
 #endif	/*	SHRUBBERYCREATIONFORM_HPP_	*/

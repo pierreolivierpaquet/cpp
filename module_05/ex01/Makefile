@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 10:13:05 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/02 09:22:41 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/02/05 11:07:28 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,12 @@ clean:
 	fi;
 
 fclean: clean
-	@$(REMOVE) $(NAME)
+	@if [ -f $(NAME) ]; then\
+		$(REMOVE) $(NAME);\
+		echo "\t$(GREEN)$(NAME) executable deleted.$(RESET)";\
+	else\
+		echo "\t$(RED)$(NAME) executable does not exist.$(RESET)";\
+	fi;
 
 re: fclean all
 

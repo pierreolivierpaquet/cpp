@@ -19,7 +19,7 @@ void	AForm::beSigned( const Bureaucrat &person ) {
 	if (this->_signed){
 		throw( AForm::AlreadySigned() );
 	} else if (person.getGrade() <= this->_gradeToSign ){
-		this->_signed = FORM_SIGNED;
+		this->_signed = AFORM_SIGNED;
 	} else {
 		throw( AForm::GradeTooLowException() );
 	}
@@ -56,22 +56,22 @@ grade_t	AForm::checkGrade( const grade_t to_check ) const {
 
 AForm::AForm( const std::string form_name ) :
 	_name( form_name ),
-	_signed( FORM_NOT_SIGNED ),
+	_signed( AFORM_NOT_SIGNED ),
 	_gradeToExecute( DEFAULT_GRADE ),
 	_gradeToSign( DEFAULT_GRADE ) {
 	std::cout	<< this->_name
-				<< " Form Constructor called. [<name> parameterized]" << std::endl;
+				<< " AConstructor called. [<name> parameterized]" << std::endl;
 	return ;
 }
 
 AForm::AForm(	const grade_t to_execute,
 			const grade_t to_sign ) :
-	_name( DEFAULT_FORM_NAME ),
-	_signed( FORM_NOT_SIGNED ),
+	_name( DEFAULT_AFORM_NAME ),
+	_signed( AFORM_NOT_SIGNED ),
 	_gradeToExecute( this->checkGrade( to_execute ) ),
 	_gradeToSign(  this->checkGrade( to_sign ) ) {
 	std::cout	<< this->_name
-				<< " Form Constructor called. [<grades> parameterized]" << std::endl;
+				<< " AConstructor called. [<grades> parameterized]" << std::endl;
 	return ;
 }
 
@@ -79,11 +79,11 @@ AForm::AForm( const std::string form_name,
 			const grade_t to_execute,
 			const grade_t to_sign ) :
 	_name( form_name ),
-	_signed( FORM_NOT_SIGNED ),
+	_signed( AFORM_NOT_SIGNED ),
 	_gradeToExecute( this->checkGrade( to_execute ) ),
 	_gradeToSign( this->checkGrade( to_sign ) ) {
 	std::cout	<< this->_name
-				<< " Form Constructor called. [full parameterized]" << std::endl;
+				<< " AConstructor called. [full parameterized]" << std::endl;
 	return ;
 }
 
@@ -96,7 +96,7 @@ AForm::AForm( const AForm &src ) :
 	_gradeToSign( src._gradeToSign ) {
 	*this = src;
 	std::cout	<< this->_name
-				<< " Form Constructor called. [reference copy]" << std::endl;
+				<< " AConstructor called. [reference copy]" << std::endl;
 	return ;
 }
 
@@ -109,18 +109,18 @@ AForm	&AForm::operator=( const AForm &rhs ) {
 /*********************** DEFAULT CONSTRUCTOR/DESTRUCTOR ***********************/
 
 AForm::AForm( void ) :
-	_name( DEFAULT_FORM_NAME ),
-	_signed( FORM_NOT_SIGNED ),
+	_name( DEFAULT_AFORM_NAME ),
+	_signed( AFORM_NOT_SIGNED ),
 	_gradeToExecute( DEFAULT_GRADE ),
 	_gradeToSign( DEFAULT_GRADE ) {
 	std::cout	<< this->_name
-				<< " Form Constructor called. [default]" << std::endl;
+				<< " AConstructor called. [default]" << std::endl;
 	return ;
 }
 
 AForm::~AForm( void ) {
 	std::cout	<< this->_name
-				<< " Form Destructor called. [default]"<< std::endl;
+				<< " ADestructor called. [default]"<< std::endl;
 	return ;
 }
 
@@ -128,15 +128,19 @@ AForm::~AForm( void ) {
 /******************************* NESTED CLASSES *******************************/
 
 const char *AForm::GradeTooHighException::what( void ) const throw() {
-	return ( "\033[91m\033[1mForm: Grade is too high.\033[0m" );
+	return ( "\033[91m\033[1mAForm: Grade is too high.\033[0m" );
 }
 
 const char *AForm::GradeTooLowException::what( void ) const throw() {
-	return ( "\033[91m\033[1mForm: Grade is too low.\033[0m" );
+	return ( "\033[91m\033[1mAForm: Grade is too low.\033[0m" );
 }
 
 const char *AForm::AlreadySigned::what( void ) const throw() {
-	return ( "\033[91m\033[1mForm: Already signed.\033[0m" );
+	return ( "\033[91m\033[1mAForm: Already signed.\033[0m" );
+}
+
+const char *AForm::NotSigned::what( void ) const throw() {
+	return ( "\033[91m\033[1mAForm: Not signed.\033[0m" );
 }
 
 /******************************************************************************/
@@ -152,7 +156,7 @@ std::ostream &operator<<( std::ostream &output, const AForm &data ) {
 	}
 	output	<< "\tREQUIRED GRADE TO EXECUTE: "
 			<< data.getGradeToExecute() << std::endl;
-	output	<< "\tREQUIRED GRADE TO SIGN "
+	output	<< "\tREQUIRED GRADE TO SIGN: "
 			<< data.getGradeToSign();
 	return ( output );
 }
