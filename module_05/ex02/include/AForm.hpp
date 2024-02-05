@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 12:18:52 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:19:00 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,34 @@
 class Bureaucrat;
 
 # include <iostream>
+# include <fstream>
 
 typedef enum form_signature_state {
-	FORM_NOT_SIGNED,
-	FORM_SIGNED
+	AFORM_NOT_SIGNED,
+	AFORM_SIGNED
 } f_state;
 
 typedef short	grade_t;
 
-# ifndef	DEFAULT_FORM_NAME
-#  define	DEFAULT_FORM_NAME	"/* Nameless Form */"
-# endif	/*	DEFAULT_NAME	*/
+# ifndef	DEFAULT_AFORM_NAME
+#  define	DEFAULT_AFORM_NAME	"/* Nameless AForm */"
+# endif	/*	DEFAULT_AFORM_NAME	*/
+
+# ifndef	ROBOTOMY_REQUEST_NAME
+#  define	ROBOTOMY_REQUEST_NAME	"Robotomy Request Form"
+# endif	/*	ROBOTOMY_REQUEST_NAME	*/
+
+# ifndef	PRESIDENTIAL_PARDON_NAME
+#  define	PRESIDENTIAL_PARDON_NAME	"Presidential Pardon Form"
+# endif	/*	PRESIDENTIAL_PARDON_NAME	*/
 
 class	AForm {
 	private:
-		const	std::string	_name;
+		const std::string	_name;
 		bool				_signed;
-		const	grade_t		_gradeToExecute; // Requisite grade to execute.
-		const	grade_t		_gradeToSign; // Requisite grade to be signed.
+		const grade_t		_gradeToExecute; // Requisite grade to execute.
+		const grade_t		_gradeToSign; // Requisite grade to be signed.
+	
 		
 	protected:
 	
@@ -52,10 +62,14 @@ class	AForm {
 		public:
 			virtual const char *what( void ) const throw();
 	};
+	class NotSigned : public std::exception {
+		public:
+			virtual const char *what( void ) const throw();
+	};
 
 //	CONSTRUCTOR.S --------------------------------------------------------------
 		AForm(	void );
-		AForm(	const Form &src ); // Reference copy.
+		AForm(	const AForm &src ); // Reference copy.
 		AForm(	const std::string form_name ); // Parameterized.
 		AForm(	const grade_t to_execute,
 				const grade_t to_sign ); // Parameterized.
@@ -81,7 +95,7 @@ class	AForm {
 		bool				isSigned( void ) const;
 		grade_t		getGradeToExecute( void ) const;
 		grade_t		getGradeToSign( void ) const;
-	
+
 };	//	AForm
 
 std::ostream &operator<<( std::ostream &output, const AForm &data );

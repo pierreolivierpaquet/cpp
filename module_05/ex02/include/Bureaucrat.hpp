@@ -6,15 +6,15 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:12:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 09:41:52 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:12:49 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		BUREAUCRAT_HPP_
 # define	BUREAUCRAT_HPP_
 
-# include "Form.hpp"
-class Form;
+# include "AForm.hpp"
+class AForm;
 
 # include	<iostream>
 
@@ -69,7 +69,7 @@ class	Bureaucrat {
 		void	decrementGrade	( void );
 		void	decrementGrade	( grade_t amount ); // Adds <amount>.
 
-		void	signForm( Form &to_sign ); // Form signature.
+		void	signForm( AForm &to_sign ); // Form signature.
 		
 //	SETTER.S -------------------------------------------------------------------
 		void	setGrade		( grade_t new_grade );	

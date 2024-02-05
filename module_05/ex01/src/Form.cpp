@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:39 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 11:44:12 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 10:39:54 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ std::ostream &operator<<( std::ostream &output, const Form &data ) {
 	}
 	output	<< "\tREQUIRED GRADE TO EXECUTE: "
 			<< data.getGradeToExecute() << std::endl;
-	output	<< "\tREQUIRED GRADE TO SIGN "
+	output	<< "\tREQUIRED GRADE TO SIGN: "
 			<< data.getGradeToSign();
 	return ( output );
 }
