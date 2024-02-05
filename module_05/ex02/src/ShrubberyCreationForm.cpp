@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:35 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 11:04:16 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 13:51:45 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,31 @@ std::string	ShrubberyCreationForm::getTarget( void ) const {
 }
 
 void	ShrubberyCreationForm::execute( const Bureaucrat &executor ) const {
-	try{
-		if (this->isSigned() == AFORM_NOT_SIGNED) {
-			throw( ShrubberyCreationForm::NotSigned() );
-		} else if (executor.getGrade() > SHRUBBERY_EXECUTE ) {
-			throw( ShrubberyCreationForm::GradeTooLowException() );
-		} else {
-			std::ofstream garden;
-
-			garden.open( this->_target.c_str(), std::ios::app );
-			if (garden.is_open() != true){
-				throw( ShrubberyCreationForm::FailedExecution() );
-			}
-			for (size_t i = 0; i < TREE_AMOUNT; i++) {
-				garden	<< "               ,@@@@@@@,\n"
-						<< "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
-						<< "    ,&&%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n"
-						<< "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n"
-						<< "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n"
-						<< "   %&&%/ %&&%&&@@\\ V /@@' `88\\8 `/88'\n"
-						<< "   `&%\\ ` /%&'    |.|        \\ '|8'\n"
-						<< "       |o|        | |         | |\n"
-						<< "       |.|        | |         | |\n"
-						<< "     \\/ ._\\//_/__/  ,\\|_//__\\/.  \\_//__/_\n"
-						<< std::endl;
-			}
-			garden.close();
+	if (this->isSigned() == AFORM_NOT_SIGNED) {
+		throw( ShrubberyCreationForm::NotSigned() );
+	} else if (executor.getGrade() > SHRUBBERY_EXECUTE ) {
+		throw( ShrubberyCreationForm::GradeTooLowException() );
+	} else {
+		std::ofstream garden;
+		
+		garden.open( this->_target.c_str(), std::ios::app );
+		if (garden.is_open() != true){
+			throw( ShrubberyCreationForm::FailedExecution() );
 		}
-	}
-	catch ( std::exception &e ) {
-		std::cout	<< executor.getName() << " can't execute " << this->getName()
-					<< " because " << e.what() << std::endl;	
+		for (size_t i = 0; i < TREE_AMOUNT; i++) {
+			garden	<< "               ,@@@@@@@,\n"
+					<< "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n"
+					<< "    ,&&%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n"
+					<< "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n"
+					<< "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n"
+					<< "   %&&%/ %&&%&&@@\\ V /@@' `88\\8 `/88'\n"
+					<< "   `&%\\ ` /%&'    |.|        \\ '|8'\n"
+					<< "       |o|        | |         | |\n"
+					<< "       |.|        | |         | |\n"
+					<< "     \\/ ._\\//_/__/  ,\\|_//__\\/.  \\_//__/_\n"
+					<< std::endl;
+		}
+		garden.close();
 	}
 	return ;
 }

@@ -6,12 +6,13 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:12:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 10:12:49 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 13:58:18 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		BUREAUCRAT_HPP_
 # define	BUREAUCRAT_HPP_
+// # pragma once
 
 # include "AForm.hpp"
 class AForm;
@@ -19,8 +20,6 @@ class AForm;
 # include	<iostream>
 
 /******************************************************************************/
-
-typedef short	grade_t;
 
 # ifndef	DEFAULT_NAME
 #  define	DEFAULT_NAME	"/* Nameless Bureaucrat */"
@@ -70,6 +69,7 @@ class	Bureaucrat {
 		void	decrementGrade	( grade_t amount ); // Adds <amount>.
 
 		void	signForm( AForm &to_sign ); // Form signature.
+		void	executeForm( const AForm &form );
 		
 //	SETTER.S -------------------------------------------------------------------
 		void	setGrade		( grade_t new_grade );	

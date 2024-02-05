@@ -6,12 +6,14 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 10:38:43 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 10:19:00 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 12:29:13 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		AFORM_HPP_
 # define	AFORM_HPP_
+// # pragma once
+typedef short	grade_t;
 
 # include "Bureaucrat.hpp"
 class Bureaucrat;
@@ -24,19 +26,17 @@ typedef enum form_signature_state {
 	AFORM_SIGNED
 } f_state;
 
-typedef short	grade_t;
-
 # ifndef	DEFAULT_AFORM_NAME
 #  define	DEFAULT_AFORM_NAME	"/* Nameless AForm */"
 # endif	/*	DEFAULT_AFORM_NAME	*/
 
-# ifndef	ROBOTOMY_REQUEST_NAME
-#  define	ROBOTOMY_REQUEST_NAME	"Robotomy Request Form"
-# endif	/*	ROBOTOMY_REQUEST_NAME	*/
+// # ifndef	ROBOTOMY_REQUEST_NAME
+// #  define	ROBOTOMY_REQUEST_NAME	"Robotomy Request Form"
+// # endif	/*	ROBOTOMY_REQUEST_NAME	*/
 
-# ifndef	PRESIDENTIAL_PARDON_NAME
-#  define	PRESIDENTIAL_PARDON_NAME	"Presidential Pardon Form"
-# endif	/*	PRESIDENTIAL_PARDON_NAME	*/
+// # ifndef	PRESIDENTIAL_PARDON_NAME
+// #  define	PRESIDENTIAL_PARDON_NAME	"Presidential Pardon Form"
+// # endif	/*	PRESIDENTIAL_PARDON_NAME	*/
 
 class	AForm {
 	private:
@@ -45,7 +45,6 @@ class	AForm {
 		const grade_t		_gradeToExecute; // Requisite grade to execute.
 		const grade_t		_gradeToSign; // Requisite grade to be signed.
 	
-		
 	protected:
 	
 	public:

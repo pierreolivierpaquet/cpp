@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:22 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 10:47:46 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 13:38:38 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ class ShrubberyCreationForm : public AForm {
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
 		ShrubberyCreationForm(	const ShrubberyCreationForm &src ); // Reference copy.
-		ShrubberyCreationForm(	const std::string target ); // Parameterized.								const grade_t to_sign); // Fully parameterized.
+		ShrubberyCreationForm(	const std::string target ); // Parameterized.
 
 //	DESTRUCTOR -----------------------------------------------------------------
 		~ShrubberyCreationForm( void );

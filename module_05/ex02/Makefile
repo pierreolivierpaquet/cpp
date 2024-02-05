@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/29 10:13:05 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/05 11:07:00 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/02/05 12:51:10 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,10 @@ fclean: clean
 	fi;
 
 re: fclean all
+
+debug: FLAGS += -g
+debug: fclean $(OBJ_PATH) $(OBJ)
+	@$(COMPILER) $(FLAGS) $(INCL) $(OBJ) $(OUTPUT_NAME) $@
 
 pdf:
 	@open 'https://cdn.intra.42.fr/pdf/pdf/95639/fr.subject.pdf'
