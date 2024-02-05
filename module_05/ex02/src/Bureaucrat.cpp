@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:13:01 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 10:12:24 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/05 14:01:54 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,18 @@ void	Bureaucrat::signForm( AForm &to_sign ) {
 					<< " because " << e.what() << std::endl;	
 	}
 	return ;
+}
+
+void	Bureaucrat::executeForm( const AForm &form ) {
+	try{
+		form.execute( *this );
+		std::cout	<< this->_name << " executed "
+					<< form.getName() << "." << std::endl;
+	}
+	catch ( std::exception &e ) {
+		std::cout	<< this->_name << " can't execute " << form.getName()
+					<< " because " << e.what() << std::endl;	
+	}
 }
 
 /******************************************************************************/
