@@ -6,13 +6,15 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:24 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 14:55:13 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 10:28:47 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		ROBOTOMYREQUEST_HPP_
 # define	ROBOTOMYREQUEST_HPP_
 
+#include	<cstdlib>   // For rand() and srand()
+#include	<ctime>     // For time()
 # include	"../include/AForm.hpp"
 
 # ifndef	ROBOTOMY_NAME
@@ -26,7 +28,6 @@
 # ifndef	ROBOTOMY_EXECUTE
 #  define	ROBOTOMY_EXECUTE	45
 # endif	/*	ROBOTOMY_EXECUTE	*/
-
 
 
 class RobotomyRequestForm : public AForm {
@@ -49,10 +50,6 @@ class RobotomyRequestForm : public AForm {
 		RobotomyRequestForm &operator=( const RobotomyRequestForm &rhs );
 
 //	NESTED CLASS ---------------------------------------------------------------
-		class FailedExecution : public std::exception {
-			public:
-				const char *what( void ) const throw();
-		};
 
 //	FUNCTION.S -----------------------------------------------------------------
 		void	execute( const Bureaucrat &executor ) const;

@@ -6,11 +6,30 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:32 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 14:56:52 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 10:28:20 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/RobotomyRequestForm.hpp"
+
+const char *noises[] = {"Whirr", "Buzz", "Hmm", "Grind", "Rattle", "Squeak",
+"Clank","Whine","Roar","Chirp", "Click","Screech","Thump","Vibrate","Hiss" };
+
+void	drillNoises( void ) {
+	int	size = sizeof( noises ) / sizeof( noises[ 0 ] ); // Lenght of the array.
+	int amount = 3;
+	int index = 0;
+	for (int i = 0; i < amount; i++){
+		index = rand() % size;
+		std::cout	<< noises[ index ];
+		if (i < (amount - 1)){
+			std::cout	<< " ";
+		} else {
+			std::cout << std::endl;
+		}
+	}
+	return ;
+}
 
 /******************************************************************************/
 /********************************* FUNCTIONS **********************************/
@@ -27,7 +46,7 @@ void	RobotomyRequestForm::execute( const Bureaucrat &executor ) const {
 	} else if (executor.getGrade() > ROBOTOMY_EXECUTE ) {
 		throw( RobotomyRequestForm::GradeTooLowException() );
 	} else {
-		std::cout	<< "BzzzzBrRRRrRRBllzzbBtRr" << std::endl;
+		drillNoises();
 		if (RobotomyRequestForm::_robotomized){
 			std::cout	<< this->_target
 						<< " successfully robotomized." << std::endl;
@@ -83,13 +102,6 @@ RobotomyRequestForm::~RobotomyRequestForm( void ) {
 	std::cout	<< this->getName()
 				<< " Destructor called. [default]" << std::endl;
 	return ;
-}
-
-/******************************************************************************/
-/******************************* NESTED CLASSES *******************************/
-
-const char *RobotomyRequestForm::FailedExecution::what( void ) const throw() {
-	return ( "\033[91m\033[1mRobotomy: Failure during execution.\033[0m" );
 }
 
 /******************************************************************************/
