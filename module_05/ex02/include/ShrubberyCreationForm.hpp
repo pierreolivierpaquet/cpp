@@ -6,14 +6,14 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:22 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 13:38:38 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 20:21:03 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		SHRUBBERYCREATIONFORM_HPP_
 # define	SHRUBBERYCREATIONFORM_HPP_
 
-# include "../include/AForm.hpp"
+# include	"../include/AForm.hpp"
 
 # ifndef	SHRUBBERY_NAME
 #  define	SHRUBBERY_NAME		"Shrubbery Creation Form"
@@ -37,15 +37,13 @@
 
 class ShrubberyCreationForm : public AForm {
 	private:
-		ShrubberyCreationForm( void ); // Default.
+		ShrubberyCreationForm( void );
 		const std::string	_target;
-
-	protected:
 
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
-		ShrubberyCreationForm(	const ShrubberyCreationForm &src ); // Reference copy.
-		ShrubberyCreationForm(	const std::string target ); // Parameterized.
+		ShrubberyCreationForm(	const ShrubberyCreationForm &src );
+		ShrubberyCreationForm(	const std::string target );
 
 //	DESTRUCTOR -----------------------------------------------------------------
 		~ShrubberyCreationForm( void );
@@ -67,7 +65,7 @@ class ShrubberyCreationForm : public AForm {
 //	GETTER.S -------------------------------------------------------------------
 		std::string	getTarget( void ) const;
 
-};	/*	ShrubberyCreationForm	*/
+};	//	ShrubberyCreationForm
 
 std::ostream &operator<<( std::ostream &output, const ShrubberyCreationForm& data );
 

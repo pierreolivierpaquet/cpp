@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:35 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 13:51:45 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 20:23:29 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ const char *ShrubberyCreationForm::FailedExecution::what( void ) const throw() {
 
 std::ostream &operator<<( std::ostream &output, const ShrubberyCreationForm &data ) {
 	output	<< "\tAFORM NAME: " << data.getName() << std::endl;
-	output 	<< "\tTARGET: " << data.getTarget() << std::endl; // new
+	output 	<< "\tTARGET: " << data.getTarget() << std::endl;
 	output	<< "\tAFORM SIGNED: ";
 	if (data.isSigned()){
 		output	<< "TRUE (signed.)" << std::endl;

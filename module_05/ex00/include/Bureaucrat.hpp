@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:12:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/01 10:23:43 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 18:58:54 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 typedef short	grade_t;
 
-
 # ifndef	DEFAULT_NAME
 #  define	DEFAULT_NAME	"/* Nameless Bureaucrat */"
 # endif	/*	DEFAULT_NAME	*/
@@ -29,7 +28,6 @@ typedef short	grade_t;
 # define	DEFAULT_GRADE	150
 #endif	/*	DEFAULT_GRADE	*/
 
-/*	Lowest grade.	*/
 # ifndef	LOWEST_GRADE
 #  define	LOWEST_GRADE	32767
 # endif	/*	LOWEST_GRADE	*/
@@ -48,30 +46,35 @@ class	Bureaucrat {
 		grade_t				_grade;
 
 	public:
-	/* Constructors */
-		Bureaucrat( void ); // Default.
-		Bureaucrat( const Bureaucrat &src ); // Reference copy.
+//	CONSTRUCTOR.S --------------------------------------------------------------
+		Bureaucrat( void );
+		Bureaucrat( const Bureaucrat &src );
 		
-		Bureaucrat( const std::string new_name ); // Parameterized.
+		Bureaucrat( const std::string new_name );
 		Bureaucrat( const grade_t new_grade );
-		Bureaucrat( const std::string new_name, const grade_t new_grade ); // Full parameterized.
+		Bureaucrat( const std::string new_name, const grade_t new_grade );
 
-	/* Destructor */
-		~Bureaucrat( void ); // Destructor.
+//	DESTRUCTOR -----------------------------------------------------------------
+		~Bureaucrat( void );
 
-		Bureaucrat &operator=( const Bureaucrat &rhs ); // Assignation overload.
+//	OVERLOAD OPERAND.S ---------------------------------------------------------
+		Bureaucrat &operator=( const Bureaucrat &rhs );
 
-	/* Function(s) */
+//	FUNCTION.S -----------------------------------------------------------------
+		void	incrementGrade	( void );
+		void	incrementGrade	( grade_t amount );
+		
+		void	decrementGrade	( void );
+		void	decrementGrade	( grade_t amount );
+
+//	GETTER.S -------------------------------------------------------------------
 		const std::string	getName	( void ) const;
 		grade_t				getGrade( void ) const;
 
-		void	setGrade		( grade_t new_grade );
-		void	incrementGrade	( void );
-		void	incrementGrade	( grade_t amount ); // Substracts <amount>.
-		void	decrementGrade	( void );
-		void	decrementGrade	( grade_t amount ); // Adds <amount>.
+//	SETTER.S -------------------------------------------------------------------
+		void	setGrade( grade_t new_grade );
 
-	/* Exceptions */
+//	NESTED CLASS.ES ------------------------------------------------------------
 		class GradeTooHighException : public std::exception {
 			public:
 				virtual const char *what( void ) const throw();
@@ -81,7 +84,7 @@ class	Bureaucrat {
 				virtual const char *what( void ) const throw();
 		};
 		
-};	/*	Bureaucrat	*/
+};	//	Bureaucrat
 
 std::ostream &operator<<( std::ostream &output, const Bureaucrat &data);
 

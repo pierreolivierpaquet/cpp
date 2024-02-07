@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:12:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/05 13:58:18 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 20:17:49 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,25 @@ class	Bureaucrat {
 
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
-		Bureaucrat( void ); // Default.
-		Bureaucrat( const Bureaucrat &src ); // Reference copy.		
-		Bureaucrat( const std::string new_name ); // Parameterized.
+		Bureaucrat( void );
+		Bureaucrat( const Bureaucrat &src );	
+		Bureaucrat( const std::string new_name );
 		Bureaucrat( const grade_t new_grade );
-		Bureaucrat( const std::string new_name, const grade_t new_grade ); // Full parameterized.
+		Bureaucrat( const std::string new_name, const grade_t new_grade );
 
 //	DESTRUCTOR -----------------------------------------------------------------
-		~Bureaucrat( void ); // Destructor.
+		~Bureaucrat( void );
 
 //	OVERLOAD OPERAND.S ---------------------------------------------------------
-		Bureaucrat &operator=( const Bureaucrat &rhs ); // Assignation overload.
+		Bureaucrat &operator=( const Bureaucrat &rhs );
 
 //	FUNCTION.S -----------------------------------------------------------------
 		void	incrementGrade	( void );
-		void	incrementGrade	( grade_t amount ); // Substracts <amount>.
+		void	incrementGrade	( grade_t amount );
 		void	decrementGrade	( void );
-		void	decrementGrade	( grade_t amount ); // Adds <amount>.
+		void	decrementGrade	( grade_t amount );
 
-		void	signForm( AForm &to_sign ); // Form signature.
+		void	signForm( AForm &to_sign );
 		void	executeForm( const AForm &form );
 		
 //	SETTER.S -------------------------------------------------------------------
