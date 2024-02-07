@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:26 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/06 10:28:37 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 21:57:30 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # endif	/*	PRESIDENTIAL_NAME	*/
 
 # ifndef	PRESIDENTIAL_SIGN
-#  define	PRESIDENTIAL_SIGN		5
+#  define	PRESIDENTIAL_SIGN		25
 # endif	/*	PRESIDENTIAL_SIGN	*/
 
 # ifndef	PRESIDENTIAL_EXECUTE
-#  define	PRESIDENTIAL_EXECUTE	25
+#  define	PRESIDENTIAL_EXECUTE	5
 # endif	/*	PRESIDENTIAL_EXECUTE	*/
 
 class PresidentialPardonForm : public AForm {
@@ -55,7 +55,7 @@ class PresidentialPardonForm : public AForm {
 //	GETTER.S -------------------------------------------------------------------
 		std::string	getTarget( void ) const;
 
-};	/*	PresidentialPardonForm	*/
+};	//	PresidentialPardonForm
 
 std::ostream &operator<<( std::ostream &output, const PresidentialPardonForm& data );
 

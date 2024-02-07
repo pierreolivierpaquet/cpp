@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:23:25 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/06 13:34:29 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 21:57:43 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ class	Intern {
 
 //	FUNCTION.S
 		AForm *makeForm( std::string form_name, std::string target ) const;
-};
+};	//	Intern
 
 #endif	/*	INTERN_HPP_	*/

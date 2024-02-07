@@ -6,14 +6,15 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:12:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/02 09:41:52 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 19:14:09 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		BUREAUCRAT_HPP_
 # define	BUREAUCRAT_HPP_
 
-# include "Form.hpp"
+# include	"Form.hpp"
+// Forward declaration.
 class Form;
 
 # include	<iostream>
@@ -51,25 +52,26 @@ class	Bureaucrat {
 
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
-		Bureaucrat( void ); // Default.
-		Bureaucrat( const Bureaucrat &src ); // Reference copy.		
-		Bureaucrat( const std::string new_name ); // Parameterized.
+		Bureaucrat( void );
+		Bureaucrat( const Bureaucrat &src );	
+		Bureaucrat( const std::string new_name );
 		Bureaucrat( const grade_t new_grade );
-		Bureaucrat( const std::string new_name, const grade_t new_grade ); // Full parameterized.
+		Bureaucrat( const std::string new_name, const grade_t new_grade );
 
 //	DESTRUCTOR -----------------------------------------------------------------
-		~Bureaucrat( void ); // Destructor.
+		~Bureaucrat( void );
 
 //	OVERLOAD OPERAND.S ---------------------------------------------------------
-		Bureaucrat &operator=( const Bureaucrat &rhs ); // Assignation overload.
+		Bureaucrat &operator=( const Bureaucrat &rhs );
 
 //	FUNCTION.S -----------------------------------------------------------------
 		void	incrementGrade	( void );
-		void	incrementGrade	( grade_t amount ); // Substracts <amount>.
+		void	incrementGrade	( grade_t amount );
+		
 		void	decrementGrade	( void );
-		void	decrementGrade	( grade_t amount ); // Adds <amount>.
+		void	decrementGrade	( grade_t amount );
 
-		void	signForm( Form &to_sign ); // Form signature.
+		void	signForm( Form &to_sign );
 		
 //	SETTER.S -------------------------------------------------------------------
 		void	setGrade		( grade_t new_grade );	

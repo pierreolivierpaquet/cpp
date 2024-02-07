@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:13:01 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/01 10:06:23 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 17:44:24 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,11 @@ Bureaucrat::~Bureaucrat( void ) {
 /******************************* NESTED CLASSES *******************************/
 
 const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
-	return ( "\t\033[91m\033[1mGrade is too high.\033[0m" );
+	return ( "\033[91m\033[1mGrade is too high.\033[0m" );
 }
 
 const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
-	return ( "\t\033[91m\033[1mGrade is too low.\033[0m" );
+	return ( "\033[91m\033[1mGrade is too low.\033[0m" );
 }
 
 /******************************************************************************/

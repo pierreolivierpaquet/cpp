@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 11:41:24 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/06 10:28:47 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/06 20:22:35 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,14 @@
 
 class RobotomyRequestForm : public AForm {
 	private:
-		RobotomyRequestForm( void ); // Default.
+		RobotomyRequestForm( void );
 		const std::string	_target;
 		static bool			_robotomized;
 
-	protected:
-
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
-		RobotomyRequestForm(	const RobotomyRequestForm &src ); // Reference copy.
-		RobotomyRequestForm(	const std::string target ); // Parameterized.
+		RobotomyRequestForm(	const RobotomyRequestForm &src );
+		RobotomyRequestForm(	const std::string target );
 
 //	DESTRUCTOR -----------------------------------------------------------------
 		~RobotomyRequestForm( void );
@@ -59,7 +57,7 @@ class RobotomyRequestForm : public AForm {
 //	GETTER.S -------------------------------------------------------------------
 		std::string	getTarget( void ) const;
 
-};	/*	RobotomyRequestForm	*/
+};	//	RobotomyRequestForm
 
 std::ostream &operator<<( std::ostream &output, const RobotomyRequestForm& data );
 
