@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:23:25 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/06 21:57:43 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/07 08:59:00 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,6 @@ class	Intern {
 		task		_formList[ TASK_AMOUNT ];
 		
 		std::string	_formIdentifier[ TASK_AMOUNT ];
-
-	protected:
-		// N/A
 
 	public:
 //	CONSTRUCOR.S
