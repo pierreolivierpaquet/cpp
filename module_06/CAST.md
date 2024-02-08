@@ -1,5 +1,6 @@
 
 <div style="padding-top: 25px"></div>
+
 <div style="padding-top: 20px;
 			padding-bottom: 20px;
 			background-color: rgba(11, 11, 11, 0.75);
@@ -8,35 +9,72 @@
 			font-family: Helvetica;
 			font-size: 20px;
 			font-weight: bold;
-			border-radius: 5px"> C++ CASTING </div>
+			border-radius: 5px"> C++ CONVERSION CAST </div>
 
 <div style="text-align: right;">
-	[ ppaquet ] 
+	[ ppaquet ]
 </div>
 
 <!----------------------------------------------------------------------------->
-### STATIC CAST
+### **STANDARD C CONVERSION**
+---
+1. <u> **IMPLICIT CONVERSION CAST.** </u>\
+	The compiler automatically converts one data type to another without requiring any explicit action from the programmer.
+
+	```c
+	int		a = 42;
+	double	b = a;			// Implicit conversion cast
+
+	double	d = a;			// Implicit promotion. SAFE
+	int		e = d;			// Implicit demotion. RISK: bit truncation, precision loss, data loss.
+	```
+	* 64bits are used to store a DOUBLE / 32 bits are used to store an INT
+	* 
+
+2. <u> **EXPLICIT CONVERSION CAST.** </u>\
+	This occurs when the programmer explicitly specifies a type conversion using a cast operator.
+	```c
+	int		a = 42;
+	double	c = (double)a;	// Explicit conversion
+	int		f = (int)d; 	// Explicit demotion. SAFE: Same as implicit, but done voluntarily.
+	```
+3. <u> **REINTERPRETATION CONVERSION. </u>**\
+	Conversion where the source type and the target type are the same, resulting in no actual conversion being performed. Reinterpretation typically doesn't involve modifying or reorganizing the bits in memory; instead, it involves treating the existing memory layout of an object as if it were of a different type.
+	```c
+	float	a	=	42.9876f;
+
+	void	*b	=	&a;	// Implicit reinterpretation cast.
+	void	*c	=	(void *) &a;	// Explicit reinterpretation cast.
+
+	void	*d	=	&a;	// Implicit promotion. SAFE
+	int		*e	=	d;	// Implicit demotion. RISKY: Arbitrary cast, data loss.
+	int		*f	=	(int *)d;	// Explicit demotion: SAFE: Voluntarily cast.
+	```
+
+
+<!----------------------------------------------------------------------------->
+### **STATIC CAST**
 ---
 <p>
 	
 </p>
 
 <!----------------------------------------------------------------------------->
-### CONST CAST
+### **CONST CAST**
 ---
 <p>
 	
 </p>
 
 <!----------------------------------------------------------------------------->
-### REINTERPRET_CAST
+### **REINTERPRET_CAST**
 ---
 <p>
 	
 </p>
 
 <!----------------------------------------------------------------------------->
-### DYNAMIC_CAST
+### **DYNAMIC_CAST**
 ---
 <p>
 	
