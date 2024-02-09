@@ -1,18 +1,8 @@
 
 <div style="padding-top: 25px"></div>
-
-<div style="padding-top: 20px;
-			padding-bottom: 20px;
-			background-color: rgba(11, 11, 11, 0.75);
-			color: white;
-			text-align: center;
-			font-family: Helvetica;
-			font-size: 20px;
-			font-weight: bold;
-			border-radius: 5px"> C++ CONVERSION CAST </div>
-
-<div style="text-align: right;">
-	[ ppaquet ]
+<div style="text-align: center; background-color: rgba(11,11,11);border-radius: 5px;">
+	<h3	style="font-family: Helvetica; font-size: 20px; color: white;padding-top: 15px;"> C++ CONVERSION TYPES </h3>
+	<p style="text-align: right; padding-bottom: 5px; font-size: 10px;font-family: Helvetica; white-space: pre-wrap;"> [ ppaquet ] </p>
 </div>
 
 <!----------------------------------------------------------------------------->
