@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 14:40:51 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/12 07:45:11 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/02/13 10:25:22 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ REMOVE		:=		rm -rf
 SRC_PATH	:=	src/
 SRC_FILES	:=	\
 				main.cpp \
+				CastConversion.cpp \
 
 #********************************** OBJECT.S **********************************#
 
@@ -119,6 +120,18 @@ fclean: clean
 		fi;
 
 re: fclean all
+
+debug: COMPILER += -g
+debug: fclean $(OBJ_PATH) $(OBJ)
+	@	clear
+	@	echo	"$(UPCUT)$(SINGLE_TAB)$(COMPILEBOX)"\
+				"$(C_B_ORN)Compiling in debug mode \`$@\`$(C_RST)"
+	@	$(COMPILER)		$(WARNINGS)	\
+		$(STD_LANG)		$(STD_CPP)	\
+		$(INCL)			$(OBJ)		\
+		$(OUTPUT_NAME)	$@
+	@	echo	"$(SINGLE_TAB)$(CHECKBOX_OK)"\
+				"$(C_B_GRN)./$@ executable ready!$(C_RST)"
 
 pdf:
 	@	open https://cdn.intra.42.fr/pdf/pdf/58239/fr.subject.pdf

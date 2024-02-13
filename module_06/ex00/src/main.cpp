@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:40:48 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/12 12:52:59 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/13 14:47:58 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,13 @@ int	main( int argc, char **argv ) {
 	( void ) argc;
 	( void ) argv;
 
-	
+	// Conversion Test( "+.f" ); // OK FALSE
+	// Conversion Test( ".f" ); // OK FALSE
+	Conversion Test( "+-++-0.f" ); // TRUE FLOAT
+	// Conversion Test( "+-++-0.43+f" ); // OK FALSE
+	// Conversion Test( "4.43+f" ); // OK FALSE
+	// Conversion Test( ".43+f" ); // OK FALSE
+	// Conversion Test( "   777.434235f   " ); // OK FALSE
 
 	return ( EXIT_SUCCESS );
 }
-
-//	1) Détecter le type de litéral passé en paramètre
-//		- Char
-//		- int
-//		- float
-//		- double
-//
-//	2) Convertir explicitement vers les autres types de données.
-//
-//	3)	Afficher un message d'erreur si la conversion ne fait pas sens, ou en cas d'overflow.
-//
-//	4)	
