@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 07:34:41 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/13 14:50:34 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/14 09:57:57 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define	CASTCONVERSION_HPP_
 
 # include	<iostream>
-# include	<limits>
+# include	<sstream> // for number extraction
+// # include	<limits>
 
 # include	<cstring>
 
@@ -71,14 +72,19 @@ class Conversion {
 		const std::string	_program_input;
 		conv_type_t			_conversion_type;
 		
-		int					_int_cast;
-		float				_float_cast;
-		double				_double_cast;
 		char				_char_cast;
+		int					_int_cast;
+		double				_double_cast;
+		float				_float_cast;
 
 		typedef	bool(Conversion::*typeIdentifier)(std::string input) const;
 		typeIdentifier	_type_id[ C_UNDEFINED ];
 		void			_setType( void );
+
+		void	_setChar(	void );
+		void	_setInt(	void );
+		void	_setDouble(	void );
+		void	_setFloat(	void );
 
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
