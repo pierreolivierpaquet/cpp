@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/07 14:40:51 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/13 10:25:22 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/02/14 12:45:30 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		:=		Cast
 NAME_MAJ	:=		CAST
 
 COMPILER	:=		c++
-WARNINGS	:=		-Wall -Werror -Wextra #-Wno-unused-variable
+WARNINGS	:=		-Wall -Werror -Wextra
 STD_LANG	:=		-std=c++98
 STD_CPP		:=		-pedantic
 OUTPUT_NAME	:=		-o
@@ -121,7 +121,8 @@ fclean: clean
 
 re: fclean all
 
-debug: COMPILER += -g
+debug: COMPILER += -g -Wno-unused
+debug: WARNINGS += -Wno-unused-variable
 debug: fclean $(OBJ_PATH) $(OBJ)
 	@	clear
 	@	echo	"$(UPCUT)$(SINGLE_TAB)$(COMPILEBOX)"\

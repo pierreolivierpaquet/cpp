@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 07:34:41 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/14 09:57:57 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/14 14:09:27 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ class Conversion {
 		bool	isNanf(		std::string input ) const;
 		bool	isInf(		std::string input ) const;
 		bool	isInff(		std::string input ) const;
-		bool	isMinf(		std::string input ) const;	//	Minus Inf
-		bool	isMinff(	std::string input ) const;	//	Minus Inff
+		bool	isMinf(		std::string input ) const;
+		bool	isMinff(	std::string input ) const;
 		bool	isChar(		std::string input ) const;
 		bool	isInt(		std::string input ) const;
 		bool	isDouble(	std::string input ) const;
@@ -79,13 +79,24 @@ class Conversion {
 
 		typedef	bool(Conversion::*typeIdentifier)(std::string input) const;
 		typeIdentifier	_type_id[ C_UNDEFINED ];
-		void			_setType( void );
+		void			_mapping_type_id( void );
+		typedef void(Conversion::*setOriginType)(void);
+		setOriginType	_origin_type[ 4 ];
+		void			_mapping_origin_type( void );
+		typedef void(Conversion::*convertFromType)(void);
+		convertFromType	_from_type[ 4 ];
+		void			_mapping_from_type( void );
+		void			_convert( void );
 
 		void	_setChar(	void );
 		void	_setInt(	void );
 		void	_setDouble(	void );
 		void	_setFloat(	void );
 
+		void	_convertFromChar(	void );
+		void	_convertFromInt(	void );
+		void	_convertFromDouble(	void );
+		void	_convertFromFloat(	void );
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
 		Conversion( std::string program_input ); // Default.
