@@ -6,29 +6,18 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:35:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/14 11:00:22 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:08:28 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/CastConversion.hpp"
 
-// static std::size_t	skipSigns( std::string input ) {
-// 	std::size_t	index = 0;
-// 	for (std::string::iterator it = input.begin(); it != input.end(); it++) {
-// 		if (*it != '+' && *it != '-'){
-// 			return ( index );
-// 		}
-// 		index++;
-// 	}
-// 	return ( index );
-// }
-
-// typedef std::string::const_iterator const_iterator_t;
-
 bool	Conversion::isError( std::string input ) const {
 	if (input.empty() == true || \
 		(input.find_first_of(".") != input.find_last_of(".")))
 		return ( true );
+
+//	Prevents flagging a single '-' or '+' as an error.
 	if (input.length() > 1 && \
 		input.find_last_of( SIGN_CHARS ) == (input.length() - 1)){
 		return( true );
@@ -105,15 +94,22 @@ bool	Conversion::isDouble( std::string input ) const {
 
 bool	Conversion::isFloat( std::string input ) const {
 	if (input.length() < 2 || \
-		input.find("f") == NOT_FOUND || \
+//	Catches "567.987d"
+		input.find( "f" ) == NOT_FOUND || \
+//	Catches "123f"
+		input.find_first_of( POINT_CHAR ) == NOT_FOUND || \
+//	Catches "-+.f"
 		input.find_first_not_of( SIGN_CHARS ) == input.find(".f")) {
 		return ( false );
+//	Catches "123.45fd"
 	} else if (	input.find_first_not_of( (static_cast<std::string>(FLOAT_CHAR)
 				+ DIGIT_CHARS + POINT_CHAR + SIGN_CHARS) ) != NOT_FOUND) {
 		return ( false );
+//	Catches 123.45ff
 	} else if ( input.find_first_of( FLOAT_CHAR ) != input.find_last_of( FLOAT_CHAR )) {
 		return ( false );
 	}
+//	Catches "-0.43+f"
 	if ( input.find( 'f' ) - 1 == input.find_last_of( SIGN_CHARS ) ) {
 		return ( false );
 	}
@@ -122,21 +118,48 @@ bool	Conversion::isFloat( std::string input ) const {
 
 /********************************* FUNCTION.S *********************************/
 
-void	Conversion::_setType( void ) {
+void	Conversion::_convertFromChar( void ) {
+	this->_int_cast		= static_cast<int>(		this->_char_cast );
+	this->_double_cast	= static_cast<double>(	this->_char_cast );
+	this->_float_cast	= static_cast<float>(	this->_char_cast );
+	return ;
+}
+
+void	Conversion::_convertFromInt( void ) {
+	this->_char_cast	= static_cast<char>(	this->_int_cast );
+	this->_double_cast	= static_cast<double>(	this->_int_cast );
+	this->_float_cast	= static_cast<float>(	this->_int_cast );
+	return ;
+}
+
+void	Conversion::_convertFromDouble( void ) {
+	this->_char_cast	= static_cast<char>(	this->_double_cast );
+	this->_int_cast		= static_cast<int>(		this->_double_cast );
+	this->_float_cast	= static_cast<float>(	this->_double_cast );
+	return ;
+}
+
+void	Conversion::_convertFromFloat( void ) {
+	this->_char_cast	= static_cast<char>(	this->_float_cast );
+	this->_int_cast		= static_cast<int>(		this->_float_cast );
+	this->_double_cast	= static_cast<double>(	this->_float_cast );
+	return ;
+}
+
+void	Conversion::_convert( void ) {
 	for (int i = 0; i < C_UNDEFINED; i++){
 		if ((this->*_type_id[ i ])( this->_program_input ) == true) {
 			this->_conversion_type = static_cast<conv_type_t>( i );
 			break;
 		}
 	}
-	void (Conversion::*TEST[ 4 ])(void) = {
-		&Conversion::_setChar,
-		&Conversion::_setInt,
-		&Conversion::_setDouble,
-		&Conversion::_setFloat };
-	for (int i = C_CHAR; i < C_UNDEFINED; i++){
+	if (this->_conversion_type == C_UNDEFINED) {
+		return ;
+	}
+	for (int i = C_CHAR; i < C_UNDEFINED; i++) {
 		if (this->_conversion_type == static_cast<conv_type_t>( i )){
-			(this->*TEST[i % C_CHAR])();
+			( this->*_origin_type[	i % C_CHAR ] )();
+			( this->*_from_type[ 	i % C_CHAR ] )();
 			break ;
 		}
 	}
@@ -166,12 +189,12 @@ void	Conversion::_setDouble( void ) {
 }
 
 void	Conversion::_setFloat( void ) {
-	this->_float_cast = atof( this->_program_input.c_str() ); // test
+	this->_float_cast = atof( this->_program_input.c_str() );
 }
 
 /********************************** GETTER.S **********************************/
 
-Conversion::conv_type_t	Conversion::getConversionType( void ) const{
+Conversion::conv_type_t	Conversion::getConversionType( void ) const {
 	return ( this->_conversion_type );
 }
 
@@ -214,30 +237,62 @@ Conversion &Conversion::operator=( const Conversion &rhs ) {
 
 /********************* DEFAULT CONSTRUCTOR && DESTRUCTOR **********************/
 
+/// @brief	Constructor mapping util ( typeIdentifier array )
+void	Conversion::_mapping_type_id( void ) {
+	this->_type_id[ C_ERROR	] = &Conversion::isError;
+	this->_type_id[ C_NAN	] = &Conversion::isNan;
+	this->_type_id[ C_NANF	] = &Conversion::isNanf;
+	this->_type_id[ C_INF	] = &Conversion::isInf;
+	this->_type_id[ C_MINF	] = &Conversion::isMinf;
+	this->_type_id[ C_INFF	] = &Conversion::isInff;
+	this->_type_id[ C_MINFF	] = &Conversion::isMinff;
+	this->_type_id[ C_CHAR	] = &Conversion::isChar;
+	this->_type_id[ C_INT	] = &Conversion::isInt;
+	this->_type_id[ C_DOUBLE] = &Conversion::isDouble;
+	this->_type_id[ C_FLOAT	] = &Conversion::isFloat;
+	return ;
+}
+
+/// @brief	Constructor mapping util ( setOriginType array )
+void	Conversion::_mapping_origin_type( void ) {
+	this->_origin_type[ 0 ] = &Conversion::_setChar;
+	this->_origin_type[ 1 ] = &Conversion::_setInt;
+	this->_origin_type[ 2 ] = &Conversion::_setDouble;
+	this->_origin_type[ 3 ] = &Conversion::_setFloat;
+	return ;
+}
+
+/// @brief	Constructor mapping util ( convertFromType array )
+void	Conversion::_mapping_from_type( void ) {
+	this->_from_type[ 0 ] = &Conversion::_convertFromChar;
+	this->_from_type[ 1 ] = &Conversion::_convertFromInt;
+	this->_from_type[ 2 ] = &Conversion::_convertFromDouble;
+	this->_from_type[ 3 ] = &Conversion::_convertFromFloat;
+	return ;
+}
+
 Conversion::Conversion( std::string program_input ) :
 	_program_input( program_input ),
 	_conversion_type( C_UNDEFINED ),
-	_char_cast( 0 ), _int_cast( 0 ), _double_cast( 0 ), _float_cast( 0 ) {
+	_char_cast( 0 ),
+	_int_cast( 0 ),
+	_double_cast( 0 ),
+	_float_cast( 0 ) {
 	std::cout	<< this->_program_input
 				<< " Constructor called [default/parameterized]" << std::endl;
-	_type_id[ C_ERROR	] = &Conversion::isError;
-	_type_id[ C_NAN		] = &Conversion::isNan;
-	_type_id[ C_NANF	] = &Conversion::isNanf;
-	_type_id[ C_INF		] = &Conversion::isInf;
-	_type_id[ C_MINF	] = &Conversion::isMinf;
-	_type_id[ C_INFF	] = &Conversion::isInff;
-	_type_id[ C_MINFF	] = &Conversion::isMinff;
-	_type_id[ C_CHAR	] = &Conversion::isChar;
-	_type_id[ C_INT		] = &Conversion::isInt;
-	_type_id[ C_DOUBLE	] = &Conversion::isDouble;
-	_type_id[ C_FLOAT	] = &Conversion::isFloat;
-	
-	this->_setType();
+
+//	Mapping of all function pointers arrays.
+	this->_mapping_type_id();
+	this->_mapping_origin_type();
+	this->_mapping_from_type();
+
+//	Main conversion method.
+	this->_convert();
 	return ;
 }
 
 Conversion::~Conversion( void ) {
 	std::cout	<< this->_program_input
-				<< "Destructor called. [default]" << std::endl;
+				<< " Destructor called. [default]" << std::endl;
 	return ;
 }
