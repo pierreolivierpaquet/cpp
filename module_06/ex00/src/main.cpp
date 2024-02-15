@@ -6,15 +6,11 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:40:48 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/14 15:05:40 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/15 15:09:01 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/CastConversion.hpp"
-
-#ifndef		EXIT_SUCCESS
-# define	EXIT_SUCCESS	0
-#endif	/*	EXIT_SUCCESS	*/
 
 int	main( int argc, char **argv ) {
 	( void ) argc;
@@ -44,7 +40,10 @@ int	main( int argc, char **argv ) {
 	// Conversion Test( "+++.7652" ); // OK DOUBLE
 	// Conversion Test( "+++.7652ff" ); // OK UNDEFINED
 	// Conversion Test( "+inff" ); // OK UNDEFINED
-	Conversion Test( "50+50" );
-
+	// Conversion Test( "17976931348623157081452742373170435679807056752584499659891747680315726078002853876058955863276687817154045895351438246423432132688946418276846754670353751698604991057655128207624549009038932894407586850845513394230458323690322294816580855933212334827479782620414472316873817718091929988125040402618412485836899999.f" );
+	// Conversion Test( "2147483648999465874655563569.87878f" );
+	std::cout << ttt << std::endl;
+	Conversion Test( "42.000009f" );
+	Test.printConvertedSet();
 	return ( EXIT_SUCCESS );
 }

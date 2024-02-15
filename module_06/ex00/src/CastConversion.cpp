@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:35:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/14 15:08:28 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/15 15:09:19 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 bool	Conversion::isError( std::string input ) const {
 	if (input.empty() == true || \
 		(input.find_first_of(".") != input.find_last_of(".")))
-		return ( true );
+		return ( throw( Conversion::FormatError() ), true );
 
 //	Prevents flagging a single '-' or '+' as an error.
 	if (input.length() > 1 && \
 		input.find_last_of( SIGN_CHARS ) == (input.length() - 1)){
-		return( true );
+		return( throw( Conversion::FormatError() ), true );
 	}
 	return ( false );
 }
@@ -86,30 +86,29 @@ bool	Conversion::isInt( std::string input ) const {
 bool	Conversion::isDouble( std::string input ) const {
 	if (input.length() < 2)
 		return ( false );
-	if (input.find_first_not_of( (static_cast<std::string>(DIGIT_CHARS)
-				+ POINT_CHAR + SIGN_CHARS) ) != NOT_FOUND)
+	if (input.find_first_not_of( (static_cast<std::string>(DIGIT_CHARS) + POINT_CHAR + SIGN_CHARS) ) != NOT_FOUND )
 		return ( false );
 	return ( true );
 }
 
 bool	Conversion::isFloat( std::string input ) const {
 	if (input.length() < 2 || \
-//	Catches "567.987d"
+//	Invalidates "567.987d"
 		input.find( "f" ) == NOT_FOUND || \
-//	Catches "123f"
+//	Invalidates "123f"
 		input.find_first_of( POINT_CHAR ) == NOT_FOUND || \
-//	Catches "-+.f"
+//	Invalidates "-+.f"
 		input.find_first_not_of( SIGN_CHARS ) == input.find(".f")) {
 		return ( false );
-//	Catches "123.45fd"
+//	Invalidates "123.45fd"
 	} else if (	input.find_first_not_of( (static_cast<std::string>(FLOAT_CHAR)
 				+ DIGIT_CHARS + POINT_CHAR + SIGN_CHARS) ) != NOT_FOUND) {
 		return ( false );
-//	Catches 123.45ff
+//	Invalidates 123.45ff
 	} else if ( input.find_first_of( FLOAT_CHAR ) != input.find_last_of( FLOAT_CHAR )) {
 		return ( false );
 	}
-//	Catches "-0.43+f"
+//	Invalidates "-0.43+f"
 	if ( input.find( 'f' ) - 1 == input.find_last_of( SIGN_CHARS ) ) {
 		return ( false );
 	}
@@ -154,8 +153,10 @@ void	Conversion::_convert( void ) {
 		}
 	}
 	if (this->_conversion_type == C_UNDEFINED) {
+		throw( Conversion::UnrecognizedType() );
 		return ;
 	}
+	this->_origin_reference = strtold( this->_program_input.c_str(), NULL );
 	for (int i = C_CHAR; i < C_UNDEFINED; i++) {
 		if (this->_conversion_type == static_cast<conv_type_t>( i )){
 			( this->*_origin_type[	i % C_CHAR ] )();
@@ -163,6 +164,62 @@ void	Conversion::_convert( void ) {
 			break ;
 		}
 	}
+	return ;
+}
+
+void	Conversion::_printConvertedChar( void ) const {
+	if (this->_conversion_type >= C_NAN && this->_conversion_type <= C_MINFF){
+		std::cout	<< PRINT_CHAR << PRINT_IMP << std::endl;
+	} else if (this->_char_cast >= 32 && this->_char_cast <= 126){
+		std::cout	<< PRINT_CHAR
+					<< SINGLE_QUOTE << this->_char_cast << SINGLE_QUOTE << std::endl;
+	} else if ((this->_char_cast >= 0 && this->_char_cast < 32) || \
+				this->_char_cast == 127){
+		std::cout	<< PRINT_CHAR
+					<< "Non displayable" << std::endl;
+	} else {
+		std::cout	<< PRINT_CHAR << PRINT_IMP << std::endl;
+	}
+	return ;
+}
+
+void	Conversion::_printConvertedInt( void ) const {
+	if (this->_conversion_type >= C_NAN && this->_conversion_type <= C_MINFF) {
+		std::cout	<< PRINT_INT << PRINT_IMP << std::endl;
+	} else if (this->_origin_reference > std::numeric_limits<int>::max() || \
+		this->_origin_reference < std::numeric_limits<int>::min()) {
+		std::cout	<< PRINT_INT << PRINT_IMP << std::endl;
+	} else {
+		std::cout	<< PRINT_INT << this->_int_cast << std::endl;
+	}
+	return ;
+}
+
+void	Conversion::_printConvertedDouble( void ) const {
+	std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1);
+	std::cout	<< PRINT_DBL << this->_double_cast;
+	if (this->_double_cast - static_cast<int>(this->_double_cast) == 0) {
+		std::cout	<< ".0";
+	} 
+	std::cout	<< std::endl;
+	return ;
+}
+
+void	Conversion::_printConvertedFloat( void ) const {
+	std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1);
+	std::cout	<< PRINT_FLT << this->_float_cast << "f";
+	if (this->_float_cast - static_cast<int>(this->_float_cast) == 0) {
+		std::cout	<< ".0f";
+	} 
+	std::cout	<< std::endl;
+	return ;
+}
+
+void	Conversion::printConvertedSet( void ) const {
+	this->_printConvertedChar();
+	this->_printConvertedInt();
+	this->_printConvertedFloat();
+	this->_printConvertedDouble();
 	return ;
 }
 
@@ -179,6 +236,12 @@ void	Conversion::_setInt( void ) {
 	int converted = 0;
 	temp_int	>> converted;
 	this->_int_cast = converted;
+	int	check_overflow = static_cast<int>(this->_origin_reference);
+	if (	check_overflow == std::numeric_limits<int>::max() || \
+			check_overflow == std::numeric_limits<int>::min() ) {
+		throw( Conversion::Overflow() );
+	}
+	return ;
 }
 
 void	Conversion::_setDouble( void ) {
@@ -186,10 +249,22 @@ void	Conversion::_setDouble( void ) {
 	double	converted = 0;
 	temp_double	>> converted;
 	this->_double_cast = converted;
+	double	check_overflow = static_cast<double>(this->_origin_reference);
+	if (	check_overflow == -std::numeric_limits<double>::infinity() || \
+			check_overflow == std::numeric_limits<double>::infinity() ) {
+		throw( Conversion::Overflow() );
+	}
+	return ;
 }
 
 void	Conversion::_setFloat( void ) {
 	this->_float_cast = atof( this->_program_input.c_str() );
+	float check_overflow = static_cast<float>(this->_origin_reference);
+	if (	check_overflow == -std::numeric_limits<float>::infinity() || \
+			check_overflow == std::numeric_limits<float>::infinity() ) {
+		throw( Conversion::Overflow() );
+	}
+	return ;
 }
 
 /********************************** GETTER.S **********************************/
@@ -287,7 +362,12 @@ Conversion::Conversion( std::string program_input ) :
 	this->_mapping_from_type();
 
 //	Main conversion method.
-	this->_convert();
+	try {
+		this->_convert();
+	}
+	catch (std::exception &exception) {
+		std::cout << exception.what() << std::endl;
+	}
 	return ;
 }
 
@@ -295,4 +375,19 @@ Conversion::~Conversion( void ) {
 	std::cout	<< this->_program_input
 				<< " Destructor called. [default]" << std::endl;
 	return ;
+}
+
+/******************************************************************************/
+/****************************** NESTED CLASS.ES *******************************/
+
+const char *Conversion::UnrecognizedType::what( void ) const throw() {
+	return ( "\033[1;31merror\033[0m: litteral provided was not recognized." );
+}
+
+const char *Conversion::FormatError::what( void ) const throw() {
+	return ( "\033[1;31merror\033[0m: check litteral format." );
+}
+
+const char *Conversion::Overflow::what( void ) const throw() {
+	return ( "\033[1;31merror\033[0m: converted value overflow." );
 }
