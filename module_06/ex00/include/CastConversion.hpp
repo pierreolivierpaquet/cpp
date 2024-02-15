@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 07:34:41 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/14 14:09:27 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/15 14:49:28 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,58 @@
 
 # include	<iostream>
 # include	<sstream> // for number extraction
+# include	<iomanip> // precision output
 // # include	<limits>
 
 # include	<cstring>
 
+#ifndef		EXIT_SUCCESS
+# define	EXIT_SUCCESS	0
+#endif	/*	EXIT_SUCCESS	*/
+
 # ifndef	FLOAT_CHAR
-#  define	FLOAT_CHAR	"f"
+#  define	FLOAT_CHAR		"f"
 # endif	/*	FLOAT_CHAR	*/
 
 # ifndef	POINT_CHAR
-#  define	POINT_CHAR	"."
+#  define	POINT_CHAR		"."
 # endif	/*	DOUBLE_CHAR	*/
 
 # ifndef	SIGN_CHARS
-#  define	SIGN_CHARS	"+-"
+#  define	SIGN_CHARS		"+-"
 # endif	/*	SIGN_CHARS	*/
 
 # ifndef	DIGIT_CHARS
-#  define	DIGIT_CHARS	"0123456789"
+#  define	DIGIT_CHARS		"0123456789"
 # endif	/*	DIGIT_CHARS	*/
 
 # ifndef	NOT_FOUND
-#  define	NOT_FOUND	std::string::npos
+#  define	NOT_FOUND		std::string::npos
 # endif	/*	NOT_FOUND	*/
+
+# ifndef	SINGLE_QUOTE
+#  define	SINGLE_QUOTE	"\'"
+# endif	/*	SINGLE_QUOTE	*/
+
+# ifndef	PRINT_IMP
+#  define	PRINT_IMP		"Impossible"
+# endif	/*	PRINT_IMP	*/
+
+# ifndef	PRINT_CHAR
+#  define	PRINT_CHAR		"char: "
+# endif	/*	PRINT_CHAR	*/
+
+# ifndef	PRINT_INT
+#  define	PRINT_INT		"int: "
+# endif	/*	PRINT_INT	*/
+
+# ifndef	PRINT_DBL
+#  define	PRINT_DBL		"double: "
+# endif	/*	PRINT_DBL	*/
+
+# ifndef	PRINT_FLT
+#  define	PRINT_FLT		"float: "
+# endif	/*	PRINT_FLT	*/
 
 class Conversion {
 	private:
@@ -72,6 +101,7 @@ class Conversion {
 		const std::string	_program_input;
 		conv_type_t			_conversion_type;
 		
+		long double			_origin_reference; // test
 		char				_char_cast;
 		int					_int_cast;
 		double				_double_cast;
@@ -97,9 +127,15 @@ class Conversion {
 		void	_convertFromInt(	void );
 		void	_convertFromDouble(	void );
 		void	_convertFromFloat(	void );
+		
+		void	_printConvertedChar(	void ) const;
+		void	_printConvertedInt(		void ) const;
+		void	_printConvertedDouble(	void ) const;
+		void	_printConvertedFloat(	void ) const;
+		
 	public:
 //	CONSTRUCTOR.S --------------------------------------------------------------
-		Conversion( std::string program_input ); // Default.
+		Conversion( std::string program_input );
 		Conversion( const Conversion &rhs );
 
 //	DESTRUCTOR.S ---------------------------------------------------------------
@@ -119,8 +155,18 @@ class Conversion {
 //	SETTER.S -------------------------------------------------------------------
 
 //	FUNCTION.S -----------------------------------------------------------------
-	
+		void	printConvertedSet(	void ) const;
 
+//	NESTED CLASS.ES
+		class UnrecognizedType : public std::exception {
+			virtual const char *what() const throw();
+		};
+		class FormatError : public std::exception {
+			virtual const char *what() const throw();
+		};
+		class Overflow : public std::exception {
+			virtual const char *what() const throw();
+		};
 };	//	Conversion
 
 #endif	/*	CASTCONVERSION_HPP_	*/
