@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 07:34:41 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/15 14:49:28 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/19 14:23:42 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # endif	/*	SINGLE_QUOTE	*/
 
 # ifndef	PRINT_IMP
-#  define	PRINT_IMP		"Impossible"
+#  define	PRINT_IMP		"impossible"
 # endif	/*	PRINT_IMP	*/
 
 # ifndef	PRINT_CHAR

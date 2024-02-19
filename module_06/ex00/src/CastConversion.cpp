@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:35:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/15 15:09:19 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/19 11:46:33 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ void	Conversion::_convert( void ) {
 void	Conversion::_printConvertedChar( void ) const {
 	if (this->_conversion_type >= C_NAN && this->_conversion_type <= C_MINFF){
 		std::cout	<< PRINT_CHAR << PRINT_IMP << std::endl;
+	} else if (this->_origin_reference < 0 || this->_origin_reference > 127) {
+		std::cout	<< PRINT_CHAR << PRINT_IMP << std::endl;
 	} else if (this->_char_cast >= 32 && this->_char_cast <= 126){
 		std::cout	<< PRINT_CHAR
 					<< SINGLE_QUOTE << this->_char_cast << SINGLE_QUOTE << std::endl;
@@ -196,7 +198,17 @@ void	Conversion::_printConvertedInt( void ) const {
 }
 
 void	Conversion::_printConvertedDouble( void ) const {
-	std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1);
+	if (this->_conversion_type == C_NAN || this->_conversion_type == C_NANF) {
+		std::cout	<< PRINT_DBL << "nan" << std::endl;
+		return ;
+	} else if (this->_conversion_type == C_INF || this->_conversion_type == C_INFF) {
+		std::cout	<< PRINT_DBL << "+inf" << std::endl;
+		return ;
+	} else if (this->_conversion_type == C_MINF || this->_conversion_type == C_MINFF) {
+		std::cout	<< PRINT_DBL << "-inf" << std::endl;
+		return ;
+	}
+	// std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1); // Enhances output precision.
 	std::cout	<< PRINT_DBL << this->_double_cast;
 	if (this->_double_cast - static_cast<int>(this->_double_cast) == 0) {
 		std::cout	<< ".0";
@@ -206,20 +218,35 @@ void	Conversion::_printConvertedDouble( void ) const {
 }
 
 void	Conversion::_printConvertedFloat( void ) const {
-	std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1);
-	std::cout	<< PRINT_FLT << this->_float_cast << "f";
+	if (this->_conversion_type == C_NAN || this->_conversion_type == C_NANF) {
+		std::cout	<< PRINT_FLT << "nanf" << std::endl;
+		return ;
+	} else if (this->_conversion_type == C_INF || this->_conversion_type == C_INFF) {
+		std::cout	<< PRINT_FLT << "+inff" << std::endl;
+		return ;
+	} else if (this->_conversion_type == C_MINF || this->_conversion_type == C_MINFF) {
+		std::cout	<< PRINT_FLT << "-inff" << std::endl;
+		return ;
+	}
+	// std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1); // Enhances output precision.
+	std::cout	<< PRINT_FLT << this->_float_cast;
 	if (this->_float_cast - static_cast<int>(this->_float_cast) == 0) {
 		std::cout	<< ".0f";
-	} 
+	} else {
+		std::cout	<< FLOAT_CHAR;
+	}
 	std::cout	<< std::endl;
 	return ;
 }
 
 void	Conversion::printConvertedSet( void ) const {
-	this->_printConvertedChar();
-	this->_printConvertedInt();
-	this->_printConvertedFloat();
-	this->_printConvertedDouble();
+	if (this->_conversion_type != C_ERROR && \
+		this->_conversion_type != C_UNDEFINED) {
+		this->_printConvertedChar();
+		this->_printConvertedInt();
+		this->_printConvertedFloat();
+		this->_printConvertedDouble();
+	}
 	return ;
 }
 
@@ -236,9 +263,10 @@ void	Conversion::_setInt( void ) {
 	int converted = 0;
 	temp_int	>> converted;
 	this->_int_cast = converted;
-	int	check_overflow = static_cast<int>(this->_origin_reference);
-	if (	check_overflow == std::numeric_limits<int>::max() || \
-			check_overflow == std::numeric_limits<int>::min() ) {
+	long	check_overflow = static_cast<long>(this->_origin_reference);
+	if (	check_overflow > std::numeric_limits<int>::max() || \
+			check_overflow < std::numeric_limits<int>::min() ) {
+		this->_conversion_type = C_ERROR;
 		throw( Conversion::Overflow() );
 	}
 	return ;
@@ -252,16 +280,20 @@ void	Conversion::_setDouble( void ) {
 	double	check_overflow = static_cast<double>(this->_origin_reference);
 	if (	check_overflow == -std::numeric_limits<double>::infinity() || \
 			check_overflow == std::numeric_limits<double>::infinity() ) {
+		this->_conversion_type = C_ERROR;
 		throw( Conversion::Overflow() );
 	}
 	return ;
 }
 
 void	Conversion::_setFloat( void ) {
-	this->_float_cast = atof( this->_program_input.c_str() );
+//	istringstream does not work because of 'f'
+	this->_float_cast = std::atof( this->_program_input.c_str() );
+	// this->_float_cast = std::stof( this->_program_input.c_str() ); // Throws an exception
 	float check_overflow = static_cast<float>(this->_origin_reference);
 	if (	check_overflow == -std::numeric_limits<float>::infinity() || \
 			check_overflow == std::numeric_limits<float>::infinity() ) {
+		this->_conversion_type = C_ERROR;
 		throw( Conversion::Overflow() );
 	}
 	return ;
@@ -353,8 +385,9 @@ Conversion::Conversion( std::string program_input ) :
 	_int_cast( 0 ),
 	_double_cast( 0 ),
 	_float_cast( 0 ) {
-	std::cout	<< this->_program_input
-				<< " Constructor called [default/parameterized]" << std::endl;
+//	Constructor message.
+	// std::cout	<< this->_program_input
+	// 			<< " Constructor called [default/parameterized]" << std::endl;
 
 //	Mapping of all function pointers arrays.
 	this->_mapping_type_id();
@@ -372,8 +405,9 @@ Conversion::Conversion( std::string program_input ) :
 }
 
 Conversion::~Conversion( void ) {
-	std::cout	<< this->_program_input
-				<< " Destructor called. [default]" << std::endl;
+//	Destructor message.
+	// std::cout	<< this->_program_input
+	// 			<< " Destructor called. [default]" << std::endl;
 	return ;
 }
 
