@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:35:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/19 11:46:33 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/20 11:11:29 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,11 +208,14 @@ void	Conversion::_printConvertedDouble( void ) const {
 		std::cout	<< PRINT_DBL << "-inf" << std::endl;
 		return ;
 	}
-	// std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1); // Enhances output precision.
-	std::cout	<< PRINT_DBL << this->_double_cast;
-	if (this->_double_cast - static_cast<int>(this->_double_cast) == 0) {
-		std::cout	<< ".0";
-	} 
+	std::cout	<< PRINT_DBL;
+
+	if (this->_origin_reference > -10000 && this->_origin_reference < 10000){
+		std::cout.setf( std::ios::fixed, std::ios::floatfield );
+	} else {
+		std::cout.setf( std::ios::scientific, std::ios::floatfield );
+	}
+	std::cout	<< std::setprecision( 1 ) << this->_double_cast;
 	std::cout	<< std::endl;
 	return ;
 }
@@ -228,13 +231,13 @@ void	Conversion::_printConvertedFloat( void ) const {
 		std::cout	<< PRINT_FLT << "-inff" << std::endl;
 		return ;
 	}
-	// std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1); // Enhances output precision.
-	std::cout	<< PRINT_FLT << this->_float_cast;
-	if (this->_float_cast - static_cast<int>(this->_float_cast) == 0) {
-		std::cout	<< ".0f";
+	std::cout	<< PRINT_FLT;
+	if (this->_origin_reference > -10000 && this->_origin_reference < 10000){
+		std::cout.setf( std::ios::fixed, std::ios::floatfield );
 	} else {
-		std::cout	<< FLOAT_CHAR;
+		std::cout.setf( std::ios::scientific, std::ios::floatfield );
 	}
+	std::cout	<< std::setprecision( 1 ) << this->_float_cast << FLOAT_CHAR;
 	std::cout	<< std::endl;
 	return ;
 }
