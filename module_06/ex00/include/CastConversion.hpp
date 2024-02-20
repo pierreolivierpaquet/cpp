@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 07:34:41 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/19 14:23:42 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/20 10:17:07 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 # define	CASTCONVERSION_HPP_
 
 # include	<iostream>
-# include	<sstream> // for number extraction
-# include	<iomanip> // precision output
-// # include	<limits>
+# include	<sstream> // Number extraction
 
-# include	<cstring>
+# include	<iomanip> // Precision output
+// # include	<cstring>
 
 #ifndef		EXIT_SUCCESS
 # define	EXIT_SUCCESS	0
@@ -101,7 +100,7 @@ class Conversion {
 		const std::string	_program_input;
 		conv_type_t			_conversion_type;
 		
-		long double			_origin_reference; // test
+		long double			_origin_reference;
 		char				_char_cast;
 		int					_int_cast;
 		double				_double_cast;
