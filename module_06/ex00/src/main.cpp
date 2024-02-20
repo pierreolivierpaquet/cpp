@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:40:48 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/20 11:13:08 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/20 12:34:35 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ void	convert( int ac, char **av) {
 		Conversion Test( av[ 1 ] );
 		Test.printConvertedSet();
 	} else {
-		std::cout	<< "\033[1;31merror\033[0m: Only one (1) argument is accepted." << std::endl;
+		std::cout	<< "\033[1;31merror\033[0m: Only one (1) argument is accepted."
+					<< std::endl;
 	}
 		return ;
 }
@@ -68,7 +69,8 @@ void	tests_main( int ac, char **av ) {
 		"42.0f", STOP_DELIM };
 	while ( to_convert[ i ].compare( STOP_DELIM ) != 0 && \
 			i < TEST_AMOUNT ){
-		printout( static_cast<std::string>(SEPARATOR) + " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
+		printout( static_cast<std::string>(SEPARATOR) \
+				+ " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
 		test( ac, av, to_convert[ i ] );
 		i++;
 	}
@@ -104,7 +106,8 @@ void	tests_error( int ac, char **av) {
 		STOP_DELIM };
 	while ( to_convert[ i ].compare( STOP_DELIM ) != 0 && \
 			i < TEST_AMOUNT ){
-		printout( static_cast<std::string>(SEPARATOR) + " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
+		printout( static_cast<std::string>(SEPARATOR) \
+				+ " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
 		test( ac, av, to_convert[ i ] );
 		i++;
 	}
@@ -129,7 +132,8 @@ void	tests_character( int ac, char **av ) {
 		STOP_DELIM };
 	while ( to_convert[ i ].compare( STOP_DELIM ) != 0 && \
 			i < TEST_AMOUNT ){
-		printout( static_cast<std::string>(SEPARATOR) + " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
+		printout( static_cast<std::string>(SEPARATOR) \
+				+ " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
 		test( ac, av, to_convert[ i ] );
 		i++;
 	}
@@ -157,7 +161,8 @@ void	tests_integer( int ac, char **av ) {
 		STOP_DELIM };
 	while ( to_convert[ i ].compare( STOP_DELIM ) != 0 && \
 			i < TEST_AMOUNT ){
-		printout( static_cast<std::string>(SEPARATOR) + " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
+		printout( static_cast<std::string>(SEPARATOR) \
+				+ " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
 		test( ac, av, to_convert[ i ] );
 		i++;
 	}
@@ -182,7 +187,8 @@ void	tests_pseudo( int ac, char **av ) {
 		STOP_DELIM };
 	while ( to_convert[ i ].compare( STOP_DELIM ) != 0 && \
 			i < TEST_AMOUNT ){
-		printout( static_cast<std::string>(SEPARATOR) + " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
+		printout( static_cast<std::string>(SEPARATOR) \
+				+ " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
 		test( ac, av, to_convert[ i ] );
 		i++;
 	}
@@ -211,7 +217,8 @@ void	tests_float( int ac, char **av ) {
 		STOP_DELIM };
 	while ( to_convert[ i ].compare( STOP_DELIM ) != 0 && \
 			i < TEST_AMOUNT ){
-		printout( static_cast<std::string>(SEPARATOR) + " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
+		printout( static_cast<std::string>(SEPARATOR) \
+				+ " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
 		test( ac, av, to_convert[ i ] );
 		i++;
 	}
@@ -239,7 +246,8 @@ void	tests_double( int ac, char **av ) {
 		STOP_DELIM };
 	while ( to_convert[ i ].compare( STOP_DELIM ) != 0 && \
 			i < TEST_AMOUNT ){
-		printout( static_cast<std::string>(SEPARATOR) + " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
+		printout( static_cast<std::string>(SEPARATOR) \
+				+ " \"\033[38;5;208m" + to_convert[ i ] + "\033[0m\"" );
 		test( ac, av, to_convert[ i ] );
 		i++;
 	}
@@ -248,23 +256,22 @@ void	tests_double( int ac, char **av ) {
 
 /******************************************************************************/
 
+void	tests_all( int ac, char **av ) {
+	tests_main(			ac, av );
+	tests_pseudo(		ac, av );
+	tests_error(		ac, av );
+	tests_character(	ac, av );
+	tests_integer(		ac, av );
+	tests_float(		ac, av );
+	tests_double(		ac, av );
+}
+
+/******************************************************************************/
+
 int	main( int argc, char **argv ) {
 
-	// convert( argc, argv);
-
-	tests_main( argc, argv );
-	tests_pseudo( argc, argv );
-	tests_error( argc, argv );
-	tests_character( argc, argv );
-	tests_integer( argc, argv );
-	tests_float( argc, argv );
-	tests_double( argc, argv );
-
-
-	// (void)argc;
-	// (void)argv;
-	// Conversion test( "246.34634f" );
-	// test.printConvertedSet();
+	convert( argc, argv);
+	// tests_all( argc, argv );
 
 	return ( EXIT_SUCCESS );
 }
