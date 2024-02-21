@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/07 14:40:51 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/21 10:29:53 by ppaquet          ###   ########.fr        #
+#    Created: 2024/02/21 08:00:27 by ppaquet           #+#    #+#              #
+#    Updated: 2024/02/21 10:29:48 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ REMOVE		:=		rm -rf
 SRC_PATH	:=	src/
 SRC_FILES	:=	\
 				main.cpp \
-				CastConversion.cpp \
+				Data.cpp
 
 #********************************** OBJECT.S **********************************#
 
