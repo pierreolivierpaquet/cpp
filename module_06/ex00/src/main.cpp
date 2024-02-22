@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:40:48 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/20 12:34:35 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/22 07:56:41 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	convert( int ac, char **av) {
 
 /******************************************************************************/
 
+/// @brief Tests from the module pdf.
 void	tests_main( int ac, char **av ) {
 	( void )ac;
 	( void )av;
@@ -271,7 +272,7 @@ void	tests_all( int ac, char **av ) {
 int	main( int argc, char **argv ) {
 
 	convert( argc, argv);
-	// tests_all( argc, argv );
+	// tests_all( argc, argv ); // Uncomment for various cases tests.
 
 	return ( EXIT_SUCCESS );
 }

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 14:02:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/21 15:17:32 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/22 08:44:44 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ Base	*idt::generate( void ) {
 }
 
 void	idt::displayId( std::string id, bool by_reference = false ) {
-	std::cout	<< "class identified as '" << id << "'";
+	std::cout	<< IDENTIFIED_ID << "'" << id << "'";
 	if (by_reference == true){
 		std::cout	<< " [reference]";
 	} else {
@@ -47,29 +47,30 @@ void	idt::displayId( std::string id, bool by_reference = false ) {
 
 void	idt::identify( Base *p ) {
 	if (dynamic_cast<A *>( p ) != NULL){
-		idt::displayId( "A" );
+		return ( idt::displayId( "A" ) );
 	} else if (dynamic_cast<B *>( p ) != NULL) {
-		idt::displayId( "B" );
+		return ( idt::displayId( "B" ) );
 	} else if (dynamic_cast<C *>( p )) {
-		idt::displayId( "C" );
+		return ( idt::displayId( "C" ) );
 	}
+	std::cout << UNIDENTIFIED_ID << std::endl;
 	return ;
 }
 
 void	idt::identify( Base &p ) {
 	try {
 		A &temp = dynamic_cast<A &>( p );
-		idt::displayId( "A", true );
-		return ;
+		return ( idt::displayId( "A", true ), static_cast<void>( temp ) );
 	} catch( const std::exception& exception ) {}
 	try {
 		B &temp = dynamic_cast<B &>( p );
-		idt::displayId( "B", true );
+		return ( idt::displayId( "B", true ), static_cast<void>( temp ) );
 	} catch ( const std::exception& exception ) {}
 	try {
 		C &temp = dynamic_cast<C &>( p );
-		idt::displayId( "C", true );
+		return ( idt::displayId( "C", true ), static_cast<void>( temp ) );
 	} catch ( const std::exception& exception ) {}
+	std::cout << UNIDENTIFIED_ID << std::endl;
 	return ;
 }
 

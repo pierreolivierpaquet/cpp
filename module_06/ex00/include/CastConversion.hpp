@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 07:34:41 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/20 12:09:56 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/22 07:42:24 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include	<sstream> // Number extraction
 
 # include	<iomanip> // Precision output
+# include	<limits> // numeric_limits
+# include	<stdlib.h> // strtold()
 
 #ifndef		EXIT_SUCCESS
 # define	EXIT_SUCCESS	0

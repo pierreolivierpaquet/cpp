@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:53:54 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/21 15:17:06 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/22 08:43:25 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ class Base;
 
 # include	<stdlib.h>	// rand(); srand()
 # include	<time.h>	// time()
+
+# ifndef	IDENTIFIED_ID
+#  define	IDENTIFIED_ID	"\tClass identified as "
+# endif	/*	IDENTIFIED_ID	*/
+
+# ifndef	UNIDENTIFIED_ID
+#  define	UNIDENTIFIED_ID	"\tNo derived class identified."
+# endif	/*	UNIDENTIFIED_ID	*/
 
 class	A : public Base {
 	public:
