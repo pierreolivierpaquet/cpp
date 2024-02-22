@@ -6,11 +6,13 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:35:33 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/20 11:11:29 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/22 07:53:10 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/CastConversion.hpp"
+
+/// ---------------------------------------------------------- @category PARSING
 
 bool	Conversion::isError( std::string input ) const {
 	if (input.empty() == true || \
@@ -104,7 +106,7 @@ bool	Conversion::isFloat( std::string input ) const {
 	} else if (	input.find_first_not_of( (static_cast<std::string>(FLOAT_CHAR)
 				+ DIGIT_CHARS + POINT_CHAR + SIGN_CHARS) ) != NOT_FOUND) {
 		return ( false );
-//	Invalidates 123.45ff
+//	Invalidates "123.45ff"
 	} else if ( input.find_first_of( FLOAT_CHAR ) != input.find_last_of( FLOAT_CHAR )) {
 		return ( false );
 	}
@@ -115,7 +117,7 @@ bool	Conversion::isFloat( std::string input ) const {
 	return ( true );
 }
 
-/********************************* FUNCTION.S *********************************/
+/// -------------------------------------------------- @category CONVERSION FROM
 
 void	Conversion::_convertFromChar( void ) {
 	this->_int_cast		= static_cast<int>(		this->_char_cast );
@@ -166,6 +168,8 @@ void	Conversion::_convert( void ) {
 	}
 	return ;
 }
+
+/// ------------------------------------------------------------ @category PRINT
 
 void	Conversion::_printConvertedChar( void ) const {
 	if (this->_conversion_type >= C_NAN && this->_conversion_type <= C_MINFF){
