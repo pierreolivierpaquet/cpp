@@ -5,16 +5,17 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/23 12:13:23 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/25 15:06:16 by ppaquet          ###   ########.fr        #
+#    Created: 2024/02/25 14:13:53 by ppaquet           #+#    #+#              #
+#    Updated: 2024/02/25 15:07:42 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-## ------------------------------------------------------------ @category NAME.S
-NAME				:=		whatever
-NAME_MAJ			:=		WHATEVER
 
-DEBUG				:=		whatever_debug
+## ------------------------------------------------------------ @category NAME.S
+NAME				:=		iter
+NAME_MAJ			:=		ITER
+
+DEBUG				:=		iter_debug
 
 ## ----------------------------------------------------- @category MISCELLANEOUS
 
@@ -128,6 +129,8 @@ fclean: clean
 	fi;
 
 re: fclean all
+
+debug: $(DEBUG)
 
 $(DEBUG): COMPILATION += -g
 $(DEBUG): COMPILATION += -Wno-unused-variable

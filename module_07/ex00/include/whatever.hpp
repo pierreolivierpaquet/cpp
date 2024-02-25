@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Whatever.hpp                                       :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:12:01 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/23 15:08:47 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/25 14:15:34 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define	WHATEVER_HPP_
 
 # include	<iostream>
+
+# ifndef	EXIT_SUCCESS
+#  define	EXIT_SUCCESS	0
+# endif	/*	EXIT_SUCCESS	*/
 
 template<typename T>
 void	swap( T &value1, T &value2 ) {

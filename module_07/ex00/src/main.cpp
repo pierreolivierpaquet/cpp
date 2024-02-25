@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:07:14 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/23 15:19:17 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/25 13:58:20 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main ( int argc, char **argv) {
 		std::cout << i << std::endl;
 	}
 	
-
 	::swap( a, b );
 	std::cout << "a = " << a << ", b = " << b << std::endl;
 	std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
@@ -37,7 +36,5 @@ int main ( int argc, char **argv) {
 	std::cout << "c = " << c << ", d = " << d << std::endl;
 	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
-	return 0;
-
 	return (0);
 }
