@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/25 14:13:53 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/26 09:16:42 by ppaquet          ###   ########.fr        #
+#    Created: 2024/02/26 08:39:19 by ppaquet           #+#    #+#              #
+#    Updated: 2024/02/26 09:27:26 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## ------------------------------------------------------------ @category NAME.S
-NAME				:=		iter
-NAME_MAJ			:=		ITER
+NAME				:=		Array
+NAME_MAJ			:=		ARRAY
 
-DEBUG				:=		iter_debug
+DEBUG				:=		array_debug
 
 ## ----------------------------------------------------- @category MISCELLANEOUS
 
