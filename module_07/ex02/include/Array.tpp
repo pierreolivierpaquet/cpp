@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:15:09 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/26 14:30:17 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/27 10:37:39 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ const char *Array<T>::BadArrayIndex::what( void ) const throw() {
 
 template < typename T >
 T	&Array<T>::operator[]( const uint32_t index ) const {
-	if (index > this->_size){
+	if (index >= this->_size){
 		throw( Array::BadArrayIndex() );
 	}
 	return ( this->_element[ index ]);
