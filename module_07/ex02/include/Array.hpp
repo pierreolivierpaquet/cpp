@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 08:39:16 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/26 14:29:39 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/27 09:57:36 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,20 @@ class	Array {
 		T		&operator[](	const uint32_t index ) const; // operand overload
 		~Array(	void );
 
-//	GETTER.S
+//	GETTER.S -------------------------------------------------------------------
 
 		uint32_t	size(	void ) const;
 		T			*getElement(	void ) const;
 	
-//	NESTED CLASS.ES
+//	NESTED CLASS.ES ------------------------------------------------------------
+
 		class BadArrayIndex : public std::exception {
 			public:
 				virtual const char *what( void ) const throw();
 		};
 
 };	/*	Array	*/
+
+# include "Array.tpp"
 
 #endif	/*	ARRAY_HPP_	*/

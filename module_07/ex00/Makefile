@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 12:13:23 by ppaquet           #+#    #+#              #
-#    Updated: 2024/02/25 15:06:16 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/02/27 08:30:15 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,6 +128,8 @@ fclean: clean
 	fi;
 
 re: fclean all
+
+debug: $(DEBUG)
 
 $(DEBUG): COMPILATION += -g
 $(DEBUG): COMPILATION += -Wno-unused-variable
