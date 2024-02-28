@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:12:01 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/27 08:54:28 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/28 07:54:21 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 
 template < typename T >
 void	swap( T &value1, T &value2 ) {
-	const T reference = value1;
+	// 'const' for safety...
+	// const T reference = value1;
+	T	reference = value1;
 
 	value1 = value2;
 	value2 = reference;
