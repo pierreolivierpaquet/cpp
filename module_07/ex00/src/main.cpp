@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 15:07:14 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/27 09:39:43 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/28 07:55:16 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int main ( int argc, char **argv) {
 	static_cast<void>( argv );
 
 	test_pdf();
-	
+
 	test_float( 1.11f, 9.99f );
 	test_string( "+A", "-A" );
 	test_int( INT_MIN, INT_MAX );

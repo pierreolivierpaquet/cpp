@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 14:13:56 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/27 09:55:13 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/28 08:39:45 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	test_demi( void ) {
 		"NINE" };
 	
 	std::cout	<< "\t\t\t\t[ ORIGINAL STRING ARRAY ]" << std::endl;
-	::iter( array, 10, ::print_output );
+	iter( array, 10, ::print_output );
 	
 //	Iterates throught the array starting at the 6th element, replaces
 //	the element by 42.
-	::iter( &array[ 5 ], 10 * 0.5 - 1, ::ft_fourtytwo );
+	iter( &array[ 5 ], 10 * 0.5 - 1, ft_fourtytwo );
 	std::cout	<< "\t\t\t\t[ AFTER FT_FOURTYTWO() ITERATION ]" << std::endl;
-	::iter( array, 10, ::print_output );
+	iter( array, 10, print_output );
 
 	return ;
 }

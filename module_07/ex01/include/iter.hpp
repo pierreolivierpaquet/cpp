@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 14:00:39 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/27 09:37:58 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/28 08:39:09 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,18 @@ void	print_output( Y &to_print ) {
 	return ;
 }
 
+/// ------------------------------------------------------------------------ ///
+
+template < typename T, typename FPTR >
+void	iter( T *array, size_t size, FPTR func ) {
+	for (size_t i = 0; i < size; i++) {
+		func( array[ i ]);
+	}
+	return ;
+}
+
 template < typename T >
-void	iter( T *array, size_t size, void (*func)(T &) ) {
+void	iter( T *array, size_t size, void(*func)(T &) ) {
 	for (size_t i = 0; i < size; i++) {
 		func( array[ i ]);
 	}
