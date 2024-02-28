@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 14:00:39 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/28 08:39:09 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:27:26 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # endif	/*	EXIT_SUCCESS	*/
 
 template < typename Y >
-void  ft_fourtytwo(Y &i) {
+Y  ft_fourtytwo(Y &i) {
 	i = 42;
-	return ;
+	return ( i ) ;
 }
 
 template < typename Y >
@@ -36,7 +36,7 @@ void	print_output( Y &to_print ) {
 template < typename T, typename FPTR >
 void	iter( T *array, size_t size, FPTR func ) {
 	for (size_t i = 0; i < size; i++) {
-		func( array[ i ]);
+		func( array[ i ] );
 	}
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 14:13:56 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/28 08:39:45 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:40:57 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	test_demi( void ) {
 	
 //	Iterates throught the array starting at the 6th element, replaces
 //	the element by 42.
-	iter( &array[ 5 ], 10 * 0.5 - 1, ft_fourtytwo );
+	iter( &array[ 5 ], 10 * 0.5 - 1, ft_fourtytwo<std::string> );
 	std::cout	<< "\t\t\t\t[ AFTER FT_FOURTYTWO() ITERATION ]" << std::endl;
 	iter( array, 10, print_output );
 
@@ -73,7 +73,7 @@ void	test_int( void ) {
 	std::cout	<< SEPARATOR << std::endl;
 	
 //	Iterates throught the array and replaces the element by 42.
-	iter( digits, 13, ft_fourtytwo );
+	iter( digits, 13, ft_fourtytwo<int> );
 	std::cout	<< "\t\t\t\t[ AFTER FT_FOURTYTWO() ITERATION ]" << std::endl;
 	iter( digits, 13, print_output );
 	return ;
