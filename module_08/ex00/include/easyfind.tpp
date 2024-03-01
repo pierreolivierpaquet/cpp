@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 08:13:55 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/29 14:00:49 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/01 10:25:50 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ typename T::const_iterator easyfind( const T &container, int find ) {
 }
 
 const char *ElementNotFound::what( void ) const throw() {
-	return ("\033[1;31merror\033[0m: element not found within the provided container.");
+	return ("\033[1;31merror\033[0m: element not found within the provided <T>container.");
 }

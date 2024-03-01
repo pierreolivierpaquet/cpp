@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 08:13:57 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/02/29 13:35:54 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/01 10:59:25 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include	<vector>
 # include	<algorithm>
 # include	<iterator>
+// # include	<array> // c++11
 
 class ElementNotFound : public std::exception {
 	public:
