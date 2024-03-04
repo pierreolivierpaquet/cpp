@@ -6,11 +6,13 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 11:55:05 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/01 16:08:10 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/04 09:57:05 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../include/Span.hpp"
+
+bool Span::rand_seed = false;
 
 Span::Span( void) : _N( 0 ){
 	return ;
@@ -31,13 +33,6 @@ void	Span::addNumber( u_int32_t number ) {
 	return ;
 }
 
-// template < typename T >
-// void	Span::addNumber( typename T::const_iterator it1, typename T::const_iterator it2 ) {
-// 	std::list< int > buffer_list( it1, it2 );
-
-// 	this->_list.insert( this->_list.end(), buffer_list.begin(), buffer_list.end() );
-// }
-
 size_t	Span::size( void ) const {
 	return ( this->_list.size() );
 }
@@ -49,7 +44,7 @@ u_int32_t	Span::shortestSpan( void ) const {
 	std::list<u_int32_t>::const_iterator	it_compare;
 	u_int32_t								temp_span = 0;
 
-	if (this->_list.size() == 0) {
+	if (this->_list.size() <= 1) {
 		throw( Span::NoSpan() );
 	}
 	it_end = this->_list.end();
@@ -72,7 +67,7 @@ u_int32_t	Span::longestSpan( void ) const {
 	std::list<u_int32_t>::const_iterator	it_compare;
 	u_int32_t								temp_span = UINT32_MAX;
 
-	if (this->_list.size() == 0) {
+	if (this->_list.size() <= 1) {
 		throw( Span::NoSpan() );
 	}
 	it_end = this->_list.end();
@@ -89,5 +84,35 @@ u_int32_t	Span::longestSpan( void ) const {
 }
 
 const char *Span::NoSpan::what( void ) const throw() {
-	return ("error: no calculation possible.");
+	return ("\033[1;31merror\033[0m: no calculation possible.");
+}
+
+const char *Span::ExceedingNumber::what( void ) const throw() {
+	return ("\033[1;31merror\033[0m: exceeding amount of number.");
+}
+
+void	Span::print( void ) const {
+	std::list< u_int32_t >::const_iterator it;
+
+	it = this->_list.begin();
+	for (it = this->_list.begin(); it != this->_list.end() ; it++){
+		std::cout	<< *it << std::endl;
+	}
+	return ;
+}
+
+void	Span::addNumber( u_int32_t N, u_int32_t max_value ) {
+	// if (N == 0){
+	// 	return ;
+	// }
+	// u_int32_t	arr[ N ];
+
+	// if (Span::rand_seed == false){
+	// 	srand( time( NULL ) );
+	// 	Span::rand_seed = true;
+	// } else if () {
+		
+	// }
+	
+	return ;
 }
