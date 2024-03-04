@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 11:54:58 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/04 10:09:36 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/04 18:21:28 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,57 @@
 # define	SPAN_HPP_
 
 # include	<iostream>
-# include	<list>
-# include	<algorithm>
-# include	<vector>
+# include	<list>		// list container
+# include	<vector>	// vector container
+# include	<algorithm>	// ::abs, sort()
+# include	<limits>	// ::numeric_limits
 
-# include	<ctime> // gettime
-# include	<cstdlib> // rand srand
+# include	<ctime>		// time()
+# include	<cstdlib>	// rand(), srand()
+# include	<fstream>	// .open()
 
-# ifndef	UINT32_MAX
-#  define	UINT32_MAX	4294967295
-# endif	/*	UINT32_MAX	*/
-
-class	Span{
+class	Span {
 	private:
-		Span( void );
-		u_int32_t				_N;
-		std::list< u_int32_t >	_list;
+		Span( void );				// Default constructor.
+		u_int32_t			_N;
+		std::list< int >	_list;
+		static bool			_rand_seed;
 
 	public:
-		Span( u_int32_t N_int );
-		~Span( void );
+///	------------------------------------------------------- @class CONSTRUCTOR.S
 
-		static bool	rand_seed;
-		void	addNumber( u_int32_t number );
-		u_int32_t	shortestSpan( void ) const;
-		u_int32_t	longestSpan( void ) const;
-		size_t	size( void ) const ;
+		Span(	u_int32_t N_int );	// Parameterized.
+		Span(	const Span &rhs );	// Reference copy.
 
-		class NoSpan : public std::exception {
+///	-------------------------------------------------------- @class DESTRUCTOR.S
+
+		~Span(	void );	// Default.
+
+///	----------------------------------------------------------- @class OPERAND.S
+
+		Span &operator=( const Span &rhs );	// Assignation overload.
+
+///	----------------------------------------------------- @class NESTED CLASS.ES
+
+		class	NoSpan : public std::exception {
 			public:
 				virtual const char *what( void ) const throw();
-		};
+		};	/*	NoSpan	*/
 
-		class ExceedingNumber : public std::exception {
+		class	ExceedingNumber : public std::exception {
 			public:
 				virtual const char *what( void ) const throw();
-		};
+		};	/*	ExceedingNumber	*/
+
+///	---------------------------------------------------------- @class TEMPLATE.S
 
 		template < typename T >
-		void	addNumber( typename T::const_iterator it1, typename T::const_iterator it2 ) {
-			std::list< long > buffer_list( it1, it2 );
+		void	addNumber(	typename T::const_iterator it1,
+							typename T::const_iterator it2 ) {
+			std::list< int > buffer_list( it1, it2 );
 
-			std::list< long >::iterator len; // iterator of the temporary list.
-			u_int32_t add_N = 0; // counter of the nodes list.
+			std::list< int >::iterator len;	// iterator of the temporary list.
+			u_int32_t add_N = 0;			// counter of the nodes list.
 			for (len = buffer_list.begin(); len != buffer_list.end(); len++) {
 				if ((add_N + 1) + this->_list.size() > this->_N) {
 					break;
@@ -64,15 +72,32 @@ class	Span{
 				add_N++;
 			}
 			if (add_N < buffer_list.size()) {
-				this->_list.insert( this->_list.end(), buffer_list.begin(), len );
+				this->_list.insert(	this->_list.end(),
+									buffer_list.begin(), len );
 				throw( Span::ExceedingNumber() );
 			} else if (this->_N != 0) {
-				this->_list.insert( this->_list.end(), buffer_list.begin(), buffer_list.end() );
+				this->_list.insert( this->_list.end(), buffer_list.begin(),
+									buffer_list.end() );
 			}
 			return ;
 		}
-		void	addNumber(u_int32_t N , u_int32_t max_value);
-		void	print( void ) const;
+
+///	------------------------------------------------------------ @class GETTER.S
+
+		size_t				size(	 void ) const ;
+		std::list< int >	getList( void ) const;
+		u_int32_t			getN(	 void ) const;
+
+///	---------------------------------------------------------- @class FUNCTION.S
+
+		void	addNumber(	int number );
+		void	addNumber(	u_int32_t N , int max_value );
+
+		int		shortestSpan(	void ) const;
+		int		longestSpan(	void ) const;
+
+		void	print(	void ) const;
+		void	print(	std::string fname ) const ;
 };
 
 #endif	/*	SPAN_HPP_	*/
