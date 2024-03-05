@@ -6,15 +6,15 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/05 08:24:48 by ppaquet           #+#    #+#              #
-#    Updated: 2024/03/05 08:25:10 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/03/05 14:49:03 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## ------------------------------------------------------------ @category NAME.S
-NAME				:=		Span
-NAME_MAJ			:=		SPAN
+NAME				:=		Mutant
+NAME_MAJ			:=		MUTANT
 
-DEBUG				:=		span_debug
+DEBUG				:=		mutant_debug
 
 ## ----------------------------------------------------- @category MISCELLANEOUS
 
