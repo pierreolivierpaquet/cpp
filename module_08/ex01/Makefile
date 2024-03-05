@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/01 13:47:17 by ppaquet           #+#    #+#              #
-#    Updated: 2024/03/01 13:47:47 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/03/05 08:24:21 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -144,7 +144,7 @@ $(DEBUG): fclean $(OBJ_PATH) $(OBJ)
 				"$(C_B_GRN)./$@ executable ready!$(C_RST)"
 
 pdf:
-	@	open https://cdn.intra.42.fr/pdf/pdf/66962/fr.subject.pdf
+	@	open https://cdn.intra.42.fr/pdf/pdf/114787/fr.subject.pdf
 
 doc:
 	@	open https://www.gnu.org/software/make/manual/make.html#Suffix-Rules

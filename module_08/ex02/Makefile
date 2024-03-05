@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/29 08:14:02 by ppaquet           #+#    #+#              #
-#    Updated: 2024/03/05 08:24:30 by ppaquet          ###   ########.fr        #
+#    Created: 2024/03/05 08:24:48 by ppaquet           #+#    #+#              #
+#    Updated: 2024/03/05 08:25:10 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## ------------------------------------------------------------ @category NAME.S
-NAME				:=		easyfind
-NAME_MAJ			:=		EASYFIND
+NAME				:=		Span
+NAME_MAJ			:=		SPAN
 
-DEBUG				:=		easyfind_debug
+DEBUG				:=		span_debug
 
 ## ----------------------------------------------------- @category MISCELLANEOUS
 
@@ -149,4 +149,3 @@ doc:
 	@	open https://www.gnu.org/software/make/manual/make.html#Suffix-Rules
 
 .PHONY: all clean fclean re
-
