@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 11:55:02 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/04 18:18:28 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:05:22 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,13 @@ void	test_add_list_iterator( void ) {
 
 	Span	from_lst( sizeof( arr ) / sizeof( int ) );
 	from_lst.addNumber< std::list<int> >( lst.begin(), lst.end() );
+	try {
+		from_lst.print();
+	std::cout << "Longest span\t=\t" << from_lst.longestSpan() << std::endl;
+	std::cout << "Shortest span\t=\t" << from_lst.shortestSpan() << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 	return ;
 }
 
