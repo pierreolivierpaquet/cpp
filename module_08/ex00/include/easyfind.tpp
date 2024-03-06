@@ -6,14 +6,14 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 08:13:55 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/01 10:25:50 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:57:30 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/easyfind.hpp"
 
 template < typename T >
-typename T::const_iterator easyfind( const T &container, int find ) {
+typename T::const_iterator easyfind( T &container, int find ) {
 
 	typename T::const_iterator iter = container.begin();
 	for (; iter != container.end(); iter++)

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 08:13:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/01 11:05:48 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:59:03 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,10 @@ void	test_list( int to_find ) {
 }
 
 // void	test_array( int to_find ) {
-// 	std::array<int, 7> arr = { -321, -123, 123, 321, 1234, 4321, 8765 };
+// 	print_separator( "ARRAY CONTAINER" );
+// 	std::array<int, 8> arr = { -321, -123, 123, 321, 1234, 4321, 8765, 0 };
 
-// 	std::array<int, 7>::const_iterator found;
+// 	std::array<int, 8>::const_iterator found;
 // 	try {
 // 		found = easyfind( arr, 4321 );
 // 		std::cout	<< "'" << *found << "' "
@@ -121,6 +122,17 @@ void	test_list( int to_find ) {
 // 	} catch ( ElementNotFound &ex ) {
 // 		std::cout << ex.what() << std::endl;
 // 	};
+// 	try {
+// 		found = easyfind( arr, to_find );
+// 		std::cout	<< "'" << *found << "' "
+// 					<< "\033[1;32mfound\033[0m within \033[1;34marray\033[0m."
+// 					<< std::endl;
+// 	} catch ( ElementNotFound &ex ) {
+// 		std::cout << ex.what() << std::endl;
+// 	};
+// 	arr[7] = to_find;
+// 	std::cout	<< "\t*** '" << to_find << "' "
+// 				<< "added to the container ***" << std::endl;
 // 	try {
 // 		found = easyfind( arr, to_find );
 // 		std::cout	<< "'" << *found << "' "
@@ -140,6 +152,7 @@ int	main( int argc, char **argv ) {
 	
 	test_vector( 102 );
 	test_list( 2222 );
+	// test_array( 55 );
 
 	return ( EXIT_SUCCESS );
 }

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 11:55:05 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/04 18:32:02 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:01:14 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	Span::longestSpan( void ) const {
 	std::list< u_int32_t >::const_iterator it1;
 	std::list< u_int32_t >::const_iterator it2;
 	u_int32_t	longest_span = std::numeric_limits< int >::min();
-	
+
 	it1 = sorted.begin();
 	it2 = sorted.end();
 	--it2;
