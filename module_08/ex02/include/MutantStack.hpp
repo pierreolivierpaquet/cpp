@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:26:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/05 14:33:24 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/06 09:22:04 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // T = type of element.
 // Container = Underlying container where elements are stored.
 template < typename T, typename Container = std::deque < T > >
-class	MutantStack	: public std::stack< T > {
+class	MutantStack	: public std::stack< T, Container > {
 	private:
 
 	public:

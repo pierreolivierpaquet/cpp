@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:25:59 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/05 14:59:00 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:03:45 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	print_sep( std::string title = "", bool nl = true) {
 
 void	test_mutant( void ) {
 	print_sep( "MUTANTSTACK" );
-
-	typedef MutantStack< int, std::deque<int> > Mutant;
+	std::cout << "\t\t\t\t\t\t\t\t\t\033[1mMUTANT\033[0m" << std::endl;
+	typedef MutantStack< int > Mutant;
+	
 	Mutant mstack;
-
 	mstack.push(5);
 	mstack.push(17);
 
@@ -49,10 +49,12 @@ void	test_mutant( void ) {
 
 	mstack.push(0);
 
-	Mutant::iterator it = mstack.begin();
-	Mutant::iterator ite = mstack.end();
+	// std::deque<int>::iterator it = mstack.begin(); // **typedef added to class.
+	// std::deque<int>::iterator ite = mstack.end(); // **typedef added to class.
 	// MutantStack<int>::iterator it = mstack.begin();
 	// MutantStack<int>::iterator ite = mstack.end();
+	Mutant::iterator it = mstack.begin();
+	Mutant::iterator ite = mstack.end();
 
 	++it;
 	--it;
@@ -66,6 +68,77 @@ void	test_mutant( void ) {
 	return ;
 }
 
+void	test_list( void ) {
+	print_sep();
+	std::cout << "\t\t\t\t\t\t\t\t\t\033[1mLIST\033[0m" << std::endl;
+	typedef std::list< int > Alternate;
+
+	Alternate  lst;
+	lst.push_back(5);
+	lst.push_back(17);
+
+	std::cout << lst.back() << std::endl;
+	lst.pop_back();
+	std::cout << lst.size() << std::endl;
+
+	lst.push_back(3);
+	lst.push_back(5);
+	lst.push_back(737);
+
+	lst.push_back(0);
+
+	Alternate::iterator it2 = lst.begin();
+	Alternate::iterator ite2 = lst.end();
+
+	++it2;
+	--it2;
+
+	while (it2 != ite2){
+	std::cout << *it2 << std::endl;
+	++it2;
+	}
+
+	return ;
+}
+
+void	test_string_list( void ) {
+	print_sep( "MUTANTSTACK - STRING - LIST" );
+	typedef MutantStack< std::string, std::list<std::string> > Mutant;
+
+	Mutant mstack;
+
+	mstack.push( "1. First" );
+	mstack.push( "2. Second" );
+	mstack.push( "2. Third" );
+
+	Mutant::iterator it1 = mstack.begin();
+	Mutant::iterator ite1 = mstack.end();
+
+	while (it1 != ite1){
+		std::cout << *it1 << std::endl;
+		it1++;
+	}
+	print_sep();
+	for (it1 = mstack.begin(); it1 != ite1; it1++){
+		*it1 = "* suppressed *";
+	}
+
+	for (it1 = mstack.begin(); it1 != ite1; it1++){
+		std::cout << *it1 << std::endl;
+	}
+	print_sep();
+	it1 = ++mstack.begin();
+	*it1 = "123456789";
+	it1--;
+
+	Mutant::const_iterator c_it1 = mstack.begin();
+	for (c_it1 = mstack.begin(); c_it1 != ite1; c_it1++){
+		std::cout << *c_it1 << std::endl;
+	}
+
+	return ;
+}
+
 /******************************************************************************/
 
 int	main ( int argc, char **argv ) {
@@ -73,6 +146,8 @@ int	main ( int argc, char **argv ) {
 	static_cast< void >( argv );
 
 	test_mutant();
+	test_list();
+	test_string_list();
 
 	return ( EXIT_SUCCESS ) ;
 }

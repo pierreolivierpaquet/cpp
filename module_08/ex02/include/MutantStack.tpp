@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 08:26:02 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/05 12:54:00 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:46:35 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ MutantStack< T, Container >::~MutantStack( void ) {
 }
 
 template< typename T, typename Container >
-MutantStack< T, Container > &MutantStack< T, Container >::operator=( const MutantStack<T, Container> &rhs ) {
+MutantStack< T, Container > &MutantStack< T, Container >::operator=(const MutantStack<T, Container> &rhs ) {
 	if (*this == rhs){
 		return ( *this );
 	}
@@ -51,7 +51,6 @@ typename Container::const_iterator MutantStack< T, Container >::begin ( void ) c
 	const_begin_it = this->c.begin();
 	return ( const_begin_it );
 }
-
 
 template < typename T, typename Container >
 typename Container::iterator	MutantStack< T, Container >::end( void ) {
