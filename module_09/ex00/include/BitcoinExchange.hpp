@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:38 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/07 10:52:59 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/07 17:17:56 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,48 @@
 
 # include	<iostream>
 # include	<fstream>
-# include	<cstring> // memset
+# include	<cstring>
 # include	<limits>
-# include	<list>
-# include	<vector>
+# include	<map>
+# include	<cstdlib> // u_int32_t
+// # include	<list>
+// # include	<vector>
 
 # ifndef	EMPTY_STR
-#  define	EMPTY_STR	""
+#  define	EMPTY_STR		""
 # endif	/*	EMPTY_STR	*/
+
+# ifndef	CSV_FILENAME
+#  define	CSV_FILENAME	"data.csv"
+# endif	/*	CSV_FILENAME	*/
+
+# define	INPUT_CHAR		"0123456789-| "
+
+typedef struct s_data {
+	std::pair<std::string, std::string>	origin_data;
+	u_int32_t	year;
+	u_int32_t	month;
+	u_int32_t	day;
+	float		value;
+} t_data;
+
+typedef std::map<size_t, t_data> ifMap;
 
 class	BitcoinExchange {
 	private:
-		std::string		_infile_name;
-		std::ifstream	_infile;
+	
+		static const std::string _csv_name; // Static data CSV file.
+
+		BitcoinExchange( void );
+		std::string		_infile_name;	//	provided filename for input
+		std::ifstream	_infile;	// infile stream from input.
+		std::ifstream	_csv;	// infile stream from CSV data sheet.
+
+		ifMap _infile_map;
 
 	public:
 ///	---------------------------------------- @class CONSTRUCTOR.S - DESTRUCTOR.S
-		BitcoinExchange( void );
+		BitcoinExchange( std::string f_name );
 		BitcoinExchange( const BitcoinExchange &rhs );
 		~BitcoinExchange( void );
 
@@ -42,6 +67,16 @@ class	BitcoinExchange {
 ///	------------------------------------------------------------ @class GETTER.S
 
 		std::string	getInfileName( void ) const;
+
+///	------------------------------------------------------------ @class SETTER.S
+
+		void	setInfileName( std::string name );
+
+///	----------------------------------------------------- @class NESTED CLASS.ES
+
+///	---------------------------------------------------------- @class FUNCTION.S
+
+	void	display( void );
 
 };	/*	BitcoinExchange	*/
 

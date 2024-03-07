@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:40 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/07 10:17:31 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/07 13:22:04 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@
 #define		C_ORN	"\033[38;5;208m"
 #define		C_B_ORN	"\033[1;38;5;208m"
 
-void	bitcoin_echange( char **f_name) {
-	
-}
-
 bool	check_program_parameter( int ac ) {
 	if (ac < 2) {
 		std::cerr	<< C_B_RED << "error" << C_RST
@@ -43,14 +39,21 @@ bool	check_program_parameter( int ac ) {
 	return ( true );
 }
 
+void	bitcoin_exchange( char *f_name ) {
+	BitcoinExchange	btc( f_name );
+	btc.display();
+	return ;
+}
+
 /******************************************************************************/
 
 int	main( int argc, char **argv ) {
 	static_cast< void >(argc);
 	static_cast< void >(argv);
 
-	check_program_parameter( argc );
-	
+	if (check_program_parameter( argc ) == true) {
+		bitcoin_exchange( argv[ 1 ] );
+	}
 
 	return ( EXIT_SUCCESS );
 }
