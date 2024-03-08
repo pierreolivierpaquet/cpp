@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:38 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/08 12:41:42 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/08 15:36:06 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 #  define	INPUT_DELIMITER	"|"
 # endif	/*	INPUT_DELIMITER	*/
 
-# define	INPUT_CHAR		"0123456789-| "
+# define	INPUT_CHAR		"0123456789-|., "
 
 typedef struct s_data {
 	std::pair<std::string, std::string>	origin_data;
@@ -46,6 +46,8 @@ typedef struct s_data {
 	u_int32_t	month;
 	u_int32_t	day;
 	float		value;
+	bool	operator==(const struct s_data &comp) const;
+	bool	operator<(const struct s_data &comp) const;
 } t_data;
 
 /// @brief Input file token pair ( "first * second" ).
