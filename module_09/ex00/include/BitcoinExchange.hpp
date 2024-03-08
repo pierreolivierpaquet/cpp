@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:38 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/07 17:17:56 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/08 15:36:06 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include	<iostream>
 # include	<fstream>
-# include	<cstring>
+# include	<sstream> // stringstream
 # include	<limits>
 # include	<map>
 # include	<cstdlib> // u_int32_t
@@ -27,10 +27,18 @@
 # endif	/*	EMPTY_STR	*/
 
 # ifndef	CSV_FILENAME
-#  define	CSV_FILENAME	"data.csv"
+#  define	CSV_FILENAME	"/home/ppaquet/Documents/cpp/module_09/ex00/data.csv"
 # endif	/*	CSV_FILENAME	*/
 
-# define	INPUT_CHAR		"0123456789-| "
+# ifndef	CSV_DELIMITER
+#  define	CSV_DELIMITER	","
+# endif	/*	CSV_DELIMITER	*/
+
+# ifndef	INPUT_DELIMITER
+#  define	INPUT_DELIMITER	"|"
+# endif	/*	INPUT_DELIMITER	*/
+
+# define	INPUT_CHAR		"0123456789-|., "
 
 typedef struct s_data {
 	std::pair<std::string, std::string>	origin_data;
@@ -38,9 +46,15 @@ typedef struct s_data {
 	u_int32_t	month;
 	u_int32_t	day;
 	float		value;
+	bool	operator==(const struct s_data &comp) const;
+	bool	operator<(const struct s_data &comp) const;
 } t_data;
 
-typedef std::map<size_t, t_data> ifMap;
+/// @brief Input file token pair ( "first * second" ).
+typedef std::pair< std::string, std::string > tokenPair;
+
+typedef std::map< size_t, t_data > ifMap;
+typedef	std::pair< size_t, t_data > ifPair;
 
 class	BitcoinExchange {
 	private:
@@ -52,7 +66,8 @@ class	BitcoinExchange {
 		std::ifstream	_infile;	// infile stream from input.
 		std::ifstream	_csv;	// infile stream from CSV data sheet.
 
-		ifMap _infile_map;
+		ifMap	_infile_map;
+		ifMap	_csv_map;
 
 	public:
 ///	---------------------------------------- @class CONSTRUCTOR.S - DESTRUCTOR.S
