@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:35 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/07 17:50:02 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/08 12:52:02 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,38 @@
 
 const std::string BitcoinExchange::_csv_name = CSV_FILENAME;
 
-static void	uploadInput( std::ifstream &infile, ifMap &infile_map ) {
+static void	convert_map( ifMap &infile_map ) {
+	std::istringstream buffer( EMPTY_STR );
+	std::string	tmp;
+	for (size_t i = 0; i < infile_map.size() ; i++) {
+		buffer.str( infile_map[ i ].origin_data.first) ; // sets the stream
+
+		std::getline( buffer, tmp, '-');
+		infile_map[ i ].year = static_cast<u_int32_t>(std::atoi( tmp.c_str() ));
+		std::getline( buffer, tmp, '-' );
+		infile_map[ i ].month = static_cast<u_int32_t>(std::atoi( tmp.c_str() ));
+		std::getline( buffer, tmp, '-' );
+		infile_map[ i ].day = static_cast<u_int32_t>(std::atoi( tmp.c_str() ));
+		buffer.clear();
+		buffer.str( infile_map[ i ].origin_data.second );
+		std::getline( buffer, tmp );
+		infile_map[ i ].value = std::strtof( tmp.c_str(), NULL);
+		buffer.clear();
+	}
+	return ;
+}
+
+static void	upload_file( std::ifstream &infile, ifMap &infile_map, char delimiter ) {
 	std::string line( EMPTY_STR );
-	std::pair<std::string, std::string> key_val;
+	tokenPair key_val;
 	t_data tmp;
 	size_t	n = 0;
 	while ( true ) {
 		std::getline( infile, line );
-		if (line.find("|") != std::string::npos)
+		if (line.find(delimiter) != std::string::npos)
 		{
-			key_val.first = line.substr( 0, line.find_first_of("|") );
-			key_val.second = line.substr( line.find_first_of("|") + 1 );
+			key_val.first = line.substr( 0, line.find_first_of(delimiter) );
+			key_val.second = line.substr( line.find_first_of(delimiter) + 1);
 		} else {
 			key_val.first = line;
 			key_val.second = EMPTY_STR;
@@ -34,19 +55,23 @@ static void	uploadInput( std::ifstream &infile, ifMap &infile_map ) {
 		tmp.month = 0;
 		tmp.year = 0;
 		tmp.value = 0;
-		infile_map.insert(std::pair<size_t, t_data>(n++, tmp));
+		infile_map.insert( ifPair( n++, tmp ) );
 		line.clear();
 		if (infile.eof() == true) {
 			break;
 		}
 	}
+	return ;
 }
 
 ///	-------------------------------------------------------- @section FUNCTION.S
 
 
 void	BitcoinExchange::display( void ) {
-	uploadInput( this->_infile, this->_infile_map);
+	upload_file( this->_infile, this->_infile_map, INPUT_DELIMITER[ 0 ]);
+	convert_map( this->_infile_map );
+	upload_file( this->_csv, this->_csv_map, CSV_DELIMITER[ 0 ] );
+	convert_map( this->_csv_map );
 	return ;
 }
 
@@ -76,6 +101,7 @@ BitcoinExchange::BitcoinExchange( std::string f_name ) :
 	_infile_name( f_name ) {
 
 	this->_infile.open( this->_infile_name.c_str() );
+	this->_csv.open( this->_csv_name.c_str() );
 	std::cout	<< this->_infile_name
 				<< " Constructor called. [parameterized]" << std::endl;
 	return ;
@@ -87,8 +113,11 @@ BitcoinExchange::BitcoinExchange( const BitcoinExchange &rhs ) {
 }
 
 BitcoinExchange::~BitcoinExchange( void ) {
-	if (this->_infile.is_open()){
+	if (this->_infile.is_open()) {
 		this->_infile.close();
+	}
+	if (this->_csv.is_open()) {
+		this->_csv.close();
 	}
 	this->_infile_name = EMPTY_STR;
 	return ;
