@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:35 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/11 12:20:49 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/11 14:38:34 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ u_int32_t	current_time( e_current_time get_option ) {
 
 const std::string BitcoinExchange::_csv_name = CSV_FILENAME;
 
-static void	convert_map( ifMap &ref_map ) {
+static void	convert_map( ifMap &ref_map) {
 	std::istringstream buffer( EMPTY_STR );
 	std::string	tmp;
 	for (size_t i = 0; i < ref_map.size() ; i++) {
@@ -71,7 +71,6 @@ static void	convert_map( ifMap &ref_map ) {
 		ref_map[ 0 ].origin_data.second.find_first_not_of( INPUT_CHAR ) != std::string::npos) {
 		ref_map.erase( ref_map.begin() );
 	}
-	//
 	return ;
 }
 
@@ -95,7 +94,11 @@ static void	upload_file( std::ifstream &infile, ifMap &ref_map, char delimiter )
 		tmp.month = 0;
 		tmp.year = 0;
 		tmp.value = 0;
-		ref_map.insert( ifPair( n++, tmp ) );
+		// TEST FOR EMPTY LINES
+		if (line.empty() != true) {
+			ref_map.insert( ifPair( n++, tmp ) );
+		}
+		//
 		line.clear();
 		if (infile.eof() == true) {
 			break;
@@ -107,8 +110,17 @@ static void	upload_file( std::ifstream &infile, ifMap &ref_map, char delimiter )
 static ifMap::const_iterator locate( const t_data &lhs, const ifMap &csv_map ) {
 	ifMap::const_iterator it = csv_map.begin();
 	ifMap::const_iterator ite = csv_map.end();
-	// ITERATE THROUGHT THE CSV DATABASE
-	return ( it );
+	while (it != ite){
+		if (lhs == (*it).second){
+			return ( it );
+		}
+		if ((*it).second < lhs) {
+			++it;
+		} else {
+			return ( --it );
+		}
+	}
+	return ( --it );
 }
 
 static bool leap_check ( u_int32_t year ) {
@@ -121,6 +133,12 @@ static bool leap_check ( u_int32_t year ) {
 }
 
 static bool	valid_date( ifMap::const_iterator it ) {
+	if ((*it).second.month > 12 ||
+		((*it).second.year <= 2009 &&
+		(*it).second.month <= 1 &&
+		(*it).second.day < 2)) {
+		return ( false );
+	}
 	switch ((*it).second.month) {
 	case( 1 ): case( 3 ): case( 5 ): case( 7 ): case( 8 ): case( 10 ): case( 12 ):
 		if ((*it).second.day > 31) {
@@ -169,13 +187,14 @@ static void	valid_check(ifMap::const_iterator it ) {
 }
 
 static void	match( ifMap &infile_map, ifMap &csv_map ) {
-	ifMap::const_iterator it;
-	ifMap::const_iterator ite = infile_map.end();
+	ifMap::const_iterator	it;
+	ifMap::const_iterator	ite = infile_map.end();
+	ifMap::const_iterator	it_print;
 	for (it = infile_map.begin(); it != ite; it++){
 		try {
 			valid_check( it );
-			// ITERATE DATABASE -> locate() function
-			// PRINT ITERATOR INFORMATION
+			it_print = locate( (*it).second, csv_map );
+			std::cout << ((*it_print).second.value * (*it).second.value) << std::endl;
 		} catch ( BitcoinExchange::BadInput &e ) {
 			std::cerr	<< e.what()
 						<< ARROW << (*it).second.origin_data.first << std::endl;
@@ -200,9 +219,9 @@ bool	t_data::operator==( const struct s_data &comp ) const {
 }
 
 bool	t_data::operator<(const struct s_data &comp) const {
-	if (this->year > comp.year ||
-		this->month > comp.month ||
-		this->day >= comp.day) {
+	if (this->year >= comp.year &&
+		this->month >= comp.month &&
+		this->day > comp.day) {
 		return ( false );
 	}
 	return ( true );
