@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:38 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/08 15:36:06 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/11 10:09:34 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include	<iostream>
 # include	<fstream>
 # include	<sstream> // stringstream
+# include	<ctime> // get year
 # include	<limits>
 # include	<map>
 # include	<cstdlib> // u_int32_t
@@ -38,7 +39,18 @@
 #  define	INPUT_DELIMITER	"|"
 # endif	/*	INPUT_DELIMITER	*/
 
+# ifndef	ARROW
+#  define	ARROW			" => "
+# endif	/*	ARROW	*/
+
+
 # define	INPUT_CHAR		"0123456789-|., "
+
+typedef enum	{
+		DAY,
+		MONTH,
+		YEAR
+	}	e_current_time;
 
 typedef struct s_data {
 	std::pair<std::string, std::string>	origin_data;
@@ -88,6 +100,19 @@ class	BitcoinExchange {
 		void	setInfileName( std::string name );
 
 ///	----------------------------------------------------- @class NESTED CLASS.ES
+
+		class	BadInput : public std::exception {
+			public:
+				virtual const char *what( void ) const throw();
+		};
+		class	ValueTooLarge : public std::exception {
+			public:
+				virtual const char *what( void ) const throw ();
+		};
+		class	ValueNegative : public std::exception {
+			public:
+				virtual const char *what( void ) const throw ();
+		};
 
 ///	---------------------------------------------------------- @class FUNCTION.S
 

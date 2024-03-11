@@ -6,29 +6,45 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:35 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/08 16:01:16 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/11 12:20:49 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include	"../include/BitcoinExchange.hpp"
 
-bool	t_data::operator==( const struct s_data &comp ) const {
-	if (this->year != comp.year ||
-		this->month != comp.month ||
-		this->day != comp.day) {
-		return ( false );
+///	------------------------------------------------------------ @section UTIL.S
+
+tm	*get_local_time( void ) {
+	static time_t current;
+	static tm *local_time;
+
+	if (current == 0){
+		current = time( NULL );
 	}
-	return ( true );
+	if (local_time == NULL) {
+		local_time = localtime( &current );
+	}
+	return ( local_time );
 }
 
-bool	t_data::operator<(const struct s_data &comp) const {
-	if (this->year > comp.year ||
-		this->month > comp.month ||
-		this->day >= comp.day) {
-		return ( false );
+u_int32_t	current_time( e_current_time get_option ) {
+	tm	*date = NULL;
+	date = get_local_time();
+	if (date == NULL) {
+		return ( std::numeric_limits<u_int32_t>::max() );
+	} else {
+		switch (get_option)
+		{
+		case ( DAY ): return ( date->tm_mday );
+		case ( MONTH ): return ( date->tm_mon + 1 );
+		case ( YEAR ): return ( date->tm_year + 1900 );
+		default:
+			break;
+		}
 	}
-	return ( true );
+	return ( std::numeric_limits<u_int32_t>::max() );
 }
+
 
 const std::string BitcoinExchange::_csv_name = CSV_FILENAME;
 
@@ -95,19 +111,101 @@ static ifMap::const_iterator locate( const t_data &lhs, const ifMap &csv_map ) {
 	return ( it );
 }
 
+static bool leap_check ( u_int32_t year ) {
+	if (year % 4 == 0 && year % 100 != 0) {
+		return ( true );
+	} else if ( year % 400 == 0 ) {
+		return ( true );
+	}
+	return ( false );
+}
+
+static bool	valid_date( ifMap::const_iterator it ) {
+	switch ((*it).second.month) {
+	case( 1 ): case( 3 ): case( 5 ): case( 7 ): case( 8 ): case( 10 ): case( 12 ):
+		if ((*it).second.day > 31) {
+			return ( false );
+		}
+		break ;
+	case( 2 ):
+		if (leap_check( (*it).second.year ) == false &&
+						(*it).second.day > 28) {
+			return ( false );
+		} else if (leap_check(	(*it).second.year ) == true &&
+								(*it).second.day > 29) {
+			return ( false );
+		}
+		break ;
+	case( 4 ): case( 6 ): case( 9 ): case( 11 ):
+		if ( (*it).second.day > 30 ) {
+			return ( false );
+		}
+		break ;
+	default:
+		break ;
+	}
+	return ( true );
+}
+
+static void	valid_check(ifMap::const_iterator it ) {
+	if ( (*it).second.origin_data.first.find_first_of('-') == std::string::npos ) {
+		throw( BitcoinExchange::BadInput() );
+	} else if ( (*it).second.year	==	0 ||
+				(*it).second.month	==	0 ||
+				(*it).second.day	==	0) {
+		throw( BitcoinExchange::BadInput() );
+	} else if ( (*it).second.year	>=	current_time( YEAR ) &&
+				(*it).second.month	>=	current_time( MONTH ) &&
+				(*it).second.day	>	current_time( DAY ) ) {
+		throw( BitcoinExchange::BadInput() );
+	} else if ( valid_date( it ) == false) {
+		throw( BitcoinExchange::BadInput() );
+	} else if ( (*it).second.value > 1000 ) {
+		throw( BitcoinExchange::ValueTooLarge() );
+	} else if ( (*it).second.value < 0) {
+		throw( BitcoinExchange::ValueNegative() );
+	}
+	return ;
+}
+
 static void	match( ifMap &infile_map, ifMap &csv_map ) {
 	ifMap::const_iterator it;
 	ifMap::const_iterator ite = infile_map.end();
 	for (it = infile_map.begin(); it != ite; it++){
 		try {
-			// CHECK FORMAT VALIDITY ETC
+			valid_check( it );
 			// ITERATE DATABASE -> locate() function
 			// PRINT ITERATOR INFORMATION
-		} catch (std::exception &e) {
+		} catch ( BitcoinExchange::BadInput &e ) {
+			std::cerr	<< e.what()
+						<< ARROW << (*it).second.origin_data.first << std::endl;
+		} catch ( BitcoinExchange::ValueTooLarge &e ) {
+			std::cerr	<< e.what() << std::endl;
+		} catch ( BitcoinExchange::ValueNegative &e ) {
 			std::cerr	<< e.what() << std::endl;
 		}
 	}
 	return ;
+}
+
+///	------------------------------------------------------------ @section STRUCT
+
+bool	t_data::operator==( const struct s_data &comp ) const {
+	if (this->year != comp.year ||
+		this->month != comp.month ||
+		this->day != comp.day) {
+		return ( false );
+	}
+	return ( true );
+}
+
+bool	t_data::operator<(const struct s_data &comp) const {
+	if (this->year > comp.year ||
+		this->month > comp.month ||
+		this->day >= comp.day) {
+		return ( false );
+	}
+	return ( true );
 }
 
 ///	-------------------------------------------------------- @section FUNCTION.S
@@ -183,4 +281,18 @@ BitcoinExchange &BitcoinExchange::operator=( const BitcoinExchange &rhs ) {
 		this->_infile.open( rhs.getInfileName().c_str() );
 	}
 	return ( *this );
+}
+
+///	--------------------------------------------------- @section NESTED CLASS.ES
+
+const char *BitcoinExchange::BadInput::what( void ) const throw() {
+	return ( "\033[1;31merror\033[0m: bad input." );
+}
+
+const char *BitcoinExchange::ValueTooLarge::what( void ) const throw() {
+	return ( "\033[1;31merror\033[0m: too large of a number." );
+}
+
+const char *BitcoinExchange::ValueNegative::what( void ) const throw() {
+	return ( "\033[1;31merror\033[0m: not a positive number." );
 }
