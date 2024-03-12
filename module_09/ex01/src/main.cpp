@@ -5,29 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/07 08:49:40 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/12 09:35:46 by ppaquet          ###   ########.fr       */
+/*   Created: 2024/03/12 09:39:47 by ppaquet           #+#    #+#             */
+/*   Updated: 2024/03/12 14:54:42 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"../include/BitcoinExchange.hpp"
+#include "../include/RPN.hpp"
 
-#ifndef		EXIT_SUCCESS
-# define	EXIT_SUCCESS	0
-#endif	/*	EXIT_SUCCESS	*/
-
-#define		C_RST	"\033[0m"
-#define		C_BLD	"\033[1m"
-#define		C_RED	"\033[31m"
-#define		C_B_RED	"\033[1;31m"
-#define		C_GRN	"\033[32m"
-#define		C_B_GRN	"\033[1;32m"
-#define		C_ORN	"\033[38;5;208m"
-#define		C_B_ORN	"\033[1;38;5;208m"
-
-/******************************************************************************/
-
-bool	check_program_parameter( int ac ) {
+bool	check_program_parameter(int ac ) {
 	if (ac < 2) {
 		std::cerr	<< C_B_RED << "error" << C_RST
 					<< ": expected input file." << std::endl;
@@ -41,24 +26,27 @@ bool	check_program_parameter( int ac ) {
 	return ( true );
 }
 
-void	bitcoin_exchange( char *f_name ) {
-	BitcoinExchange	btc( f_name );
-	btc.display();
+void	reverse_polish_notation( std::string av ) {
+	RPN reverse_polish( av );
+	reverse_polish.calculate();
 	return ;
 }
 
-/******************************************************************************/
-
 int	main( int argc, char **argv ) {
-	static_cast< void >(argc);
-	static_cast< void >(argv);
-
-	if (check_program_parameter( argc ) == true) {
+	
+	if (check_program_parameter( argc )) {
 		try {
-			bitcoin_exchange( argv[ 1 ] );
+			reverse_polish_notation( argv[ 1 ] );
 		} catch( std::exception &e ) {
-			std::cerr	<< e.what() << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 	return ( EXIT_SUCCESS );
 }
+
+/* // -----------------------------------------------------------------------///
+	* 1. Input line in a stream 
+	* 2. Add gradually into a stack
+	* 3. Reverse it
+	* 4. Calculate using the stack
+*/ // -----------------------------------------------------------------------///

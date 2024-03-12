@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/07 08:49:43 by ppaquet           #+#    #+#              #
-#    Updated: 2024/03/12 07:41:31 by ppaquet          ###   ########.fr        #
+#    Created: 2024/03/12 09:40:14 by ppaquet           #+#    #+#              #
+#    Updated: 2024/03/12 14:02:24 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## ------------------------------------------------------------ @category NAME.S
-NAME				:=		btc
-NAME_MAJ			:=		BTC
+NAME				:=		RPN
+NAME_MAJ			:=		RPN
 
-DEBUG				:=		btc_debug
+DEBUG				:=		RPN_debug
 
 ## ----------------------------------------------------- @category MISCELLANEOUS
 
@@ -40,7 +40,7 @@ COMPILATION			:=		$(COMPILER)		$(WARNINGS_FLAG)\
 SRC_PATH			:=		src/
 SRC_FILES			:=	\
 							main.cpp \
-							BitcoinExchange.cpp \
+							RPN.cpp \
 
 ## ---------------------------------------------------------- @category OBJECT.S
 OBJ_PATH			:=		obj/
@@ -135,7 +135,7 @@ debug: $(DEBUG)
 $(DEBUG): COMPILATION += -g
 $(DEBUG): COMPILATION += -Wno-unused-variable -Wno-unused-function
 $(DEBUG): COMPILATION += -Wno-unused-parameter -Wno-unused-const-variable
-# $(DEBUG): COMPILATION += -Wno-unused-const-variable
+$(DEBUG): COMPILATION += -Wno-unused-private-field
 $(DEBUG): fclean $(OBJ_PATH) $(OBJ)
 	@	echo	"$(STAB)$(EXEC_BOX)"\
 				"$(C_B_ORN)Compiling in debug mode \`$@\`$(C_RST)"
