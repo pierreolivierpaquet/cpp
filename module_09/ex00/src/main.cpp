@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:40 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/08 13:23:46 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/12 09:35:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,11 @@ int	main( int argc, char **argv ) {
 	static_cast< void >(argv);
 
 	if (check_program_parameter( argc ) == true) {
-		bitcoin_exchange( argv[ 1 ] );
+		try {
+			bitcoin_exchange( argv[ 1 ] );
+		} catch( std::exception &e ) {
+			std::cerr	<< e.what() << std::endl;
+		}
 	}
-
 	return ( EXIT_SUCCESS );
 }
-
-// The program takes "input.txt" as an argument
-//		Check if we can open the file
-//		Be able to getline from this file to upload information
-//		Check the format of each line (*** | ***)
-//		Check valid date format (****-**-**)
-//		Check valid value format (float or int from 0 - 1000)
-// 

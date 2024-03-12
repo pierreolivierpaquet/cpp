@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:38 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/11 10:09:34 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/12 09:11:29 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 # define	BITCOINEXCHANGE_HPP_
 
 # include	<iostream>
-# include	<fstream>
-# include	<sstream> // stringstream
-# include	<ctime> // get year
-# include	<limits>
-# include	<map>
-# include	<cstdlib> // u_int32_t
-// # include	<list>
-// # include	<vector>
+# include	<fstream>	//	opening files
+# include	<sstream>	//	stringstream
+# include	<ctime>		//	current time
+# include	<limits>	//	numeric_limits
+# include	<map>		//	Container used
+# include	<cstdlib>	//	u_int32_t
+
+///	------------------------------------------------------------------------ ///
 
 # ifndef	EMPTY_STR
 #  define	EMPTY_STR		""
 # endif	/*	EMPTY_STR	*/
 
 # ifndef	CSV_FILENAME
-#  define	CSV_FILENAME	"/home/ppaquet/Documents/cpp/module_09/ex00/data.csv"
+#  define	CSV_FILENAME	"data.csv"
 # endif	/*	CSV_FILENAME	*/
 
 # ifndef	CSV_DELIMITER
@@ -42,7 +42,6 @@
 # ifndef	ARROW
 #  define	ARROW			" => "
 # endif	/*	ARROW	*/
-
 
 # define	INPUT_CHAR		"0123456789-|., "
 
@@ -67,6 +66,15 @@ typedef std::pair< std::string, std::string > tokenPair;
 
 typedef std::map< size_t, t_data > ifMap;
 typedef	std::pair< size_t, t_data > ifPair;
+
+///	--------------------------------------------------- @section ERROR MESSAGE.S
+
+# define	ERR_FILE		"\033[1;31merror\033[0m: could not open file."
+# define	ERR_BAD_INPUT	"\033[1;31merror\033[0m: bad input."
+# define	ERR_NEG_NUM		"\033[1;31merror\033[0m: not a positive number."
+# define	ERR_LARGE_NUM	"\033[1;31merror\033[0m: too large number."
+
+///	---------------------------------------------------------- @section CLASSE.S
 
 class	BitcoinExchange {
 	private:

@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:35 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/11 14:38:34 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/12 09:06:00 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,21 @@ tm	*get_local_time( void ) {
 
 u_int32_t	current_time( e_current_time get_option ) {
 	tm	*date = NULL;
+
 	date = get_local_time();
 	if (date == NULL) {
 		return ( std::numeric_limits<u_int32_t>::max() );
 	} else {
 		switch (get_option)
 		{
-		case ( DAY ): return ( date->tm_mday );
-		case ( MONTH ): return ( date->tm_mon + 1 );
-		case ( YEAR ): return ( date->tm_year + 1900 );
-		default:
-			break;
+			case ( DAY ):	return ( date->tm_mday );
+			case ( MONTH ):	return ( date->tm_mon + 1 );
+			case ( YEAR ):	return ( date->tm_year + 1900 );
+			default:	break;
 		}
 	}
 	return ( std::numeric_limits<u_int32_t>::max() );
 }
-
 
 const std::string BitcoinExchange::_csv_name = CSV_FILENAME;
 
@@ -66,7 +65,7 @@ static void	convert_map( ifMap &ref_map) {
 		ref_map[ i ].value = std::strtof( tmp.c_str(), NULL);
 		buffer.clear();
 	}
-	// POPS OUT THE FIRST PAIR IF IS THE TITLE
+//	Deletes the first line if it contains <COLUMN><TITLE> elements.
 	if (ref_map[ 0 ].origin_data.first.find_first_not_of( INPUT_CHAR ) != std::string::npos ||
 		ref_map[ 0 ].origin_data.second.find_first_not_of( INPUT_CHAR ) != std::string::npos) {
 		ref_map.erase( ref_map.begin() );
@@ -94,11 +93,9 @@ static void	upload_file( std::ifstream &infile, ifMap &ref_map, char delimiter )
 		tmp.month = 0;
 		tmp.year = 0;
 		tmp.value = 0;
-		// TEST FOR EMPTY LINES
 		if (line.empty() != true) {
 			ref_map.insert( ifPair( n++, tmp ) );
 		}
-		//
 		line.clear();
 		if (infile.eof() == true) {
 			break;
@@ -133,10 +130,9 @@ static bool leap_check ( u_int32_t year ) {
 }
 
 static bool	valid_date( ifMap::const_iterator it ) {
-	if ((*it).second.month > 12 ||
-		((*it).second.year <= 2009 &&
-		(*it).second.month <= 1 &&
-		(*it).second.day < 2)) {
+	if ((*it).second.month > 12 || ((*it).second.year <= 2009 &&
+									(*it).second.month <= 1 &&
+									(*it).second.day < 2)) {
 		return ( false );
 	}
 	switch ((*it).second.month) {
@@ -146,11 +142,9 @@ static bool	valid_date( ifMap::const_iterator it ) {
 		}
 		break ;
 	case( 2 ):
-		if (leap_check( (*it).second.year ) == false &&
-						(*it).second.day > 28) {
+		if (leap_check( (*it).second.year ) == false && (*it).second.day > 28) {
 			return ( false );
-		} else if (leap_check(	(*it).second.year ) == true &&
-								(*it).second.day > 29) {
+		} else if (leap_check(	(*it).second.year ) == true && (*it).second.day > 29) {
 			return ( false );
 		}
 		break ;
@@ -166,12 +160,18 @@ static bool	valid_date( ifMap::const_iterator it ) {
 }
 
 static void	valid_check(ifMap::const_iterator it ) {
-	if ( (*it).second.origin_data.first.find_first_of('-') == std::string::npos ) {
+	if ( (*it).second.origin_data.first.find_first_of('-') == std::string::npos ||
+//		Protects YYYY-MM-DD from extra/missing character.
+		(*it).second.origin_data.first.length() != 11 ||
+		((*it).second.origin_data.first.find_first_of('-') ==
+		(*it).second.origin_data.first.find_last_of('-')) ) {
 		throw( BitcoinExchange::BadInput() );
+//				Protects againts impossible date.
 	} else if ( (*it).second.year	==	0 ||
 				(*it).second.month	==	0 ||
 				(*it).second.day	==	0) {
 		throw( BitcoinExchange::BadInput() );
+//				Protects against futuristic dates.
 	} else if ( (*it).second.year	>=	current_time( YEAR ) &&
 				(*it).second.month	>=	current_time( MONTH ) &&
 				(*it).second.day	>	current_time( DAY ) ) {
@@ -186,18 +186,26 @@ static void	valid_check(ifMap::const_iterator it ) {
 	return ;
 }
 
+static void	display_results( ifMap::const_iterator it_csv, ifMap::const_iterator it_infile ) {
+	std::cout	<< (*it_infile).second.origin_data.first
+				<< (*it_infile).second.value << ARROW
+				<< ( (*it_csv).second.value * (*it_infile).second.value )
+				<< std::endl;
+	return ;
+}
+
 static void	match( ifMap &infile_map, ifMap &csv_map ) {
-	ifMap::const_iterator	it;
+	ifMap::const_iterator	it_infile;
 	ifMap::const_iterator	ite = infile_map.end();
-	ifMap::const_iterator	it_print;
-	for (it = infile_map.begin(); it != ite; it++){
+	ifMap::const_iterator	it_csv;
+	for (it_infile = infile_map.begin(); it_infile != ite; it_infile++){
 		try {
-			valid_check( it );
-			it_print = locate( (*it).second, csv_map );
-			std::cout << ((*it_print).second.value * (*it).second.value) << std::endl;
+			valid_check( it_infile );
+			it_csv = locate( (*it_infile).second, csv_map );
+			display_results( it_csv, it_infile );
 		} catch ( BitcoinExchange::BadInput &e ) {
 			std::cerr	<< e.what()
-						<< ARROW << (*it).second.origin_data.first << std::endl;
+						<< ARROW << (*it_infile).second.origin_data.first << std::endl;
 		} catch ( BitcoinExchange::ValueTooLarge &e ) {
 			std::cerr	<< e.what() << std::endl;
 		} catch ( BitcoinExchange::ValueNegative &e ) {
@@ -265,6 +273,9 @@ BitcoinExchange::BitcoinExchange( std::string f_name ) :
 
 	this->_infile.open( this->_infile_name.c_str() );
 	this->_csv.open( this->_csv_name.c_str() );
+	if (this->_infile.fail() == true || this->_csv.fail() == true) {
+		throw( std::runtime_error( ERR_FILE ) );
+	}
 	std::cout	<< this->_infile_name
 				<< " Constructor called. [parameterized]" << std::endl;
 	return ;
@@ -283,6 +294,8 @@ BitcoinExchange::~BitcoinExchange( void ) {
 		this->_csv.close();
 	}
 	this->_infile_name = EMPTY_STR;
+	std::cout	<< this->_infile_name
+				<< " Destructor called. [default]" << std::endl;
 	return ;
 }
 
@@ -299,19 +312,22 @@ BitcoinExchange &BitcoinExchange::operator=( const BitcoinExchange &rhs ) {
 	} else {
 		this->_infile.open( rhs.getInfileName().c_str() );
 	}
+	if (this->_infile.fail() || this->_csv.fail()) {
+		throw( std::runtime_error( ERR_FILE ) );
+	}
 	return ( *this );
 }
 
 ///	--------------------------------------------------- @section NESTED CLASS.ES
 
 const char *BitcoinExchange::BadInput::what( void ) const throw() {
-	return ( "\033[1;31merror\033[0m: bad input." );
+	return ( ERR_BAD_INPUT );
 }
 
 const char *BitcoinExchange::ValueTooLarge::what( void ) const throw() {
-	return ( "\033[1;31merror\033[0m: too large of a number." );
+	return ( ERR_LARGE_NUM );
 }
 
 const char *BitcoinExchange::ValueNegative::what( void ) const throw() {
-	return ( "\033[1;31merror\033[0m: not a positive number." );
+	return ( ERR_NEG_NUM );
 }

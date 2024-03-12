@@ -6,7 +6,7 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 08:49:43 by ppaquet           #+#    #+#              #
-#    Updated: 2024/03/08 15:29:24 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/03/12 07:41:31 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,7 +134,8 @@ debug: $(DEBUG)
 
 $(DEBUG): COMPILATION += -g
 $(DEBUG): COMPILATION += -Wno-unused-variable -Wno-unused-function
-$(DEBUG): COMPILATION += -Wno-unused-parameter -Wno-unused-but-set-variable
+$(DEBUG): COMPILATION += -Wno-unused-parameter -Wno-unused-const-variable
+# $(DEBUG): COMPILATION += -Wno-unused-const-variable
 $(DEBUG): fclean $(OBJ_PATH) $(OBJ)
 	@	echo	"$(STAB)$(EXEC_BOX)"\
 				"$(C_B_ORN)Compiling in debug mode \`$@\`$(C_RST)"
