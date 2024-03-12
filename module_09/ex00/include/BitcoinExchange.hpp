@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:38 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/12 09:11:29 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/12 13:02:51 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define	BITCOINEXCHANGE_HPP_
 
 # include	<iostream>
-# include	<fstream>	//	opening files
-# include	<sstream>	//	stringstream
-# include	<ctime>		//	current time
-# include	<limits>	//	numeric_limits
-# include	<map>		//	Container used
-# include	<cstdlib>	//	u_int32_t
+# include	<fstream>		//	opening files
+# include	<sstream>		//	stringstream
+# include	<ctime>			//	current time
+# include	<limits>		//	numeric_limits
+# include	<map>			//	Container used
+# include	<cstdlib>		//	u_int32_t
 
 ///	------------------------------------------------------------------------ ///
 
