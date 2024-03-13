@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:47 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/12 14:54:42 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/13 13:03:09 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	check_program_parameter(int ac ) {
 void	reverse_polish_notation( std::string av ) {
 	RPN reverse_polish( av );
 	reverse_polish.calculate();
+	reverse_polish.displayResult();
 	return ;
 }
 
@@ -38,15 +39,8 @@ int	main( int argc, char **argv ) {
 		try {
 			reverse_polish_notation( argv[ 1 ] );
 		} catch( std::exception &e ) {
-			std::cout << e.what() << std::endl;
+			std::cerr << e.what() << std::endl;
 		}
 	}
 	return ( EXIT_SUCCESS );
 }
-
-/* // -----------------------------------------------------------------------///
-	* 1. Input line in a stream 
-	* 2. Add gradually into a stack
-	* 3. Reverse it
-	* 4. Calculate using the stack
-*/ // -----------------------------------------------------------------------///
