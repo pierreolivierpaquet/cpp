@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:47 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/12 14:54:42 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/13 09:50:16 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ bool	check_program_parameter(int ac ) {
 void	reverse_polish_notation( std::string av ) {
 	RPN reverse_polish( av );
 	reverse_polish.calculate();
+	reverse_polish.displayResult();
 	return ;
 }
 

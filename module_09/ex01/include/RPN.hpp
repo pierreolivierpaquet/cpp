@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/13 09:19:41 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/13 10:10:41 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef enum {
 	DIVIDE = 47
 }	e_aritmetic;
 
-class	RPN : public std::stack< u_int32_t, std::vector< u_int32_t > > {
+class	RPN : public std::stack< long double, std::vector< long double > > {
 	private:
 		RPN( void );	// Default constructor.
 		long double	_result;
@@ -51,11 +51,17 @@ class	RPN : public std::stack< u_int32_t, std::vector< u_int32_t > > {
 		void	multiplication(	RPN &tmp_stack );
 		void	division(		RPN &tmp_stack );
 
+		// TEST DELETE
+		template < typename OP >
+		void	arithmetic_operation( RPN &tmp_stack, OP operation );
+		//
+
 	public:
 		RPN( std::string input );	// parameterized constructor.
 		~RPN( void );
 
 		void	calculate( void );
+		void	displayResult( void ) const;
 
 };	/*	RPN	*/
 
