@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/13 10:10:41 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/13 13:13:20 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include	<stack>
 # include	<vector>
 # include	<cstdlib>		// u_int32_t
+
+///	----------------------------------------------- @section MACRO.S - TYPEDEF.S
 
 # ifndef	EXIT_SUCCESS
 #  define	EXIT_SUCCESS	0
@@ -31,37 +33,53 @@
 # define	to_digit( c )	(c - 48)
 
 # define	ERR_MSG			"\033[1;31merror\033[0m"
+
 typedef enum {
 	NOT_ARITMETIC,
 	MULTIPLY = 42,
 	ADD,
 	SUBSTRACT = 45,
 	DIVIDE = 47
-}	e_aritmetic;
+}	e_arithmetic;
 
-class	RPN : public std::stack< long double, std::vector< long double > > {
+typedef long double l_dbl_t;
+
+///	---------------------------------------------------------- @section CLASSE.S
+
+class	RPN : public std::stack< l_dbl_t, std::vector< l_dbl_t > > {
 	private:
-		RPN( void );	// Default constructor.
-		long double	_result;
-		std::string	_input;	// Program parameter.
-		void	convert( void );
-		void	process_aritmetic( e_aritmetic type, RPN &tmp_stack );
-		void	addition(		RPN &tmp_stack );
-		void	substraction(	RPN &tmp_stack );
-		void	multiplication(	RPN &tmp_stack );
-		void	division(		RPN &tmp_stack );
+		RPN( void );
+		l_dbl_t		_result;
+		std::string	_input;
 
-		// TEST DELETE
-		template < typename OP >
-		void	arithmetic_operation( RPN &tmp_stack, OP operation );
-		//
+		void		convert( void );
+		void		process_arithmetic( e_arithmetic type, RPN &tmp_stack );
+
+		template	< typename OP >
+		void		arithmetic_operation( RPN &tmp_stack, OP operation );
 
 	public:
-		RPN( std::string input );	// parameterized constructor.
-		~RPN( void );
+///	------------------------------------------------- @class SETTER.S - GETTER.S
 
-		void	calculate( void );
-		void	displayResult( void ) const;
+		void		setInput( std::string input );
+
+		std::string	getInput( void ) const;
+		l_dbl_t		getResult( void ) const;
+
+///	---------------------------------------- @class CONSTRUCTOR.S - DESTRUCTOR.S
+
+		RPN(	const RPN &rhs );
+		RPN(	std::string input );
+		~RPN(	void );
+
+///	------------------------------------------------- @class OPERATOR.S OVERLOAD
+
+		RPN		&operator=( const RPN &rhs );
+
+///	---------------------------------------------------------- @class FUNCTION.S
+
+		void	calculate(		void );
+		void	displayResult(	void ) const;
 
 };	/*	RPN	*/
 

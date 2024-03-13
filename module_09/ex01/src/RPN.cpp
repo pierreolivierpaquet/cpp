@@ -6,11 +6,13 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:50 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/13 10:42:08 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/13 13:20:04 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/RPN.hpp"
+
+///	------------------------------------------------------------ @section UTIL.S
 
 static void	reverse_rpn( RPN &from, RPN &to ) {
 	while (from.empty() == false) {
@@ -19,6 +21,16 @@ static void	reverse_rpn( RPN &from, RPN &to ) {
 	}
 	return ;
 }
+
+static e_arithmetic	is_aritmetic( u_int32_t	n ) {
+	if (n == MULTIPLY	|| n == DIVIDE ||
+		n == ADD		|| n == SUBSTRACT ) {
+		return ( static_cast< e_arithmetic >( n ) );
+	}
+	return ( NOT_ARITMETIC );
+}
+
+///	-------------------------------------------------------- @section FUNCTION.S
 
 void	RPN::convert( void ) {
 	RPN temp;
@@ -29,102 +41,39 @@ void	RPN::convert( void ) {
 	line.str( this->_input );
 	while (line.eof() == false) {
 		line >> tmp;
-		if (tmp.length() != 1 ||
-			tmp.find_first_not_of( static_cast< std::string >(DIGIT_CHAR) + ARITMETIC_CHAR ) != std::string::npos) {
-			throw( std::runtime_error( ERR_MSG ) );
+
+		if ( tmp.empty() == true ) {
+			break ;
+		} else if (tmp.length() != 1 ||
+			tmp.find_first_not_of(	static_cast< std::string >(DIGIT_CHAR) +
+									ARITMETIC_CHAR ) != std::string::npos) {
+			throw( std::runtime_error(	static_cast< std::string >( ERR_MSG ) +
+										": invalid token, or character.") );
 		} else if (tmp.find_first_of( ARITMETIC_CHAR ) != std::string::npos) {
 			add = tmp.at( 0 );
 		} else if ( tmp.find_first_not_of( DIGIT_CHAR ) == std::string::npos ) {
 			add = to_digit( tmp.at( 0 ) );
 		}
+		tmp.clear();
 		temp.push( add );
 	}
 	reverse_rpn( temp, *this );
 	return ;
 }
 
-// void RPN::multiplication( RPN &tmp_stack ) {
-// 	long double tmp = 0;
-// 	if (tmp_stack.size() > 1) {
-// 		tmp = tmp_stack.top();
-// 		tmp_stack.pop();
-// 		tmp *= tmp_stack.top();
-// 		tmp_stack.pop();
-// 		tmp_stack.push( tmp );
-// 	}
-// 	return ;
-// }
-
-// void RPN::division( RPN &tmp_stack ) {
-// 	long double tmp = 0;
-// 	if (tmp_stack.size() > 1) {
-// 		tmp = tmp_stack.top();
-// 		tmp_stack.pop();
-// 		tmp /= tmp_stack.top();
-// 		tmp_stack.pop();
-// 		tmp_stack.push( tmp );
-// 	}
-// 	return ;
-// }
-
-// void RPN::substraction( RPN &tmp_stack ) {
-// 	long double tmp = 0;
-// 	if (tmp_stack.size() > 1) {
-// 		tmp = tmp_stack.top();
-// 		tmp_stack.pop();
-// 		tmp = tmp_stack.top() - tmp;
-// 		tmp_stack.pop();
-// 		tmp_stack.push( tmp );
-// 	}
-// 	return ;
-// }
-
-// void RPN::addition( RPN &tmp_stack ) {
-// 	long double tmp = 0;
-// 	if (tmp_stack.size() > 1) {
-// 		tmp = tmp_stack.top();
-// 		tmp_stack.pop();
-// 		tmp += tmp_stack.top();
-// 		tmp_stack.pop();
-// 		tmp_stack.push( tmp );
-// 	} else {
-// 		throw( std::runtime_error( static_cast<std::string>(ERR_MSG) + ": check synthax." ) );
-// 	}
-// 	return ;
-// }
-
-template< typename OP >
-void RPN::arithmetic_operation( RPN &tmp_stack, OP operation ) {
-    long double tmp = 0;
-    if (tmp_stack.size() > 1) {
-        tmp = tmp_stack.top();
-        tmp_stack.pop();
-        tmp = operation(tmp_stack.top(), tmp);
-        tmp_stack.pop();
-        tmp_stack.push(tmp);
-    } else {
-		throw( std::runtime_error( static_cast< std::string >(ERR_MSG) + ": check synthax." ) );
-	}
-	return ;
-}
-
-void	RPN::process_aritmetic( e_aritmetic type, RPN &tmp_stack ) {
+void	RPN::process_arithmetic( e_arithmetic type, RPN &tmp_stack ) {
 	switch(type) {
 		case( ADD ):
-			// this->addition( tmp_stack );
-			this->arithmetic_operation(tmp_stack, std::plus< long double >());
+			this->arithmetic_operation( tmp_stack, std::plus< l_dbl_t >());
 			break ;
 		case( SUBSTRACT ):
-			// this->substraction( tmp_stack );
-			this->arithmetic_operation( tmp_stack, std::minus< long double >() );
+			this->arithmetic_operation( tmp_stack, std::minus< l_dbl_t >());
 			break ;
 		case( MULTIPLY ):
-			// this->multiplication( tmp_stack );
-			this->arithmetic_operation( tmp_stack, std::multiplies< long double >() );
+			this->arithmetic_operation( tmp_stack, std::multiplies< l_dbl_t >());
 			break ;
 		case( DIVIDE ):
-			// this->division( tmp_stack );
-			this->arithmetic_operation( tmp_stack, std::divides<long double>() );
+			this->arithmetic_operation( tmp_stack, std::divides< l_dbl_t >());
 			break ;
 		default:
 			break ;
@@ -132,12 +81,20 @@ void	RPN::process_aritmetic( e_aritmetic type, RPN &tmp_stack ) {
 	return ;
 }
 
-static e_aritmetic	is_aritmetic( u_int32_t	n ) {
-	if (n == MULTIPLY	|| n == DIVIDE ||
-		n == ADD		|| n == SUBSTRACT ) {
-		return ( static_cast< e_aritmetic >( n ) );
+template< typename OP >
+void RPN::arithmetic_operation( RPN &tmp_stack, OP operation ) {
+    l_dbl_t tmp = 0;
+    if (tmp_stack.size() > 1) {
+        tmp = tmp_stack.top();
+        tmp_stack.pop();
+        tmp = operation(tmp_stack.top(), tmp);
+        tmp_stack.pop();
+        tmp_stack.push(tmp);
+    } else {
+		throw( std::runtime_error(	static_cast< std::string >(ERR_MSG) +
+									": check synthax." ) );
 	}
-	return ( NOT_ARITMETIC );
+	return ;
 }
 
 void	RPN::calculate( void ) {
@@ -148,28 +105,70 @@ void	RPN::calculate( void ) {
 			tmp_stack.push( this->top() );
 			this->pop();
 		} else {
-			process_aritmetic( static_cast< e_aritmetic >(this->top()), tmp_stack );
+			if (this->top() == DIVIDE && tmp_stack.top() == 0){
+				throw( std::runtime_error(	static_cast< std::string >(ERR_MSG) +
+											": division by 0 is prohibited." ) );
+			}
+			process_arithmetic( static_cast< e_arithmetic >(this->top()), tmp_stack );
 			this->pop();
 		}
 	}
 	if (tmp_stack.size() > 1) {
-		throw( std::runtime_error( static_cast< std::string >(ERR_MSG) + ": missing operator suspected." ) );
+		throw( std::runtime_error(	static_cast< std::string >(ERR_MSG) +
+									": missing operator suspected." ) );
 	}
 	this->_result = tmp_stack.top();
 	return ;
 }
+
 
 void	RPN::displayResult( void ) const {
 	std::cout	<< this->_result << std::endl;
 	return ;
 }
 
+///	----------------------------------------------- @section SETTER.S - GETTER.S
+
+void	RPN::setInput( std::string input ) {
+	this->_result = std::numeric_limits< l_dbl_t >::quiet_NaN();
+	this->_input = input;
+	return ;
+}
+
+std::string	RPN::getInput( void ) const {
+	return ( this->_input );
+}
+
+l_dbl_t	RPN::getResult() const {
+	return ( this->_result );
+}
+
+
+///	----------------------------------------------- @section OPERATOR.S OVERLOAD
+
+RPN	&RPN::operator=( const RPN &rhs ) {
+	this->_input = rhs.getInput();
+	this->_result = rhs.getResult();
+	return ( *this );
+}
+
+///	-------------------------------------- @section CONSTRUCTOR.S - DESTRUCTOR.S
+
 RPN::RPN( void ) {
 	return ;
 }
 
 RPN::RPN( std::string input ) :
+	_result( std::numeric_limits< l_dbl_t >::quiet_NaN() ),
 	_input( input ) {
+	return ;
+}
+
+RPN::RPN( const RPN &rhs ) {
+	if (this == &rhs) {
+		return ;
+	}
+	*this = rhs;
 	return ;
 }
 
