@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:45 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/13 13:13:20 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/14 09:17:43 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include	<iostream>
 # include	<sstream>		// istringstream
 # include	<stack>
-# include	<vector>
+// # include	<vector>
+# include	<list>
 # include	<cstdlib>		// u_int32_t
 
 ///	----------------------------------------------- @section MACRO.S - TYPEDEF.S
@@ -46,7 +47,7 @@ typedef long double l_dbl_t;
 
 ///	---------------------------------------------------------- @section CLASSE.S
 
-class	RPN : public std::stack< l_dbl_t, std::vector< l_dbl_t > > {
+class	RPN : public std::stack< l_dbl_t, std::list< l_dbl_t > > {
 	private:
 		RPN( void );
 		l_dbl_t		_result;
