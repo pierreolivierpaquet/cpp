@@ -6,15 +6,15 @@
 #    By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/13 13:28:07 by ppaquet           #+#    #+#              #
-#    Updated: 2024/03/13 13:32:20 by ppaquet          ###   ########.fr        #
+#    Updated: 2024/03/14 11:00:46 by ppaquet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## ------------------------------------------------------------ @category NAME.S
-NAME				:=		RPN
-NAME_MAJ			:=		RPN
+NAME				:=		PmergeMe
+NAME_MAJ			:=		PMERGEME
 
-DEBUG				:=		RPN_debug
+DEBUG				:=		PMERGEME_debug
 
 ## ----------------------------------------------------- @category MISCELLANEOUS
 
