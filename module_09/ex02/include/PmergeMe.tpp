@@ -6,17 +6,22 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:11:18 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/18 10:51:09 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/18 14:19:19 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.hpp"
 
 template < typename C >
-C input_check( int ac, char **av ) {
+C input_check( int ac, char **av, std::chrono::duration<double, std::milli> &duration ) {
 	C unsorted;
 	u_int32_t	tmp = 0;
 
+	static std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+	if (ac == 1) {
+		throw( std::runtime_error( static_cast< std::string >( ERR_MSG )
+									+ ERR_NO_INPUT ) );
+	}
 	for (int i = 1; i < ac; i++) {
 		tmp = std::atoi( av[ i ] );
 		if (std::string(av[ i ]).length() > 10 ||
@@ -31,6 +36,8 @@ C input_check( int ac, char **av ) {
 			unsorted.push_back( tmp );
 		}
 	}
+	static std::chrono::high_resolution_clock::time_point stop = std::chrono::high_resolution_clock::now();
+	duration = stop - start;
 	return ( unsorted );
 }
 
@@ -191,6 +198,10 @@ void	PmergeMe< Container >::_insertStraggler( void ) {
 	}
 	if (this->_ti == DEQUE) {
 		std::deque< int >::reverse_iterator deq_itre = this->_sorted_deque.rend();
+		if (this->_size == 1) {
+			this->_sorted_deque.insert( this->_sorted_deque.rbegin().base(), this->_straggler.second);
+		return ;
+		}
 		for (std::deque< int >::reverse_iterator deq_itr = this->_sorted_deque.rbegin(); deq_itr != deq_itre; deq_itr++) {
 			if (this->_straggler.second >= *deq_itr) {
 				this->_sorted_deque.insert( deq_itr.base(), this->_straggler.second );
@@ -199,6 +210,10 @@ void	PmergeMe< Container >::_insertStraggler( void ) {
 		}
 	} else {
 		std::vector< int >::reverse_iterator vec_itre = this->_sorted_vector.rend();
+		if (this->_size == 1) {
+			this->_sorted_vector.insert( this->_sorted_vector.rbegin().base(), this->_straggler.second );
+			return ;
+		}
 		for (std::vector< int >::reverse_iterator vec_itr = this->_sorted_vector.rbegin(); vec_itr != vec_itre; vec_itr++) {
 			if (this->_straggler.second >= *vec_itr) {
 				this->_sorted_vector.insert( vec_itr.base(), this->_straggler.second );
@@ -211,7 +226,7 @@ void	PmergeMe< Container >::_insertStraggler( void ) {
 
 template < typename Container >
 void	PmergeMe< Container >::algorithm( void ) {
-	//	START TIMER HERE =======================================================
+	std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
 	this->_pairSort();
 	this->_mergeSort( *this );
@@ -219,16 +234,24 @@ void	PmergeMe< Container >::algorithm( void ) {
 	this->_insertionSort();
 	this->_insertStraggler();
 
-	// STOP TIMER HERE =========================================================
+	std::chrono::high_resolution_clock::time_point stop = std::chrono::high_resolution_clock::now();
+	this->_sorting = stop - start;
+	this->clear();
 	return ;
 }
 
 template < typename Container >
 void	PmergeMe< Container >::printSortedDeque ( void ) const {
 	std::deque< int >::const_iterator	ite = this->_sorted_deque.end();
-	for (std::deque< int >::const_iterator it = this->_sorted_deque.begin(); it != ite; it++) {
-		std::cout << *it << " " << std::endl;
+	std::deque< int >::const_iterator	it = this->_sorted_deque.begin();
+
+	while (it != ite) {
+		std::cout << *it;
+		if (++it != ite) {
+			std::cout << " ";
+		}
 	}
+	std::cout << std::endl;
 	return ;
 }
 
@@ -257,8 +280,8 @@ void	PmergeMe< Container >::setType( void ) {
 
 template < typename Container >
 PmergeMe<Container>::PmergeMe( int ac, char **av ) :
-	_unsorted_vector( input_check<std::vector< u_int32_t > >( ac, av ) ),
-	_unsorted_deque( input_check<std::deque< u_int32_t > >( ac, av ) ),
+	_unsorted_vector( input_check<std::vector< u_int32_t > >( ac, av, this->_parsing_vector ) ),
+	_unsorted_deque( input_check<std::deque< u_int32_t > >( ac, av, this->_parsing_deque ) ),
 	_type_info( typeid( Container ) ),
 	_size( ac - 1 ),
 	_straggler( -1, -1 ) {
@@ -279,6 +302,20 @@ PmergeMe< Container >::~PmergeMe() {
 }
 
 template < typename Container >
+void	PmergeMe< Container >::printUnsorted() const {
+	std::deque< u_int32_t >::const_iterator ite = this->_unsorted_deque.end();
+	std::deque< u_int32_t >::const_iterator it = this->_unsorted_deque.begin();
+	while (it != ite) {
+		std::cout << *it;
+		if (++it != ite) {
+			std::cout << " ";
+		}
+	}
+	std::cout << std::endl;
+	return ;
+}
+
+template < typename Container >
 std::string PmergeMe< Container >::getTypeInfo( void ) const {
 	if (this->_ti == DEQUE) {
 		return ( "std::deque< int >" );
@@ -286,4 +323,22 @@ std::string PmergeMe< Container >::getTypeInfo( void ) const {
 		return ( "std::vector< int >" );
 	}
 	return ( "" ) ;
+}
+
+template < typename Container >
+u_int32_t	PmergeMe< Container >::getSize( void ) const {
+	return ( this->_size );
+}
+
+template < typename Container >
+void	PmergeMe< Container >::printDuration( void ) const {
+	std::chrono::duration<double, std::milli> total;
+
+	if (this->_ti == DEQUE) {
+		total = this->_parsing_deque + this->_sorting;
+	} else {
+		total = this->_parsing_vector + this->_sorting;
+	}
+	std::cout <<  total.count() << " ms" << std::endl;
+	return ;
 }

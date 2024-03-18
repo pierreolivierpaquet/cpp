@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:28:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/18 10:47:42 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/18 14:07:12 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@
 # include	<iostream>
 # include	<typeinfo>	// (https://cplusplus.com/reference/typeinfo/type_info/)
 # include	<vector>
-# include	<list> // test
+// # include	<list>		// test
 # include	<stack>
 # include	<sstream>	// istringstream
 # include	<limits>	// numeric_limits
 # include	<cstdlib>	// u_int32_t
 # include	<utility>	// swap
+# include	<chrono>	// high_resolution_clock
 
 ///	----------------------------------------------- @section MACRO.S - TYPEDEF.S
 
@@ -32,6 +33,7 @@
 # define	ERR_MSG			"\033[1;31merror\033[0m"
 # define	ERR_OVERFLOW	": unsupported value detected: "
 # define	ERR_BAD_INPUT	": non-numeric input detected."
+# define	ERR_NO_INPUT	": missing value(s)."
 # define	DIGIT_CHAR		"+-0123456789"
 
 typedef enum {
@@ -57,6 +59,11 @@ class	PmergeMe : public Container {
 		std::deque< int >				_sorted_deque;
 		std::vector< int >				_sorted_vector;
 
+		std::chrono::duration<double, std::milli>	_parsing_deque;
+		std::chrono::duration<double, std::milli>	_parsing_vector;
+
+		std::chrono::duration<double, std::milli>	_sorting;
+
 		void	_pairSort( void );
 		void	_mergeSort( Container &array );
 		void	_merge( Container &lhs, Container &rhs, Container &array );
@@ -69,12 +76,11 @@ class	PmergeMe : public Container {
 		std::pair< int, int >	_straggler;
 
 	public:
-		void	printSortedDeque( void ) const;
-		void	printSortedVector( void ) const;
 ///	------------------------------------------------- @class SETTER.S - GETTER.S
 
 		void		setType( void );
 		std::string	getTypeInfo( void ) const;
+		u_int32_t	getSize( void ) const;
 
 ///	------------------------------------------------------- @class CONSTRUCTOR.S
 
@@ -90,13 +96,19 @@ class	PmergeMe : public Container {
 
 ///	---------------------------------------------------------- @class FUNCTION.S
 
-	void	algorithm( void );
+		void	algorithm( void );
+		void	printUnsorted( void ) const;
+		void	printSortedVector( void ) const;
+		void	printSortedDeque( void ) const;
+		void	printDuration( void ) const;
 
 };	/*	PmergeMe	*/
 
 // std::vector< u_int32_t > input_check( int ac, char **av );
 template < typename C >
-C input_check( int ac, char **av );
+C input_check( int ac, char **av, std::chrono::duration<double, std::milli> &duration );
+
+void	displayComparison( const PmergeMe< deque_t > &deque, const PmergeMe< vector_t > &vector );
 
 # include "../include/PmergeMe.tpp"
 
