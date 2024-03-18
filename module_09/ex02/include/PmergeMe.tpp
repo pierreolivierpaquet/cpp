@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:11:18 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/15 14:13:25 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/18 10:51:09 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,13 +145,99 @@ void	PmergeMe< Container >::_mergeSort( Container &array) {
 }
 
 template < typename Container >
+void	PmergeMe< Container >::_mainChain( void ) {
+	typename Container::const_iterator	ite = this->end();
+
+	for (typename Container::const_iterator it = this->begin(); it != ite; it++ ) {
+		if (this->_ti == DEQUE) {
+			this->_sorted_deque.push_back( (*it).first );
+		} else {
+			this->_sorted_vector.push_back( (*it).first );
+		}
+	}
+	return ;
+}
+
+template < typename Container >
+void	PmergeMe< Container >::_insertionSort( void ) {
+	typename Container::const_iterator	ite = this->end();
+
+	for (typename Container::const_iterator it = this->begin(); it != ite; it++) {
+		if (this->_ti == DEQUE) {
+			std::deque< int >::reverse_iterator	deq_itre = this->_sorted_deque.rend();
+			for (std::deque< int >::reverse_iterator deq_itr = this->_sorted_deque.rbegin(); deq_itr != deq_itre; deq_itr++) {
+				if ((*it).second >= *deq_itr) {
+					this->_sorted_deque.insert( deq_itr.base(), (*it).second );
+					break ;
+				}
+			}
+		} else {
+			std::vector< int >::reverse_iterator	vec_itre = this->_sorted_vector.rend();
+			for (std::vector< int >::reverse_iterator	vec_itr = this->_sorted_vector.rbegin(); vec_itr != vec_itre; vec_itr++) {
+				if ((*it).second >= *vec_itr) {
+					this->_sorted_vector.insert( vec_itr.base(), (*it).second );
+					break ;
+				}
+			}
+		}
+	}
+	return ;
+}
+
+template < typename Container >
+void	PmergeMe< Container >::_insertStraggler( void ) {
+	if ( this->_size % 2 == 0 ) {
+		return ;
+	}
+	if (this->_ti == DEQUE) {
+		std::deque< int >::reverse_iterator deq_itre = this->_sorted_deque.rend();
+		for (std::deque< int >::reverse_iterator deq_itr = this->_sorted_deque.rbegin(); deq_itr != deq_itre; deq_itr++) {
+			if (this->_straggler.second >= *deq_itr) {
+				this->_sorted_deque.insert( deq_itr.base(), this->_straggler.second );
+				break ;
+			}
+		}
+	} else {
+		std::vector< int >::reverse_iterator vec_itre = this->_sorted_vector.rend();
+		for (std::vector< int >::reverse_iterator vec_itr = this->_sorted_vector.rbegin(); vec_itr != vec_itre; vec_itr++) {
+			if (this->_straggler.second >= *vec_itr) {
+				this->_sorted_vector.insert( vec_itr.base(), this->_straggler.second );
+				break ;
+			}
+		}
+	}
+	return ;
+}
+
+template < typename Container >
 void	PmergeMe< Container >::algorithm( void ) {
 	//	START TIMER HERE =======================================================
 
 	this->_pairSort();
 	this->_mergeSort( *this );
+	this->_mainChain();
+	this->_insertionSort();
+	this->_insertStraggler();
 
 	// STOP TIMER HERE =========================================================
+	return ;
+}
+
+template < typename Container >
+void	PmergeMe< Container >::printSortedDeque ( void ) const {
+	std::deque< int >::const_iterator	ite = this->_sorted_deque.end();
+	for (std::deque< int >::const_iterator it = this->_sorted_deque.begin(); it != ite; it++) {
+		std::cout << *it << " " << std::endl;
+	}
+	return ;
+}
+
+template < typename Container >
+void	PmergeMe< Container >::printSortedVector ( void ) const {
+	std::vector< int >::const_iterator	ite = this->_sorted_vector.end();
+	for (std::vector< int >::const_iterator it = this->_sorted_vector.begin(); it != ite; it++) {
+		std::cout << *it << " " << std::endl;
+	}
 	return ;
 }
 

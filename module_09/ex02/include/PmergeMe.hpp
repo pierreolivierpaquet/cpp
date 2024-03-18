@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:28:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/15 13:19:24 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/18 10:47:42 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,23 @@ class	PmergeMe : public Container {
 		e_type_info						_ti;
 		const std::type_info			&_type_info;
 		u_int32_t						_size;
+		std::deque< int >				_sorted_deque;
+		std::vector< int >				_sorted_vector;
 
-		void	_pairSort( void ); // first sorting step.
+		void	_pairSort( void );
 		void	_mergeSort( Container &array );
 		void	_merge( Container &lhs, Container &rhs, Container &array );
 		void	_pairing(	std::vector< u_int32_t >::const_iterator it );
 		void	_pairing(	std::deque< u_int32_t >::const_iterator it );
+		void	_mainChain( void );
+		void	_insertionSort( void );
+		void	_insertStraggler( void );
 
 		std::pair< int, int >	_straggler;
 
 	public:
+		void	printSortedDeque( void ) const;
+		void	printSortedVector( void ) const;
 ///	------------------------------------------------- @class SETTER.S - GETTER.S
 
 		void		setType( void );
