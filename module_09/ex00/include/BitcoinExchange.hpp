@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:38 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/12 13:02:51 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 08:53:44 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # endif	/*	ARROW	*/
 
 # define	INPUT_CHAR		"0123456789-|., "
+# define	VALUE_CHAR		"0123456789-., "
 
 typedef enum	{
 		DAY,
