@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:11:18 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/19 09:30:09 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 10:35:16 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,11 +200,15 @@ void	PmergeMe< Container >::_insertStraggler( void ) {
 			this->_sorted_deque.insert( this->_sorted_deque.rbegin().base(), this->_straggler.second);
 		return ;
 		}
-		for (std::deque< int >::reverse_iterator deq_itr = this->_sorted_deque.rbegin(); deq_itr != deq_itre; deq_itr++) {
+		std::deque< int >::reverse_iterator deq_itr = this->_sorted_deque.rbegin();
+		for (; deq_itr != deq_itre; deq_itr++) {
 			if (this->_straggler.second >= *deq_itr) {
 				this->_sorted_deque.insert( deq_itr.base(), this->_straggler.second );
+				this->_straggler.second = -1;
 				break ;
 			}
+		} if ( this->_straggler.second != -1 ) {
+			this->_sorted_deque.insert( deq_itr.base(), this->_straggler.second );
 		}
 	} else {
 		std::vector< int >::reverse_iterator vec_itre = this->_sorted_vector.rend();
@@ -212,11 +216,15 @@ void	PmergeMe< Container >::_insertStraggler( void ) {
 			this->_sorted_vector.insert( this->_sorted_vector.rbegin().base(), this->_straggler.second );
 			return ;
 		}
-		for (std::vector< int >::reverse_iterator vec_itr = this->_sorted_vector.rbegin(); vec_itr != vec_itre; vec_itr++) {
+		std::vector< int >::reverse_iterator vec_itr = this->_sorted_vector.rbegin();
+		for (; vec_itr != vec_itre; vec_itr++) {
 			if (this->_straggler.second >= *vec_itr) {
 				this->_sorted_vector.insert( vec_itr.base(), this->_straggler.second );
+				this->_straggler.second = -1;
 				break ;
 			}
+		} if ( this->_straggler.second != -1 ) {
+			this->_sorted_vector.insert( vec_itr.base(), this->_straggler.second );
 		}
 	}
 	return ;
@@ -295,9 +303,27 @@ PmergeMe< Container >::PmergeMe( void ) :
 }
 
 template < typename Container >
-PmergeMe< Container >::~PmergeMe() {
+PmergeMe< Container >::~PmergeMe( void ) {
 	return ;
 }
+
+// template < typename Container >
+// PmergeMe< Container >::PmergeMe( const PmergeMe< Container > &rhs ) {
+// 	if (this == &rhs) {
+// 		return ;
+// 	}
+// 	*this = rhs;
+// 	return ;
+// }
+
+///	----------------------------------------------- @section OPERATOR.S OVERLOAD
+
+// template < typename Container >
+// PmergeMe< Container > &PmergeMe< Container >::operator=( const PmergeMe< Container > &rhs ) {
+// 	static_cast< void >( rhs );
+// 	return ( *this );
+// }
+
 
 template < typename Container >
 void	PmergeMe< Container >::printUnsorted() const {
