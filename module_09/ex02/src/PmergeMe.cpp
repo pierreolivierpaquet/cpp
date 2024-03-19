@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:28:00 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/18 13:36:05 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 11:54:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	displayComparison( const PmergeMe< deque_t > &deque, const PmergeMe< vector
 	deque.printUnsorted();
 	std::cout	<< "After:\t";
 	deque.printSortedDeque();
-	std::cout	<< "Time to process a range of\t" << deque.getSize() << " "
-				<< "elements with " << deque.getTypeInfo() << "\t: ";
+	std::cout	<< "Time to process a range of " << deque.getSize() << "\t"
+				<< "elements with " << deque.getTypeInfo() << " : ";
 	deque.printDuration();
-	std::cout	<< "Time to process a range of\t" << vector.getSize() << " "
-				<< "elements with " << vector.getTypeInfo() << "\t: ";
+	std::cout	<< "Time to process a range of " << vector.getSize() << "\t"
+				<< "elements with " << vector.getTypeInfo() << " : ";
 	vector.printDuration();
 	return ;
 }
