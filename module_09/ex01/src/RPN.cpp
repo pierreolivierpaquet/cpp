@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:50 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/13 13:20:04 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 09:16:03 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ void RPN::arithmetic_operation( RPN &tmp_stack, OP operation ) {
     if (tmp_stack.size() > 1) {
         tmp = tmp_stack.top();
         tmp_stack.pop();
-        tmp = operation(tmp_stack.top(), tmp);
+        tmp = operation( tmp_stack.top(), tmp );
         tmp_stack.pop();
-        tmp_stack.push(tmp);
+        tmp_stack.push( tmp );
     } else {
 		throw( std::runtime_error(	static_cast< std::string >(ERR_MSG) +
 									": check synthax." ) );

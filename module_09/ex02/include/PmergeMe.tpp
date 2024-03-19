@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/14 11:11:18 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/18 14:19:19 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 09:30:09 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	PmergeMe< Container >::_pairSort( void ) {
 	}
 	typename Container::iterator it = this->begin();
 	typename Container::iterator ite = this->end();
-	int	tmp = 0;
 	while (it != ite) {
 		if ((*it).first > (*it).second) {
 			std::swap( (*it).first, (*it).second );
@@ -110,7 +109,6 @@ template < typename Container >
 void	PmergeMe< Container >::_merge( Container &lhs, Container &rhs, Container &array ) {
 	size_t	l = lhs.size();
 	size_t	r = rhs.size();
-	size_t	total = array.size();
 	size_t	i( 0 ), j( 0 ), k( 0 );
 
 	while (j < l && k < r) {

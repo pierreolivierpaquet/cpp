@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 09:39:47 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/13 13:03:09 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 09:13:46 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	reverse_polish_notation( std::string av ) {
 }
 
 int	main( int argc, char **argv ) {
-	
+
 	if (check_program_parameter( argc )) {
 		try {
 			reverse_polish_notation( argv[ 1 ] );
