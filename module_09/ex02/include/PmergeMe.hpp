@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:28:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/19 09:56:53 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 12:12:00 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include	<iostream>
 # include	<typeinfo>	// (https://cplusplus.com/reference/typeinfo/type_info/)
 # include	<vector>
-// # include	<list>		// test
 # include	<stack>
 # include	<sstream>	// istringstream
 # include	<limits>	// numeric_limits
@@ -51,8 +50,8 @@ template < typename Container = deque_t >
 class	PmergeMe : public Container {
 	private:
 		PmergeMe( void );
-		// PmergeMe	&operator=( const PmergeMe &rhs );
-		// PmergeMe( const PmergeMe &rhs );
+		PmergeMe	&operator=( const PmergeMe &rhs );
+		PmergeMe( const PmergeMe &rhs );
 
 		const std::vector< u_int32_t >	_unsorted_vector;
 		const std::deque< u_int32_t >	_unsorted_deque;
@@ -64,14 +63,13 @@ class	PmergeMe : public Container {
 
 		std::chrono::duration<double, std::milli>	_parsing_deque;
 		std::chrono::duration<double, std::milli>	_parsing_vector;
-
 		std::chrono::duration<double, std::milli>	_sorting;
 
+		void	_pairing(	std::vector< u_int32_t >::const_iterator it );
+		void	_pairing(	std::deque< u_int32_t >::const_iterator it );
 		void	_pairSort( void );
 		void	_mergeSort( Container &array );
 		void	_merge( Container &lhs, Container &rhs, Container &array );
-		void	_pairing(	std::vector< u_int32_t >::const_iterator it );
-		void	_pairing(	std::deque< u_int32_t >::const_iterator it );
 		void	_mainChain( void );
 		void	_insertionSort( void );
 		void	_insertStraggler( void );
@@ -85,16 +83,10 @@ class	PmergeMe : public Container {
 		std::string	getTypeInfo( void ) const;
 		u_int32_t	getSize( void ) const;
 
-///	------------------------------------------------------- @class CONSTRUCTOR.S
+///	---------------------------------------- @class CONSTRUCTOR.S - DESTRUCTOR.S
 
 		PmergeMe( int ac, char **av );
-
-///	-------------------------------------------------------- @class DESTRUCTOR.S
-
 		virtual ~PmergeMe(	void );
-
-///	------------------------------------------------- @class OPERATOR.S OVERLOAD
-
 
 ///	---------------------------------------------------------- @class FUNCTION.S
 
@@ -106,7 +98,6 @@ class	PmergeMe : public Container {
 
 };	/*	PmergeMe	*/
 
-// std::vector< u_int32_t > input_check( int ac, char **av );
 template < typename C >
 C input_check( int ac, char **av, std::chrono::duration<double, std::milli> &duration );
 
