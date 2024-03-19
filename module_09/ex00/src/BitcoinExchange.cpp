@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:49:35 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/12 09:06:00 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 09:08:16 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ static void	convert_map( ifMap &ref_map) {
 		buffer.clear();
 	}
 //	Deletes the first line if it contains <COLUMN><TITLE> elements.
-	if (ref_map[ 0 ].origin_data.first.find_first_not_of( INPUT_CHAR ) != std::string::npos ||
-		ref_map[ 0 ].origin_data.second.find_first_not_of( INPUT_CHAR ) != std::string::npos) {
+	if (ref_map.size() &&
+		( ref_map[ 0 ].origin_data.first.find_first_not_of( INPUT_CHAR ) != std::string::npos ||
+		ref_map[ 0 ].origin_data.second.find_first_not_of( INPUT_CHAR ) != std::string::npos) ) {
 		ref_map.erase( ref_map.begin() );
 	}
 	return ;
@@ -132,7 +133,8 @@ static bool leap_check ( u_int32_t year ) {
 static bool	valid_date( ifMap::const_iterator it ) {
 	if ((*it).second.month > 12 || ((*it).second.year <= 2009 &&
 									(*it).second.month <= 1 &&
-									(*it).second.day < 2)) {
+									(*it).second.day < 2) || 
+		(*it).second.year < 2009) {
 		return ( false );
 	}
 	switch ((*it).second.month) {
@@ -166,15 +168,22 @@ static void	valid_check(ifMap::const_iterator it ) {
 		((*it).second.origin_data.first.find_first_of('-') ==
 		(*it).second.origin_data.first.find_last_of('-')) ) {
 		throw( BitcoinExchange::BadInput() );
+//				Protects against incorrect value.
+	} else if ( (*it).second.origin_data.second.empty() == true ||
+				(*it).second.origin_data.second.find_first_not_of( VALUE_CHAR ) != std::string::npos) {
+		throw( BitcoinExchange::BadInput() );
 //				Protects againts impossible date.
 	} else if ( (*it).second.year	==	0 ||
 				(*it).second.month	==	0 ||
 				(*it).second.day	==	0) {
 		throw( BitcoinExchange::BadInput() );
 //				Protects against futuristic dates.
-	} else if ( (*it).second.year	>=	current_time( YEAR ) &&
-				(*it).second.month	>=	current_time( MONTH ) &&
-				(*it).second.day	>	current_time( DAY ) ) {
+	} else if ( (*it).second.year > current_time( YEAR ) ||
+			((*it).second.year	>=	current_time( YEAR ) &&
+			(*it).second.month	>	current_time( MONTH )) ||
+		((*it).second.year	>=	current_time( YEAR ) &&
+		(*it).second.month	>=	current_time( MONTH ) &&
+		(*it).second.day	>	current_time( DAY )) ) {
 		throw( BitcoinExchange::BadInput() );
 	} else if ( valid_date( it ) == false) {
 		throw( BitcoinExchange::BadInput() );
@@ -198,6 +207,9 @@ static void	match( ifMap &infile_map, ifMap &csv_map ) {
 	ifMap::const_iterator	it_infile;
 	ifMap::const_iterator	ite = infile_map.end();
 	ifMap::const_iterator	it_csv;
+	if (csv_map.size() == 0) {
+		throw( std::runtime_error( "\033[1;31merror\033[0m: problem with csv database." ) );
+	}
 	for (it_infile = infile_map.begin(); it_infile != ite; it_infile++){
 		try {
 			valid_check( it_infile );
@@ -263,8 +275,8 @@ void	BitcoinExchange::setInfileName( std::string name ) {
 
 BitcoinExchange::BitcoinExchange( void ) :
 	_infile_name( EMPTY_STR ) {
-	std::cout	<< this->_infile_name
-				<< " Constructor called. [default]" << std::endl;
+	// std::cout	<< this->_infile_name
+	// 			<< " Constructor called. [default]" << std::endl;
 	return ;
 }
 
@@ -276,8 +288,8 @@ BitcoinExchange::BitcoinExchange( std::string f_name ) :
 	if (this->_infile.fail() == true || this->_csv.fail() == true) {
 		throw( std::runtime_error( ERR_FILE ) );
 	}
-	std::cout	<< this->_infile_name
-				<< " Constructor called. [parameterized]" << std::endl;
+	// std::cout	<< this->_infile_name
+	// 			<< " Constructor called. [parameterized]" << std::endl;
 	return ;
 }
 
@@ -294,8 +306,8 @@ BitcoinExchange::~BitcoinExchange( void ) {
 		this->_csv.close();
 	}
 	this->_infile_name = EMPTY_STR;
-	std::cout	<< this->_infile_name
-				<< " Destructor called. [default]" << std::endl;
+	// std::cout	<< this->_infile_name
+	// 			<< " Destructor called. [default]" << std::endl;
 	return ;
 }
 
