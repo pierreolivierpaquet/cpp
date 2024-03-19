@@ -6,7 +6,7 @@
 /*   By: ppaquet <pierreolivierpaquet@hotmail.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 13:28:04 by ppaquet           #+#    #+#             */
-/*   Updated: 2024/03/18 14:07:12 by ppaquet          ###   ########.fr       */
+/*   Updated: 2024/03/19 09:56:53 by ppaquet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ template < typename Container = deque_t >
 class	PmergeMe : public Container {
 	private:
 		PmergeMe( void );
+		// PmergeMe	&operator=( const PmergeMe &rhs );
+		// PmergeMe( const PmergeMe &rhs );
+
 		const std::vector< u_int32_t >	_unsorted_vector;
 		const std::deque< u_int32_t >	_unsorted_deque;
 		e_type_info						_ti;
@@ -91,7 +94,6 @@ class	PmergeMe : public Container {
 		virtual ~PmergeMe(	void );
 
 ///	------------------------------------------------- @class OPERATOR.S OVERLOAD
-
 
 
 ///	---------------------------------------------------------- @class FUNCTION.S
